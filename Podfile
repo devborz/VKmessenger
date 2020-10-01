@@ -7,4 +7,5 @@ target 'VKmessenger' do
 
   # Pods for VKmessenger
 	pod 'Firebase/Database'
+	pod 'MessageKit'
 end
