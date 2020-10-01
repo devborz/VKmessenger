@@ -1,16 +1,61 @@
 PODS:
-  - VK-ios-sdk (1.5.1)
+  - Firebase/CoreOnly (6.32.0):
+    - FirebaseCore (= 6.10.2)
+  - Firebase/Database (6.32.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (~> 6.6.0)
+  - FirebaseCore (6.10.2):
+    - FirebaseCoreDiagnostics (~> 1.6)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+  - FirebaseCoreDiagnostics (1.6.0):
+    - GoogleDataTransport (~> 7.2)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+    - nanopb (~> 1.30906.0)
+  - FirebaseDatabase (6.6.0):
+    - FirebaseCore (~> 6.10)
+    - leveldb-library (~> 1.22)
+  - GoogleDataTransport (7.3.0):
+    - nanopb (~> 1.30906.0)
+  - GoogleUtilities/Environment (6.7.2):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.7.2):
+    - GoogleUtilities/Environment
+  - leveldb-library (1.22)
+  - nanopb (1.30906.0):
+    - nanopb/decode (= 1.30906.0)
+    - nanopb/encode (= 1.30906.0)
+  - nanopb/decode (1.30906.0)
+  - nanopb/encode (1.30906.0)
+  - PromisesObjC (1.2.10)
 
 DEPENDENCIES:
-  - VK-ios-sdk
+  - Firebase/Database
 
 SPEC REPOS:
   trunk:
-    - VK-ios-sdk
+    - Firebase
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseDatabase
+    - GoogleDataTransport
+    - GoogleUtilities
+    - leveldb-library
+    - nanopb
+    - PromisesObjC
 
 SPEC CHECKSUMS:
-  VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
+  Firebase: afa030f17f5421810f379a42b0e5d3302d27eb26
+  FirebaseCore: 1d697bb944bf2af5fc248f1a66e165c9dd88bf97
+  FirebaseCoreDiagnostics: 7415bfb3883b3500c5a95c42b6ba66baae78f600
+  FirebaseDatabase: 13a865a4b85897462b930eb683bda8f52583713f
+  GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
+  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
+  leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
 
-PODFILE CHECKSUM: 2defd3e7bf12e9451687c7785fda5bd1376c130e
+PODFILE CHECKSUM: fbbaaa8d4d22b6b57a6ca24f9b5519f58afeae17
 
 COCOAPODS: 1.9.3

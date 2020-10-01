@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>985887397146-be46fm6nf5fb6d2baka3hr54cq2jivpc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.985887397146-be46fm6nf5fb6d2baka3hr54cq2jivpc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC7j83obTV80SRhjgZWnGe5T481s7B82Ac</string>
+	<key>GCM_SENDER_ID</key>
+	<string>985887397146</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.turkaev.usman.VKmessenger</string>
+	<key>PROJECT_ID</key>
+	<string>vkmessenger-b86ae</string>
+	<key>STORAGE_BUCKET</key>
+	<string>vkmessenger-b86ae.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:985887397146:ios:a37a9fdeabe8a6a7a2c8a3</string>
+	<key>DATABASE_URL</key>
+	<string>https://vkmessenger-b86ae.firebaseio.com</string>
+</dict>
+</plist>

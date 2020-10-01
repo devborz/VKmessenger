@@ -19,6 +19,24 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XGe-0L-RYk">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="yLu-ax-nE5">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="x8a-mu-LzM">
+                                        <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x8a-mu-LzM" id="bdO-7j-fCi">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" button="YES"/>
+                                        </accessibility>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -30,11 +48,79 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XGe-0L-RYk" secondAttribute="bottom" id="tea-lO-KGC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Сообщения" id="8W2-Lh-CsV"/>
+                    <navigationItem key="navigationItem" title="Сообщения" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="8W2-Lh-CsV">
+                        <barButtonItem key="backBarButtonItem" title=" " id="CZl-TU-fot"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="gear" catalog="system" id="DUQ-xU-Qbw"/>
+                        <rightBarButtonItems>
+                            <barButtonItem image="ellipsis" catalog="system" id="WRo-iD-LOc"/>
+                            <barButtonItem title="Item" image="square.and.pencil" catalog="system" id="oiS-dE-bKG"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="chatsTableView" destination="XGe-0L-RYk" id="G5U-fd-agW"/>
+                        <segue destination="8m4-zN-w0C" kind="show" identifier="SegueToChat" id="5gj-Dv-NDg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="668" y="590"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="lFq-uF-qJh">
+            <objects>
+                <viewController id="8m4-zN-w0C" customClass="ChatViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OJp-ik-4Fy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbW-rZ-oQO">
+                                <rect key="frame" x="0.0" y="822" width="414" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFZ-bW-md0">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="s5J-ho-jQe"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                        </state>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Сообщение" textAlignment="natural" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="pQ1-YE-jRL">
+                                        <rect key="frame" x="60" y="0.0" width="294" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ToW-oq-l0N">
+                                        <rect key="frame" x="354" y="0.0" width="60" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="KvR-VQ-FqQ"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow.up" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="5un-8T-7pv"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RvN-Ve-8Mr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RvN-Ve-8Mr" firstAttribute="bottom" secondItem="UbW-rZ-oQO" secondAttribute="bottom" id="0Hd-bS-CFH"/>
+                            <constraint firstItem="RvN-Ve-8Mr" firstAttribute="trailing" secondItem="UbW-rZ-oQO" secondAttribute="trailing" id="2nk-jF-AE0"/>
+                            <constraint firstItem="UbW-rZ-oQO" firstAttribute="leading" secondItem="RvN-Ve-8Mr" secondAttribute="leading" id="SfS-ow-sbh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jCO-tV-Ieb">
+                        <barButtonItem key="backBarButtonItem" title=" " id="HI9-wb-tnq"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9kb-wS-b36" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1457" y="593"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hMC-0j-YHE">
@@ -54,8 +140,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.up" catalog="system" width="120" height="128"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

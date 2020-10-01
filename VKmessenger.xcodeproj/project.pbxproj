@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,8 @@
 		B63CC1232524D8E600D76A4C /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1212524D8E600D76A4C /* MessageTableViewCell.swift */; };
 		B63CC1242524D8E600D76A4C /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B63CC1222524D8E600D76A4C /* MessageTableViewCell.xib */; };
 		B63CC1292524DBEF00D76A4C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1282524DBEF00D76A4C /* MainViewController.swift */; };
+		B63CC14725253B6600D76A4C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B63CC14625253B6600D76A4C /* GoogleService-Info.plist */; };
+		B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1552525D21000D76A4C /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		B63CC1212524D8E600D76A4C /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		B63CC1222524D8E600D76A4C /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		B63CC1282524DBEF00D76A4C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B63CC14625253B6600D76A4C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B63CC1552525D21000D76A4C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +56,6 @@
 				A8DF9C0F8192D216F9B5E704 /* Pods-VKmessenger.debug.xcconfig */,
 				2EC408FD6BAA81FD29AAEBA2 /* Pods-VKmessenger.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -81,8 +84,10 @@
 				B63CC10D2524D59100D76A4C /* SceneDelegate.swift */,
 				B63CC1112524D59100D76A4C /* Main.storyboard */,
 				B63CC1282524DBEF00D76A4C /* MainViewController.swift */,
+				B63CC1552525D21000D76A4C /* ChatViewController.swift */,
 				B63CC1142524D59600D76A4C /* Assets.xcassets */,
 				B63CC1162524D59600D76A4C /* LaunchScreen.storyboard */,
+				B63CC14625253B6600D76A4C /* GoogleService-Info.plist */,
 				B63CC1192524D59600D76A4C /* Info.plist */,
 				B63CC1212524D8E600D76A4C /* MessageTableViewCell.swift */,
 				B63CC1222524D8E600D76A4C /* MessageTableViewCell.xib */,
@@ -109,7 +114,7 @@
 				B63CC1042524D59100D76A4C /* Sources */,
 				B63CC1052524D59100D76A4C /* Frameworks */,
 				B63CC1062524D59100D76A4C /* Resources */,
-				0D4A5C36E1F30A7EC6B3BC6C /* [CP] Embed Pods Frameworks */,
+				657FF22FED6E68DAC1B5EA23 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -160,6 +165,7 @@
 				B63CC1182524D59600D76A4C /* LaunchScreen.storyboard in Resources */,
 				B63CC1242524D8E600D76A4C /* MessageTableViewCell.xib in Resources */,
 				B63CC1152524D59600D76A4C /* Assets.xcassets in Resources */,
+				B63CC14725253B6600D76A4C /* GoogleService-Info.plist in Resources */,
 				B63CC1132524D59100D76A4C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,7 +173,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D4A5C36E1F30A7EC6B3BC6C /* [CP] Embed Pods Frameworks */ = {
+		657FF22FED6E68DAC1B5EA23 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -216,6 +222,7 @@
 				B63CC1232524D8E600D76A4C /* MessageTableViewCell.swift in Sources */,
 				B63CC10C2524D59100D76A4C /* AppDelegate.swift in Sources */,
 				B63CC10E2524D59100D76A4C /* SceneDelegate.swift in Sources */,
+				B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */,
 				B63CC1292524DBEF00D76A4C /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

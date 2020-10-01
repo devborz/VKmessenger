@@ -6,5 +6,5 @@ target 'VKmessenger' do
   use_frameworks!
 
   # Pods for VKmessenger
-  pod "VK-ios-sdk"
+	pod 'Firebase/Database'
 end

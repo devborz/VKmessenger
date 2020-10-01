@@ -58,6 +58,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="chatImageView" destination="psK-7d-usz" id="PhR-4g-kog"/>
+                <outlet property="chatNameLabel" destination="Kcz-aa-NbW" id="dwT-MR-pCG"/>
+                <outlet property="lastMessageLabel" destination="WPh-Eo-8wE" id="p2K-H0-sW3"/>
+            </connections>
             <point key="canvasLocation" x="-121.73913043478262" y="99.107142857142847"/>
         </tableViewCell>
     </objects>
