@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 import FirebaseDatabase
 
-class MainViewController: UIViewController, UIGestureRecognizerDelegate {
+class MainViewController: UIViewController {
     
     var userToken: String?
     var userID: String?
@@ -57,16 +57,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             self.webView?.removeFromSuperview()
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SegueToChat" {
-            if let viewController = segue.destination as? ChatViewController {
-                let cell = sender as! MessageTableViewCell
-                viewController.chatID = cell.chatID
-                viewController.userID = self.userID
-            }
-        }
-    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -81,8 +71,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = chatsTableView.cellForRow(at: indexPath)
         chatsTableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: "SegueToChat", sender: cell)
+        let chatVC = ChatViewController()
+        chatVC.title = chats[indexPath.row][1]
+        chatVC.chatID = chats[indexPath.row][0]
+        chatVC.userID = self.userID
+        self.navigationController?.pushViewController(chatVC, animated: true)
     }
 }

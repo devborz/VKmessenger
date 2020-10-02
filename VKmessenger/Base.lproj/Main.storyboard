@@ -19,7 +19,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XGe-0L-RYk">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="yLu-ax-nE5">
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Поиск" id="yLu-ax-nE5">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -49,78 +49,92 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Сообщения" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="8W2-Lh-CsV">
-                        <barButtonItem key="backBarButtonItem" title=" " id="CZl-TU-fot"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="gear" catalog="system" id="DUQ-xU-Qbw"/>
+                        <barButtonItem key="backBarButtonItem" title=" " image="bubble_full" id="CZl-TU-fot"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="gear" catalog="system" id="DUQ-xU-Qbw">
+                            <connections>
+                                <segue destination="8m4-zN-w0C" kind="show" id="HFh-tI-gm4"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="ellipsis" catalog="system" id="WRo-iD-LOc"/>
-                            <barButtonItem title="Item" image="square.and.pencil" catalog="system" id="oiS-dE-bKG"/>
+                            <barButtonItem title="Item" image="square.and.pencil" catalog="system" id="oiS-dE-bKG">
+                                <connections>
+                                    <segue destination="uLc-nu-Gzf" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="Js8-Ca-5e7"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="chatsTableView" destination="XGe-0L-RYk" id="G5U-fd-agW"/>
-                        <segue destination="8m4-zN-w0C" kind="show" identifier="SegueToChat" id="5gj-Dv-NDg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="668" y="590"/>
         </scene>
-        <!--Chat View Controller-->
+        <!--Начать общение-->
+        <scene sceneID="jLo-aF-SqR">
+            <objects>
+                <viewController title="Начать общение" id="xU2-bd-Kc5" customClass="StartCommunicationViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="utZ-Ak-0A0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="unl-rh-78J">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7Cm-10-hc7"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstItem="unl-rh-78J" firstAttribute="top" secondItem="7Cm-10-hc7" secondAttribute="top" id="CvI-GN-qnJ"/>
+                            <constraint firstItem="7Cm-10-hc7" firstAttribute="trailing" secondItem="unl-rh-78J" secondAttribute="trailing" id="JpH-ai-ICs"/>
+                            <constraint firstItem="7Cm-10-hc7" firstAttribute="bottom" secondItem="unl-rh-78J" secondAttribute="bottom" id="Tyo-k8-xws"/>
+                            <constraint firstItem="unl-rh-78J" firstAttribute="leading" secondItem="7Cm-10-hc7" secondAttribute="leading" id="a5N-5T-Ykm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Начать общение" id="5DP-J6-YNR"/>
+                    <connections>
+                        <outlet property="tableView" destination="unl-rh-78J" id="zsH-g7-MSg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vSc-6X-es6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2755.072463768116" y="361.60714285714283"/>
+        </scene>
+        <!--Настройки-->
         <scene sceneID="lFq-uF-qJh">
             <objects>
-                <viewController id="8m4-zN-w0C" customClass="ChatViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8m4-zN-w0C" customClass="SettingsViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OJp-ik-4Fy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbW-rZ-oQO">
-                                <rect key="frame" x="0.0" y="822" width="414" height="40"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFZ-bW-md0">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="s5J-ho-jQe"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
-                                        </state>
-                                    </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Сообщение" textAlignment="natural" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="pQ1-YE-jRL">
-                                        <rect key="frame" x="60" y="0.0" width="294" height="40"/>
-                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ToW-oq-l0N">
-                                        <rect key="frame" x="354" y="0.0" width="60" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="KvR-VQ-FqQ"/>
-                                        </constraints>
-                                        <state key="normal" image="arrow.up" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="5un-8T-7pv"/>
-                                </constraints>
-                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B3Y-xJ-iaM">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RvN-Ve-8Mr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="RvN-Ve-8Mr" firstAttribute="bottom" secondItem="UbW-rZ-oQO" secondAttribute="bottom" id="0Hd-bS-CFH"/>
-                            <constraint firstItem="RvN-Ve-8Mr" firstAttribute="trailing" secondItem="UbW-rZ-oQO" secondAttribute="trailing" id="2nk-jF-AE0"/>
-                            <constraint firstItem="UbW-rZ-oQO" firstAttribute="leading" secondItem="RvN-Ve-8Mr" secondAttribute="leading" id="SfS-ow-sbh"/>
+                            <constraint firstItem="RvN-Ve-8Mr" firstAttribute="trailing" secondItem="B3Y-xJ-iaM" secondAttribute="trailing" id="XlR-jn-ZMN"/>
+                            <constraint firstItem="B3Y-xJ-iaM" firstAttribute="leading" secondItem="RvN-Ve-8Mr" secondAttribute="leading" id="Xlx-6t-Ypm"/>
+                            <constraint firstItem="B3Y-xJ-iaM" firstAttribute="top" secondItem="RvN-Ve-8Mr" secondAttribute="top" id="Y48-bU-0ta"/>
+                            <constraint firstItem="RvN-Ve-8Mr" firstAttribute="bottom" secondItem="B3Y-xJ-iaM" secondAttribute="bottom" id="jna-wS-TZs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jCO-tV-Ieb">
+                    <navigationItem key="navigationItem" title="Настройки" id="jCO-tV-Ieb">
                         <barButtonItem key="backBarButtonItem" title=" " id="HI9-wb-tnq"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="settingsTableView" destination="B3Y-xJ-iaM" id="Kop-ci-0Wq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9kb-wS-b36" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1457" y="593"/>
+            <point key="canvasLocation" x="1846" y="1046"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hMC-0j-YHE">
@@ -138,9 +152,27 @@
             </objects>
             <point key="canvasLocation" x="-112" y="590"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SH1-4h-PiI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uLc-nu-Gzf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dC9-4l-GZf">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xU2-bd-Kc5" kind="relationship" relationship="rootViewController" id="NID-lJ-lYS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XRr-ZB-lOI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1844.9275362318842" y="361.60714285714283"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="arrow.up" catalog="system" width="120" height="128"/>
+        <image name="bubble_full" width="56" height="35"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>

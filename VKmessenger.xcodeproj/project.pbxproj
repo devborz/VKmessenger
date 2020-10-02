@@ -18,6 +18,8 @@
 		B63CC1292524DBEF00D76A4C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1282524DBEF00D76A4C /* MainViewController.swift */; };
 		B63CC14725253B6600D76A4C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B63CC14625253B6600D76A4C /* GoogleService-Info.plist */; };
 		B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1552525D21000D76A4C /* ChatViewController.swift */; };
+		B63CC18925273DCA00D76A4C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC18825273DCA00D76A4C /* SettingsViewController.swift */; };
+		B63CC18D2527490300D76A4C /* StartCommunicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC18C2527490300D76A4C /* StartCommunicationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		B63CC1282524DBEF00D76A4C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B63CC14625253B6600D76A4C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B63CC1552525D21000D76A4C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		B63CC18825273DCA00D76A4C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B63CC18C2527490300D76A4C /* StartCommunicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCommunicationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,8 @@
 				B63CC1112524D59100D76A4C /* Main.storyboard */,
 				B63CC1282524DBEF00D76A4C /* MainViewController.swift */,
 				B63CC1552525D21000D76A4C /* ChatViewController.swift */,
+				B63CC18825273DCA00D76A4C /* SettingsViewController.swift */,
+				B63CC18C2527490300D76A4C /* StartCommunicationViewController.swift */,
 				B63CC1142524D59600D76A4C /* Assets.xcassets */,
 				B63CC1162524D59600D76A4C /* LaunchScreen.storyboard */,
 				B63CC14625253B6600D76A4C /* GoogleService-Info.plist */,
@@ -224,6 +230,8 @@
 				B63CC10E2524D59100D76A4C /* SceneDelegate.swift in Sources */,
 				B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */,
 				B63CC1292524DBEF00D76A4C /* MainViewController.swift in Sources */,
+				B63CC18D2527490300D76A4C /* StartCommunicationViewController.swift in Sources */,
+				B63CC18925273DCA00D76A4C /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
