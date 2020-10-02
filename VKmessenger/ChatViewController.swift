@@ -28,7 +28,7 @@ struct Media: MediaItem {
     var size: CGSize
 }
 
-class ChatViewController: MessagesViewController, MessagesLayoutDelegate, MessagesDisplayDelegate, MessagesDataSource, InputBarAccessoryViewDelegate {
+class ChatViewController: MessagesViewController, MessagesLayoutDelegate, MessagesDisplayDelegate, MessagesDataSource, InputBarAccessoryViewDelegate, UITextFieldDelegate {
     var chatID: String?
     var userID: String?
     
@@ -46,22 +46,51 @@ class ChatViewController: MessagesViewController, MessagesLayoutDelegate, Messag
         setupInputBar()
     }
     
+    private func setupBubbles() {
+        
+    }
+    
     private func setupInputBar() {
         messageInputBar.sendButton.image = UIImage(systemName: "arrow.up")
         messageInputBar.sendButton.title = ""
         messageInputBar.inputTextView.placeholder = "Сообщение"
         let button = InputBarButtonItem()
-        button.setSize(CGSize(width: 35, height: 35), animated: false)
+        button.setSize(CGSize(width: 50, height: 50), animated: false)
         button.setImage(UIImage(systemName: "paperclip"), for: .normal)
+        button.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: .horizontal)
         button.image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: UIImage.SymbolScale(rawValue: 3)!))
-        
         button.onTouchUpInside { [weak self] _ in
             self?.presentInputActionSheet()
         }
-        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
+        messageInputBar.setLeftStackViewWidthConstant(to: 51, animated: false)
         messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+        messageInputBar.sendButton.addTarget(self, action: #selector(didTappedSendButton(_:)), for: .touchUpInside)
     }
     
+    @objc func didTappedSendButton(_ responder: Any) {
+        let message = Message(sender: currentUser, messageId: "2", sentDate: Date().addingTimeInterval(-86400), kind: .text(messageInputBar.inputTextView.text!))
+        messageInputBar.inputTextView.text = ""
+        messages.append(message)
+        messagesCollectionView.reloadData()
+    }
+    
+    func getMessages() {
+    }
+
+    func currentSender() -> SenderType {
+        return currentUser
+    }
+    
+    func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
+        return messages[indexPath.section]
+    }
+    
+    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
+        return messages.count
+    }
+}
+
+extension ChatViewController: UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate {
     private func presentInputActionSheet() {
         let actionSheet = UIAlertController(title: "Attach Media",
                                             message: "What would you like to attach?",
@@ -88,7 +117,7 @@ class ChatViewController: MessagesViewController, MessagesLayoutDelegate, Messag
 
             let picker = UIImagePickerController()
             picker.sourceType = .camera
-            picker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            picker.delegate = self
             picker.allowsEditing = true
             self?.present(picker, animated: true)
 
@@ -97,7 +126,7 @@ class ChatViewController: MessagesViewController, MessagesLayoutDelegate, Messag
 
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
-            picker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            picker.delegate = self
             picker.allowsEditing = true
             self?.present(picker, animated: true)
 
@@ -115,7 +144,7 @@ class ChatViewController: MessagesViewController, MessagesLayoutDelegate, Messag
 
             let picker = UIImagePickerController()
             picker.sourceType = .camera
-            picker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            picker.delegate = self
             picker.mediaTypes = ["public.movie"]
             picker.videoQuality = .typeMedium
             picker.allowsEditing = true
@@ -126,7 +155,7 @@ class ChatViewController: MessagesViewController, MessagesLayoutDelegate, Messag
 
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
-            picker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            picker.delegate = self
             picker.allowsEditing = true
             picker.mediaTypes = ["public.movie"]
             picker.videoQuality = .typeMedium
@@ -136,24 +165,5 @@ class ChatViewController: MessagesViewController, MessagesLayoutDelegate, Messag
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
         present(actionSheet, animated: true)
-    }
-    
-    func getMessages() {
-        messages.append(Message(sender: currentUser,
-                                messageId: "1",
-                                sentDate: Date().addingTimeInterval(-86400),
-                                kind: .text("Hello World")))
-    }
-
-    func currentSender() -> SenderType {
-        return currentUser
-    }
-    
-    func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        return messages[indexPath.row]
-    }
-    
-    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        return messages.count
     }
 }

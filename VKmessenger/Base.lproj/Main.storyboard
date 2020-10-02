@@ -83,6 +83,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="unl-rh-78J">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="rHD-6J-MoQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7Cm-10-hc7"/>
@@ -130,11 +135,28 @@
                     </navigationItem>
                     <connections>
                         <outlet property="settingsTableView" destination="B3Y-xJ-iaM" id="Kop-ci-0Wq"/>
+                        <segue destination="hnz-FT-wdG" kind="show" id="OHI-xq-Jno"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9kb-wS-b36" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1846" y="1046"/>
+            <point key="canvasLocation" x="1845" y="1046"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="d3E-y3-lZo">
+            <objects>
+                <viewController id="hnz-FT-wdG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gY0-Op-pEr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="2A5-0z-HFA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JDw-97-j8I"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Uq-eS-d92" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2755" y="1046"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hMC-0j-YHE">
