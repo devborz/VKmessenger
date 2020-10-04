@@ -1,5 +1,5 @@
 //
-//  MessageTableViewCell.swift
+//  ChatTableViewCell.swift
 //  VKmessenger
 //
 //  Created by Усман Туркаев on 30.09.2020.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MessageTableViewCell: UITableViewCell {
+class ChatTableViewCell: UITableViewCell {
     
     @IBOutlet weak var chatNameLabel: UILabel!
     @IBOutlet weak var chatImageView: UIImageView!

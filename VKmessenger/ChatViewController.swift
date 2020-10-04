@@ -28,7 +28,7 @@ struct Media: MediaItem {
     var size: CGSize
 }
 
-class ChatViewController: MessagesViewController, MessagesLayoutDelegate, MessagesDisplayDelegate, MessagesDataSource, InputBarAccessoryViewDelegate, UITextFieldDelegate {
+class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate, UITextFieldDelegate {
     var chatID: String?
     var userID: String?
     
@@ -39,44 +39,113 @@ class ChatViewController: MessagesViewController, MessagesLayoutDelegate, Messag
     override func viewDidLoad() {
         super.viewDidLoad()
         getMessages()
+        setupAttachButton()
+        setupSendButton()
+        setupInputBar()
+        setupColorScheme()
+        setupMessagesView()
+    }
+    
+    private func setupColorScheme() {
+        view.backgroundColor = UIColor(named: "BackgroundColor")!
+        messagesCollectionView.backgroundColor = UIColor(named: "BackgroundColor")!
+        messageInputBar.backgroundView.backgroundColor = UIColor(named: "BackgroundColor")!
+    }
+    
+    private func setupMessagesView() {
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        messageInputBar.delegate = self
-        setupInputBar()
+        messagesCollectionView.messageCellDelegate = self
+        maintainPositionOnKeyboardFrameChanged = true
+        messagesCollectionView.scrollToBottom()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tap.cancelsTouchesInView = false
+        messagesCollectionView.addGestureRecognizer(tap)
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+          layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+        }
     }
     
-    private func setupBubbles() {
-        
+    @objc
+    private func hideKeyboard() {
+        messageInputBar.inputTextView.resignFirstResponder()
     }
     
     private func setupInputBar() {
-        messageInputBar.sendButton.image = UIImage(systemName: "arrow.up")
-        messageInputBar.sendButton.title = ""
+        messageInputBar.delegate = self
+        messageInputBar.leftStackView.alignment = .center
+        messageInputBar.rightStackView.alignment = .center
+        messageInputBar.separatorLine.isHidden = true
         messageInputBar.inputTextView.placeholder = "Сообщение"
+        messageInputBar.inputTextView.backgroundColor = UIColor(named: "InputViewColor")!
+        messageInputBar.inputTextView.layer.cornerCurve = .circular
+        messageInputBar.inputTextView.layer.cornerRadius = 15
+        messageInputBar.inputTextView.endEditing(true)
+    }
+    
+    private func setupSendButton() {
+        messageInputBar.sendButton.image = UIImage(systemName: "arrow.up.circle.fill")
+        let config = UIImage.SymbolConfiguration(pointSize: 30)
+        messageInputBar.sendButton.setPreferredSymbolConfiguration(config, forImageIn: .normal)
+        messageInputBar.sendButton.title = nil
+        messageInputBar.sendButton.contentMode = .scaleAspectFit
+        messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
+    }
+    
+    private func setupAttachButton() {
         let button = InputBarButtonItem()
-        button.setSize(CGSize(width: 50, height: 50), animated: false)
-        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
+        button.setSize(CGSize(width: 40, height: 40), animated: false)
+        button.setImage(UIImage(systemName: "plus.circle"), for: .normal)
         button.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: .horizontal)
-        button.image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: UIImage.SymbolScale(rawValue: 3)!))
+        let config = UIImage.SymbolConfiguration(pointSize: 30)
+        button.setPreferredSymbolConfiguration(config, forImageIn: .normal)
+        button.contentMode = .scaleAspectFit
         button.onTouchUpInside { [weak self] _ in
             self?.presentInputActionSheet()
         }
-        messageInputBar.setLeftStackViewWidthConstant(to: 51, animated: false)
         messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
-        messageInputBar.sendButton.addTarget(self, action: #selector(didTappedSendButton(_:)), for: .touchUpInside)
     }
     
-    @objc func didTappedSendButton(_ responder: Any) {
-        let message = Message(sender: currentUser, messageId: "2", sentDate: Date().addingTimeInterval(-86400), kind: .text(messageInputBar.inputTextView.text!))
-        messageInputBar.inputTextView.text = ""
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        let message = Message(sender: currentUser, messageId: "2", sentDate: Date().addingTimeInterval(-86400), kind: .text(text))
+        messageInputBar.inputTextView.text = nil
+        sendMessage(message)
+    }
+    
+    private func sendMessage(_ message: Message) {
         messages.append(message)
-        messagesCollectionView.reloadData()
+        messagesCollectionView.performBatchUpdates({
+            messagesCollectionView.insertSections([messages.count - 1])
+            if messages.count >= 2 {
+                messagesCollectionView.reloadSections([messages.count - 2])
+            }
+        }, completion: { [weak self] _ in
+            self?.messagesCollectionView.scrollToBottom(animated: true)
+        })
     }
+        
+//    private func isLastSectionVisible() -> Bool {
+//        guard !messages.isEmpty else { return false }
+//
+//        let lastIndexPath = IndexPath(item: 0, section: messages.count - 1)
+//
+//        return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
+//    }
     
-    func getMessages() {
+    private func getMessages() {
+        for _ in 1...20 {
+            messages.append(Message(sender: otherUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("What's up nigga?")))
+        }
+        for _ in 1...5 {
+            messages.append(Message(sender: currentUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("What's up\n nigga?")))
+        }
     }
+}
 
+// MARK: MessagesDataSources & MessageCellDelegate
+
+extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate {
     func currentSender() -> SenderType {
         return currentUser
     }
@@ -88,82 +157,33 @@ class ChatViewController: MessagesViewController, MessagesLayoutDelegate, Messag
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
-}
-
-extension ChatViewController: UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate {
-    private func presentInputActionSheet() {
-        let actionSheet = UIAlertController(title: "Attach Media",
-                                            message: "What would you like to attach?",
-                                            preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Photo", style: .default, handler: { [weak self] _ in
-            self?.presentPhotoInputActionsheet()
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Video", style: .default, handler: { [weak self]  _ in
-            self?.presentVideoInputActionsheet()
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Audio", style: .default, handler: {  _ in
-
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        present(actionSheet, animated: true)
-    }
-
-    private func presentPhotoInputActionsheet() {
-        let actionSheet = UIAlertController(title: "Attach Photo",
-                                            message: "Where would you like to attach a photo from",
-                                            preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
-
-            let picker = UIImagePickerController()
-            picker.sourceType = .camera
-            picker.delegate = self
-            picker.allowsEditing = true
-            self?.present(picker, animated: true)
-
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { [weak self] _ in
-
-            let picker = UIImagePickerController()
-            picker.sourceType = .photoLibrary
-            picker.delegate = self
-            picker.allowsEditing = true
-            self?.present(picker, animated: true)
-
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        present(actionSheet, animated: true)
-    }
-
-    private func presentVideoInputActionsheet() {
-        let actionSheet = UIAlertController(title: "Attach Video",
-                                            message: "Where would you like to attach a video from?",
-                                            preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
-
-            let picker = UIImagePickerController()
-            picker.sourceType = .camera
-            picker.delegate = self
-            picker.mediaTypes = ["public.movie"]
-            picker.videoQuality = .typeMedium
-            picker.allowsEditing = true
-            self?.present(picker, animated: true)
-
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { [weak self] _ in
-
-            let picker = UIImagePickerController()
-            picker.sourceType = .photoLibrary
-            picker.delegate = self
-            picker.allowsEditing = true
-            picker.mediaTypes = ["public.movie"]
-            picker.videoQuality = .typeMedium
-            self?.present(picker, animated: true)
-
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        present(actionSheet, animated: true)
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        let sender = messages[indexPath.section].sender.senderId
+        switch sender {
+        case currentUser.senderId:
+            avatarView.image = UIImage(systemName: "person")
+        default:
+            avatarView.image = UIImage(systemName: "person.fill")
+            avatarView.backgroundColor = .white
+        }
     }
 }
+
+extension ChatViewController: MessagesDisplayDelegate, MessageCellDelegate {
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        let sender = message.sender.senderId
+        switch sender {
+        case currentUser.senderId:
+            return UIColor(named: "CurrentUserMessageBackgroundColor")!
+        default:
+            return UIColor(named: "OtherUserMessageBackgroundColor")!
+        }
+    }
+    
+    func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        return UIColor(named: "TextColor")!
+    }
+}
+
+

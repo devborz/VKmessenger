@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
         self.authorize()
         chatsTableView.delegate = self
         chatsTableView.dataSource = self
-        chatsTableView.register(UINib(nibName: "MessageTableViewCell", bundle: nil), forCellReuseIdentifier: "MessageTableViewCell")
+        chatsTableView.register(UINib(nibName: "ChatTableViewCell", bundle: nil), forCellReuseIdentifier: "ChatTableViewCell")
     }
     
     func authorize() {
@@ -65,7 +65,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = chatsTableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as! MessageTableViewCell
+        let cell = chatsTableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell", for: indexPath) as! ChatTableViewCell
         cell.setup(chats[indexPath.row][0], chatImage: UIImage(), chatName: chats[indexPath.row][1], lastMessage: chats[indexPath.row][2], lastTime: chats[indexPath.row][3])
         return cell
     }
