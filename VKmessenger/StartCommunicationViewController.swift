@@ -8,9 +8,8 @@
 import UIKit
 
 class StartCommunicationViewController: UIViewController {
-
-
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var chatSearchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,7 +10,7 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     var settings = [Setting]()
-
+    
     @IBOutlet weak var settingsTableView: UITableView!
     
     override func viewDidLoad() {

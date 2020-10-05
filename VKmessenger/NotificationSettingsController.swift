@@ -46,7 +46,7 @@ extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 12))
         returnedView.backgroundColor = .white
-
+        
         let label = UILabel(frame: CGRect(x: 10, y: 1, width: view.bounds.width, height: 12))
         label.textColor = .systemGray4
         label.font = UIFont.boldSystemFont(ofSize: 12.0)
@@ -67,7 +67,7 @@ extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settings[section].count
     }
-        
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationSettingCell", for: indexPath) as! NotificationSettingCell
         cell.setup(settings[indexPath.section][indexPath.row])

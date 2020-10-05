@@ -63,7 +63,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
         tap.cancelsTouchesInView = false
         messagesCollectionView.addGestureRecognizer(tap)
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
-          layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
         }
     }
     
@@ -124,14 +124,14 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
             self?.messagesCollectionView.scrollToBottom(animated: true)
         })
     }
-        
-//    private func isLastSectionVisible() -> Bool {
-//        guard !messages.isEmpty else { return false }
-//
-//        let lastIndexPath = IndexPath(item: 0, section: messages.count - 1)
-//
-//        return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
-//    }
+    
+    //    private func isLastSectionVisible() -> Bool {
+    //        guard !messages.isEmpty else { return false }
+    //
+    //        let lastIndexPath = IndexPath(item: 0, section: messages.count - 1)
+    //
+    //        return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
+    //    }
     
     private func getMessages() {
         for _ in 1...20 {
