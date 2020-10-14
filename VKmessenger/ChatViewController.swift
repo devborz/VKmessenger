@@ -8,6 +8,7 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
+import BTNavigationDropdownMenu
 
 struct Sender: SenderType {
     var senderId: String
@@ -28,6 +29,12 @@ struct Media: MediaItem {
     var size: CGSize
 }
 
+struct ChatMenuOption {
+    var name: String
+    var image: UIImage
+    var action: (()->Void)?
+}
+
 class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate, UITextFieldDelegate {
     var chatID: String?
     var userID: String?
@@ -35,6 +42,32 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
     let currentUser = Sender(senderId: "self", displayName: "Me")
     let otherUser = Sender(senderId: "other", displayName: "InterLocutor")
     var messages = [Message]()
+    
+    var chatMenuOptions: [ChatMenuOption] = [
+        ChatMenuOption(name: "Открыть профиль", image: UIImage(systemName: "person.crop.circle")!, action: nil),
+        ChatMenuOption(name: "Добавить в беседу", image: UIImage(systemName: "plus.message")!, action: nil),
+        ChatMenuOption(name: "Поиск сообщений", image: UIImage(systemName: "magnifyingglass")!, action: nil),
+        ChatMenuOption(name: "Показать вложения", image: UIImage(systemName: "photo")!, action: nil),
+        ChatMenuOption(name: "Отключить уведомления", image: UIImage(systemName: "volume.slash")!, action: nil),
+        ChatMenuOption(name: "Очистить историю", image: UIImage(systemName: "trash")!, action: nil),
+    ]
+    
+    @IBOutlet var transparentView: UIView!
+    
+    @IBOutlet var inputBarTransparentView: UIView!
+    
+    @IBOutlet weak var dropdownMenuTable: UITableView!
+    
+    @IBOutlet var dropdownMenu: UIView!
+    
+    var dropdownMenuHeightConstraint: NSLayoutConstraint?
+    
+    @IBOutlet weak var titleButton: UIButton!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        messagesCollectionView.scrollToBottom(animated: false)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +77,12 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
         setupInputBar()
         setupColorScheme()
         setupMessagesView()
+        setupNavigationBar()
+        setupDropDownMenu()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     private func setupColorScheme() {
@@ -57,11 +96,14 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messageCellDelegate = self
+        
         maintainPositionOnKeyboardFrameChanged = true
-        messagesCollectionView.scrollToBottom()
+        
+        additionalBottomInset = 20
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tap.cancelsTouchesInView = false
         messagesCollectionView.addGestureRecognizer(tap)
+        
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
             layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
         }
@@ -133,57 +175,20 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
     //        return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
     //    }
     
-    private func getMessages() {
-        for _ in 1...20 {
-            messages.append(Message(sender: otherUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("What's up nigga?")))
-        }
-        for _ in 1...5 {
-            messages.append(Message(sender: currentUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("What's up\n nigga?")))
-        }
-    }
-}
-
-// MARK: MessagesDataSources & MessageCellDelegate
-
-extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate {
-    func currentSender() -> SenderType {
-        return currentUser
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.layer.borderWidth = 0
+        navigationController?.navigationBar.layoutIfNeeded()
+        navigationController?.navigationBar.backgroundColor = UIColor(named: "BackgroundColor")
+        titleButton.setTitle(self.title, for: .normal)
     }
     
-    func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        return messages[indexPath.section]
-    }
     
-    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        return messages.count
-    }
-    
-    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        let sender = messages[indexPath.section].sender.senderId
-        switch sender {
-        case currentUser.senderId:
-            avatarView.image = UIImage(systemName: "person")
-        default:
-            avatarView.image = UIImage(systemName: "person.fill")
-            avatarView.backgroundColor = .white
+    @IBAction func pressedTitleButton(_ sender: Any) {
+        if titleButton.isSelected {
+            hideChatMenu()
+        } else {
+            showChatMenu()
         }
     }
 }
-
-extension ChatViewController: MessagesDisplayDelegate, MessageCellDelegate {
-    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        let sender = message.sender.senderId
-        switch sender {
-        case currentUser.senderId:
-            return UIColor(named: "CurrentUserMessageBackgroundColor")!
-        default:
-            return UIColor(named: "OtherUserMessageBackgroundColor")!
-        }
-    }
-    
-    func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return UIColor(named: "TextColor")!
-    }
-}
-
 

@@ -29,7 +29,6 @@ class NotificationSettingCell: UITableViewCell {
         settingNameLabel.text = setting.name
         valueLabel.text = setting.value
         self.tintColor = setting.tintColor
-        print(setting.tintColor.description)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

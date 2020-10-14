@@ -1,4 +1,5 @@
 PODS:
+  - BTNavigationDropdownMenu (0.5)
   - Firebase/CoreOnly (6.32.0):
     - FirebaseCore (= 6.10.2)
   - Firebase/Database (6.32.0):
@@ -36,11 +37,13 @@ PODS:
   - PromisesObjC (1.2.10)
 
 DEPENDENCIES:
+  - BTNavigationDropdownMenu
   - Firebase/Database
   - MessageKit
 
 SPEC REPOS:
   trunk:
+    - BTNavigationDropdownMenu
     - Firebase
     - FirebaseCore
     - FirebaseCoreDiagnostics
@@ -54,6 +57,7 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  BTNavigationDropdownMenu: ba3a26fdb6a56c4721c31df8a0875106c259663a
   Firebase: afa030f17f5421810f379a42b0e5d3302d27eb26
   FirebaseCore: 1d697bb944bf2af5fc248f1a66e165c9dd88bf97
   FirebaseCoreDiagnostics: 7415bfb3883b3500c5a95c42b6ba66baae78f600
@@ -66,6 +70,6 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
 
-PODFILE CHECKSUM: 3d0035818ff1e108a62189693c6c990351e7628d
+PODFILE CHECKSUM: 4ab37a35dbaf41eb7d2d6052f7367c4a4894969e
 
 COCOAPODS: 1.9.3

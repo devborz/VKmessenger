@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		19268856C9564D651F83F31D /* Pods_VKmessenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A9A89C641D424C697D68E0 /* Pods_VKmessenger.framework */; };
+		B62C16852530FE350066E537 /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C16842530FE350066E537 /* TableViewDelegate.swift */; };
+		B62C16882530FE650066E537 /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C16872530FE650066E537 /* CollectionViewDelegate.swift */; };
+		B62C168C25311D080066E537 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C168B25311D080066E537 /* Authorization.swift */; };
+		B62C1691253125BF0066E537 /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C1690253125BF0066E537 /* DropDownMenu.swift */; };
+		B62C169525312EC40066E537 /* MessageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C169425312EC40066E537 /* MessageProtocols.swift */; };
+		B62C169825312F540066E537 /* ChatMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C169725312F540066E537 /* ChatMenu.swift */; };
+		B62C169B2532216E0066E537 /* MessageProcesser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C169A2532216E0066E537 /* MessageProcesser.swift */; };
 		B63CC10C2524D59100D76A4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC10B2524D59100D76A4C /* AppDelegate.swift */; };
 		B63CC10E2524D59100D76A4C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC10D2524D59100D76A4C /* SceneDelegate.swift */; };
 		B63CC1132524D59100D76A4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B63CC1112524D59100D76A4C /* Main.storyboard */; };
@@ -15,12 +22,14 @@
 		B63CC1182524D59600D76A4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B63CC1162524D59600D76A4C /* LaunchScreen.storyboard */; };
 		B63CC1232524D8E600D76A4C /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1212524D8E600D76A4C /* ChatTableViewCell.swift */; };
 		B63CC1242524D8E600D76A4C /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B63CC1222524D8E600D76A4C /* ChatTableViewCell.xib */; };
-		B63CC1292524DBEF00D76A4C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1282524DBEF00D76A4C /* MainViewController.swift */; };
+		B63CC1292524DBEF00D76A4C /* ChatsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1282524DBEF00D76A4C /* ChatsMenuViewController.swift */; };
 		B63CC14725253B6600D76A4C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B63CC14625253B6600D76A4C /* GoogleService-Info.plist */; };
 		B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1552525D21000D76A4C /* ChatViewController.swift */; };
 		B63CC18925273DCA00D76A4C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC18825273DCA00D76A4C /* SettingsViewController.swift */; };
 		B63CC18D2527490300D76A4C /* StartCommunicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC18C2527490300D76A4C /* StartCommunicationViewController.swift */; };
 		B68B94A1252BB956001AE2EF /* ChatFolders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68B94A0252BB956001AE2EF /* ChatFolders.swift */; };
+		B68B94C0252DF9F1001AE2EF /* ChatMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68B94BE252DF9F1001AE2EF /* ChatMenuCell.swift */; };
+		B68B94C1252DF9F1001AE2EF /* ChatMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B68B94BF252DF9F1001AE2EF /* ChatMenuCell.xib */; };
 		B6ADB5CF252B7A27006598FF /* FolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADB5CD252B7A27006598FF /* FolderCell.swift */; };
 		B6ADB5D0252B7A27006598FF /* FolderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6ADB5CE252B7A27006598FF /* FolderCell.xib */; };
 		B6C22AAC2528DF04001D33C0 /* MediaPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22AAB2528DF04001D33C0 /* MediaPickerController.swift */; };
@@ -39,6 +48,13 @@
 		11A9A89C641D424C697D68E0 /* Pods_VKmessenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKmessenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC408FD6BAA81FD29AAEBA2 /* Pods-VKmessenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKmessenger.release.xcconfig"; path = "Target Support Files/Pods-VKmessenger/Pods-VKmessenger.release.xcconfig"; sourceTree = "<group>"; };
 		A8DF9C0F8192D216F9B5E704 /* Pods-VKmessenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKmessenger.debug.xcconfig"; path = "Target Support Files/Pods-VKmessenger/Pods-VKmessenger.debug.xcconfig"; sourceTree = "<group>"; };
+		B62C16842530FE350066E537 /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
+		B62C16872530FE650066E537 /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
+		B62C168B25311D080066E537 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
+		B62C1690253125BF0066E537 /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
+		B62C169425312EC40066E537 /* MessageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProtocols.swift; sourceTree = "<group>"; };
+		B62C169725312F540066E537 /* ChatMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMenu.swift; sourceTree = "<group>"; };
+		B62C169A2532216E0066E537 /* MessageProcesser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProcesser.swift; sourceTree = "<group>"; };
 		B63CC1082524D59100D76A4C /* VKmessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKmessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B63CC10B2524D59100D76A4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B63CC10D2524D59100D76A4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,12 +64,14 @@
 		B63CC1192524D59600D76A4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B63CC1212524D8E600D76A4C /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		B63CC1222524D8E600D76A4C /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
-		B63CC1282524DBEF00D76A4C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B63CC1282524DBEF00D76A4C /* ChatsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsMenuViewController.swift; sourceTree = "<group>"; };
 		B63CC14625253B6600D76A4C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B63CC1552525D21000D76A4C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B63CC18825273DCA00D76A4C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B63CC18C2527490300D76A4C /* StartCommunicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCommunicationViewController.swift; sourceTree = "<group>"; };
 		B68B94A0252BB956001AE2EF /* ChatFolders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFolders.swift; sourceTree = "<group>"; };
+		B68B94BE252DF9F1001AE2EF /* ChatMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuCell.swift; sourceTree = "<group>"; };
+		B68B94BF252DF9F1001AE2EF /* ChatMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMenuCell.xib; sourceTree = "<group>"; };
 		B6ADB5CD252B7A27006598FF /* FolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCell.swift; sourceTree = "<group>"; };
 		B6ADB5CE252B7A27006598FF /* FolderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderCell.xib; sourceTree = "<group>"; };
 		B6C22AAB2528DF04001D33C0 /* MediaPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerController.swift; sourceTree = "<group>"; };
@@ -89,6 +107,39 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B62C167E2530FDC10066E537 /* ChatsMenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B63CC1282524DBEF00D76A4C /* ChatsMenuViewController.swift */,
+				B62C16842530FE350066E537 /* TableViewDelegate.swift */,
+				B62C16872530FE650066E537 /* CollectionViewDelegate.swift */,
+				B68B94A0252BB956001AE2EF /* ChatFolders.swift */,
+				B62C1690253125BF0066E537 /* DropDownMenu.swift */,
+			);
+			name = ChatsMenuViewController;
+			sourceTree = "<group>";
+		};
+		B62C168A25311CC60066E537 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				B62C168B25311D080066E537 /* Authorization.swift */,
+			);
+			name = Authorization;
+			sourceTree = "<group>";
+		};
+		B62C169325312E830066E537 /* ChatController */ = {
+			isa = PBXGroup;
+			children = (
+				B63CC1552525D21000D76A4C /* ChatViewController.swift */,
+				B62C169425312EC40066E537 /* MessageProtocols.swift */,
+				B62C169A2532216E0066E537 /* MessageProcesser.swift */,
+				B62C169725312F540066E537 /* ChatMenu.swift */,
+				B68B94BE252DF9F1001AE2EF /* ChatMenuCell.swift */,
+				B68B94BF252DF9F1001AE2EF /* ChatMenuCell.xib */,
+			);
+			name = ChatController;
+			sourceTree = "<group>";
+		};
 		B63CC0FF2524D59100D76A4C = {
 			isa = PBXGroup;
 			children = (
@@ -110,8 +161,9 @@
 		B63CC10A2524D59100D76A4C /* VKmessenger */ = {
 			isa = PBXGroup;
 			children = (
-				B63CC1282524DBEF00D76A4C /* MainViewController.swift */,
-				B63CC1552525D21000D76A4C /* ChatViewController.swift */,
+				B62C169325312E830066E537 /* ChatController */,
+				B62C168A25311CC60066E537 /* Authorization */,
+				B62C167E2530FDC10066E537 /* ChatsMenuViewController */,
 				B63CC18C2527490300D76A4C /* StartCommunicationViewController.swift */,
 				B63CC18825273DCA00D76A4C /* SettingsViewController.swift */,
 				B6C22AAB2528DF04001D33C0 /* MediaPickerController.swift */,
@@ -128,7 +180,6 @@
 				B63CC1162524D59600D76A4C /* LaunchScreen.storyboard */,
 				B63CC14625253B6600D76A4C /* GoogleService-Info.plist */,
 				B63CC1192524D59600D76A4C /* Info.plist */,
-				B68B94A0252BB956001AE2EF /* ChatFolders.swift */,
 			);
 			path = VKmessenger;
 			sourceTree = "<group>";
@@ -220,6 +271,7 @@
 				B63CC1242524D8E600D76A4C /* ChatTableViewCell.xib in Resources */,
 				B6ADB5D0252B7A27006598FF /* FolderCell.xib in Resources */,
 				B6C22AB6252928FE001D33C0 /* SettingTableViewCell.xib in Resources */,
+				B68B94C1252DF9F1001AE2EF /* ChatMenuCell.xib in Resources */,
 				B63CC1152524D59600D76A4C /* Assets.xcassets in Resources */,
 				B63CC14725253B6600D76A4C /* GoogleService-Info.plist in Resources */,
 				B63CC1132524D59100D76A4C /* Main.storyboard in Resources */,
@@ -278,18 +330,26 @@
 				B6C22AC22529F719001D33C0 /* AccountSettingsController.swift in Sources */,
 				B6C22AAC2528DF04001D33C0 /* MediaPickerController.swift in Sources */,
 				B6C22ABC2529F6BC001D33C0 /* NotificationSettingsController.swift in Sources */,
+				B62C169B2532216E0066E537 /* MessageProcesser.swift in Sources */,
 				B6C22ABF2529F6EC001D33C0 /* DoNotDisturbController.swift in Sources */,
 				B68B94A1252BB956001AE2EF /* ChatFolders.swift in Sources */,
 				B6C22AC92529F781001D33C0 /* AppearanceSettingsController.swift in Sources */,
+				B62C169525312EC40066E537 /* MessageProtocols.swift in Sources */,
 				B63CC1232524D8E600D76A4C /* ChatTableViewCell.swift in Sources */,
 				B63CC10C2524D59100D76A4C /* AppDelegate.swift in Sources */,
 				B6ADB5CF252B7A27006598FF /* FolderCell.swift in Sources */,
 				B6C22AB5252928FE001D33C0 /* SettingTableViewCell.swift in Sources */,
+				B62C169825312F540066E537 /* ChatMenu.swift in Sources */,
 				B63CC10E2524D59100D76A4C /* SceneDelegate.swift in Sources */,
+				B62C1691253125BF0066E537 /* DropDownMenu.swift in Sources */,
 				B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */,
+				B62C168C25311D080066E537 /* Authorization.swift in Sources */,
 				B6C22AC62529F73F001D33C0 /* MainSettingsController.swift in Sources */,
-				B63CC1292524DBEF00D76A4C /* MainViewController.swift in Sources */,
+				B63CC1292524DBEF00D76A4C /* ChatsMenuViewController.swift in Sources */,
 				B63CC18D2527490300D76A4C /* StartCommunicationViewController.swift in Sources */,
+				B68B94C0252DF9F1001AE2EF /* ChatMenuCell.swift in Sources */,
+				B62C16852530FE350066E537 /* TableViewDelegate.swift in Sources */,
+				B62C16882530FE650066E537 /* CollectionViewDelegate.swift in Sources */,
 				B6C22ACD2529FDA8001D33C0 /* NotificationSettingCell.swift in Sources */,
 				B63CC18925273DCA00D76A4C /* SettingsViewController.swift in Sources */,
 			);

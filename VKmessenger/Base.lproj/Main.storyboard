@@ -3,34 +3,102 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Сообщения-->
+        <!--Chat View Controller-->
+        <scene sceneID="80R-km-FbQ">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="V1S-gf-PVZ" customClass="ChatViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kmd-TU-RlU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="euh-0m-mwF">
+                                <rect key="frame" x="0.0" y="125" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Sfn-wY-XWx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="kKY-UG-wIL">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oj2-6f-QDJ">
+                            <rect key="frame" x="170.5" y="11" width="73" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button" image="chevron.down" catalog="system">
+                                <color key="titleColor" name="TextColor"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                            </state>
+                            <connections>
+                                <action selector="pressedTitleButton:" destination="V1S-gf-PVZ" eventType="touchUpInside" id="Bp4-nW-YQ0"/>
+                            </connections>
+                        </button>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="dropdownMenu" destination="TxD-ls-RHk" id="fCF-ln-gLl"/>
+                        <outlet property="dropdownMenuTable" destination="FpG-DP-O5a" id="li9-jn-WLz"/>
+                        <outlet property="inputBarTransparentView" destination="OJK-gO-w3c" id="LZo-jV-IMx"/>
+                        <outlet property="titleButton" destination="oj2-6f-QDJ" id="5Kj-3V-W3l"/>
+                        <outlet property="transparentView" destination="oRM-vB-eT0" id="QyZ-34-LUu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V70-vf-qbc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="TxD-ls-RHk">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FpG-DP-O5a">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                            <color key="backgroundColor" name="BackgroundColor"/>
+                        </tableView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="PCv-Rl-NUh"/>
+                    <color key="backgroundColor" name="BackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="PCv-Rl-NUh" firstAttribute="trailing" secondItem="FpG-DP-O5a" secondAttribute="trailing" id="Hpg-7C-F3u"/>
+                        <constraint firstItem="FpG-DP-O5a" firstAttribute="bottom" secondItem="PCv-Rl-NUh" secondAttribute="bottom" id="Hu1-4b-vrc"/>
+                        <constraint firstItem="FpG-DP-O5a" firstAttribute="leading" secondItem="PCv-Rl-NUh" secondAttribute="leading" id="pVn-cd-Klr"/>
+                        <constraint firstItem="FpG-DP-O5a" firstAttribute="top" secondItem="TxD-ls-RHk" secondAttribute="top" id="uch-gL-AZB"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" id="oRM-vB-eT0">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <viewLayoutGuide key="safeArea" id="iKe-8F-O1F"/>
+                    <color key="backgroundColor" name="BackgroundColor"/>
+                </view>
+                <view contentMode="scaleToFill" id="OJK-gO-w3c">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <viewLayoutGuide key="safeArea" id="Swc-TW-6AI"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="1577" y="1373"/>
+        </scene>
+        <!--Чаты-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ChatsMenuViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XGe-0L-RYk">
-                                <rect key="frame" x="0.0" y="168" width="414" height="645"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="128" width="414" height="685"/>
+                                <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
-                            <searchBar contentMode="redraw" text="" placeholder="Поиск" translatesAutoresizingMaskIntoConstraints="NO" id="yLu-ax-nE5">
-                                <rect key="frame" x="0.0" y="88" width="414" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="s0D-9C-GZ0"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wlB-oa-G3q">
-                                <rect key="frame" x="0.0" y="128" width="414" height="40"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="40"/>
+                                <color key="backgroundColor" name="BackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="sKi-mW-BTg"/>
                                 </constraints>
@@ -55,21 +123,18 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wlB-oa-G3q" secondAttribute="trailing" id="10E-4l-JvF"/>
                             <constraint firstItem="XGe-0L-RYk" firstAttribute="top" secondItem="wlB-oa-G3q" secondAttribute="bottom" id="4pF-lE-q3l"/>
                             <constraint firstItem="XGe-0L-RYk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8Br-nD-uG0"/>
-                            <constraint firstItem="yLu-ax-nE5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9Ff-kf-hT1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XGe-0L-RYk" secondAttribute="trailing" id="CXc-Iu-oCp"/>
-                            <constraint firstItem="yLu-ax-nE5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="NOH-g0-tvN"/>
-                            <constraint firstItem="wlB-oa-G3q" firstAttribute="top" secondItem="yLu-ax-nE5" secondAttribute="bottom" id="Pew-Gt-Fpm"/>
+                            <constraint firstItem="wlB-oa-G3q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="iqb-AT-TSi"/>
                             <constraint firstItem="wlB-oa-G3q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sHM-VB-zbw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XGe-0L-RYk" secondAttribute="bottom" id="tea-lO-KGC"/>
-                            <constraint firstItem="yLu-ax-nE5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uuF-Ge-y9a"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Сообщения" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="8W2-Lh-CsV">
+                    <navigationItem key="navigationItem" title="Чаты" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="8W2-Lh-CsV">
                         <barButtonItem key="backBarButtonItem" title=" " image="bubble_full" id="CZl-TU-fot"/>
                         <barButtonItem key="leftBarButtonItem" image="ellipsis" catalog="system" id="WRo-iD-LOc"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="oiS-dE-bKG">
@@ -80,18 +145,12 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="chatSearchBar" destination="yLu-ax-nE5" id="2FM-DW-Oiu"/>
                         <outlet property="chatsTableView" destination="XGe-0L-RYk" id="G5U-fd-agW"/>
                         <outlet property="foldersView" destination="wlB-oa-G3q" id="fXX-kx-IIH"/>
+                        <segue destination="V1S-gf-PVZ" kind="show" identifier="GoToChat" id="rDy-Fa-mwb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="kJp-PU-2ED">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <viewLayoutGuide key="safeArea" id="yWG-eM-AZz"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
             </objects>
             <point key="canvasLocation" x="1576.8115942028987" y="589.95535714285711"/>
         </scene>
@@ -131,16 +190,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vSc-6X-es6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3251" y="590"/>
-        </scene>
-        <!--Chat View Controller-->
-        <scene sceneID="zbv-Fa-yfH">
-            <objects>
-                <viewController id="z9H-P0-rec" customClass="ChatViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="0A4-JH-Fyg"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="G5u-yb-5wD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1577" y="1373"/>
         </scene>
         <!--Notification Settings Controller-->
         <scene sceneID="wj6-Ra-I2n">
@@ -351,10 +400,17 @@
     </scenes>
     <resources>
         <image name="bubble_full" width="56" height="35"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+        <namedColor name="BackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
