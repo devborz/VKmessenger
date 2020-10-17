@@ -15,5 +15,6 @@ class ChatMenuCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.frame.size.height = 45
     }
 }

@@ -1,5 +1,5 @@
 //
-//  MessageTableViewCell.swift
+//  IncomingMessageTableViewCell.swift
 //  VKmessenger
 //
 //  Created by Усман Туркаев on 17.10.2020.
@@ -40,7 +40,10 @@ class IncomingMessageTableViewCell: UITableViewCell {
         let hour = calendar.component(.hour, from: message.sentDate)
         let minute = calendar.component(.minute, from: message.sentDate)
         
-        timeLabel.text = "\(hour):\(minute)"
+        let hourString = String(hour).count > 1 ? String(hour) : "0" + String(hour)
+        let minuteString = String(minute).count > 1 ? String(minute) : "0" + String(minute)
+        
+        timeLabel.text = "\(hourString):\(minuteString)"
         timeLabel.textColor = UIColor.systemGray
     }
 

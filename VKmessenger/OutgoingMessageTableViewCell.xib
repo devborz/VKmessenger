@@ -18,16 +18,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nlW-p7-dPP">
-                        <rect key="frame" x="20" y="5" width="325" height="144"/>
+                        <rect key="frame" x="293.5" y="5" width="51.5" height="144"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjA-hb-zBt">
-                                <rect key="frame" x="5" y="5" width="315" height="120"/>
+                                <rect key="frame" x="5" y="5" width="41.5" height="120"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JP-qq-kWV">
-                                <rect key="frame" x="5" y="125" width="315" height="14"/>
+                                <rect key="frame" x="5" y="125" width="41.5" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="7Ay-2X-XpN"/>
                                 </constraints>
@@ -44,12 +44,13 @@
                             <constraint firstItem="5JP-qq-kWV" firstAttribute="leading" secondItem="nlW-p7-dPP" secondAttribute="leading" constant="5" id="OKg-n7-vyc"/>
                             <constraint firstAttribute="bottom" secondItem="5JP-qq-kWV" secondAttribute="bottom" constant="5" id="UWm-ju-jIF"/>
                             <constraint firstItem="5JP-qq-kWV" firstAttribute="width" secondItem="wjA-hb-zBt" secondAttribute="width" id="Ucr-LT-KIn"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="240" id="hyN-WR-hqD"/>
                             <constraint firstItem="wjA-hb-zBt" firstAttribute="top" secondItem="nlW-p7-dPP" secondAttribute="top" constant="5" id="moZ-Jq-1Fb"/>
                             <constraint firstAttribute="trailing" secondItem="5JP-qq-kWV" secondAttribute="trailing" constant="5" id="x7w-zg-fLW"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8R6-yr-zoo">
-                        <rect key="frame" x="5" y="124.5" width="10" height="9"/>
+                        <rect key="frame" x="278.5" y="124.5" width="10" height="9"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="Vx7-OZ-x6R"/>
                             <constraint firstAttribute="height" constant="10" id="xSd-62-MAI"/>
@@ -62,7 +63,6 @@
                     <constraint firstAttribute="bottom" secondItem="8R6-yr-zoo" secondAttribute="bottom" constant="20" id="cxt-ld-2J4"/>
                     <constraint firstAttribute="trailing" secondItem="nlW-p7-dPP" secondAttribute="trailing" constant="5" id="d3t-Lv-LW9"/>
                     <constraint firstItem="nlW-p7-dPP" firstAttribute="leading" secondItem="8R6-yr-zoo" secondAttribute="trailing" constant="5" id="eJ6-0S-iAM"/>
-                    <constraint firstItem="8R6-yr-zoo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="zMA-Fr-Js6"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

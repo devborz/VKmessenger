@@ -25,16 +25,16 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGn-qi-kjN">
-                        <rect key="frame" x="30" y="5" width="269" height="236"/>
+                        <rect key="frame" x="30" y="5" width="51.5" height="236"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rv7-O6-XrC">
-                                <rect key="frame" x="5" y="5" width="259" height="212"/>
+                                <rect key="frame" x="5" y="5" width="41.5" height="212"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfP-af-qKf">
-                                <rect key="frame" x="5" y="217" width="259" height="14"/>
+                                <rect key="frame" x="5" y="217" width="41.5" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="4Gi-0G-sI6"/>
                                 </constraints>
@@ -46,6 +46,7 @@
                         <color key="backgroundColor" name="OtherUserMessageBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="bfP-af-qKf" secondAttribute="trailing" constant="5" id="Cx4-lI-PJf"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="240" id="Cxb-E4-8mt"/>
                             <constraint firstItem="Rv7-O6-XrC" firstAttribute="leading" secondItem="vGn-qi-kjN" secondAttribute="leading" constant="5" id="IEb-0x-iiS"/>
                             <constraint firstAttribute="trailing" secondItem="Rv7-O6-XrC" secondAttribute="trailing" constant="5" id="Pmk-ou-3hu"/>
                             <constraint firstItem="bfP-af-qKf" firstAttribute="width" secondItem="Rv7-O6-XrC" secondAttribute="width" id="WZf-gv-Tzv"/>
@@ -56,7 +57,7 @@
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YEg-gs-KKS">
-                        <rect key="frame" x="304" y="205.5" width="10" height="9"/>
+                        <rect key="frame" x="86.5" y="205.5" width="10" height="9"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="DCb-R7-E4P"/>
                             <constraint firstAttribute="width" constant="10" id="b1B-Tc-e2S"/>
@@ -72,7 +73,6 @@
                     <constraint firstItem="vGn-qi-kjN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="d56-1Y-Tc0"/>
                     <constraint firstAttribute="bottom" secondItem="b7o-7f-Gci" secondAttribute="bottom" constant="5" id="gKo-GT-kEx"/>
                     <constraint firstItem="b7o-7f-Gci" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="kfU-0k-8cJ"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="YEg-gs-KKS" secondAttribute="trailing" constant="5" id="vVS-bW-kKL"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
