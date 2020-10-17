@@ -7,6 +7,5 @@ target 'VKmessenger' do
 
   # Pods for VKmessenger
 	pod 'Firebase/Database'
-	pod 'MessageKit'
-  pod 'BTNavigationDropdownMenu'
+    pod 'BTNavigationDropdownMenu'
 end
