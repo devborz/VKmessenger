@@ -21,6 +21,8 @@ class ChatTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        chatImageView.layer.masksToBounds = false
+        chatImageView.layer.cornerRadius = chatImageView.frame.width / 2 + 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -44,7 +46,6 @@ class ChatTableViewCell: UITableViewCell {
         self.lastMessage = lastMessage
         self.lastTime = lastTime
         self.chatNameLabel.text = self.chatName
-        self.chatImageView.image = self.chatImage
         self.lastMessageLabel.text = self.lastMessage! + " " + self.lastTime!
-    }
+        chatImageView.backgroundColor = .white    }
 }
