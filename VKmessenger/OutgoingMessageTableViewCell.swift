@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OutgoingMessageTableViewCell: UITableViewCell {
+class OutgoingMessageTableViewCell: MessageTableViewCell {
     @IBOutlet weak var textContentLabel: UILabel!
     
     @IBOutlet weak var timeLabel: UILabel!
@@ -21,10 +21,17 @@ class OutgoingMessageTableViewCell: UITableViewCell {
         // Initialization code
         bubbleView.layer.cornerCurve = .circular
         bubbleView.layer.cornerRadius = 10
+        
         textContentLabel.text = "This text will not fit into one line and should break"
         textContentLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         textContentLabel.sizeToFit()
         textContentLabel.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    override func prepareForReuse() {
+        textContentLabel.text = nil
+        timeLabel.text = nil
+        indicatorImageView.image = nil
     }
     
     func setup(_ message: Message) {
@@ -41,6 +48,23 @@ class OutgoingMessageTableViewCell: UITableViewCell {
         
         timeLabel.text = "\(hourString):\(minuteString)"
         timeLabel.textColor = UIColor.systemGray
+        
+        let interaction = UIContextMenuInteraction(delegate: self)
+        bubbleView.addInteraction(interaction)
+        
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
+        self.addGestureRecognizer(gesture)
     }
     
+    @objc private func didLongPress() {
+        
+    }
+    
+}
+
+extension OutgoingMessageTableViewCell: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        
+        return self.returnContextMenuConfiguration(0)
+    }
 }

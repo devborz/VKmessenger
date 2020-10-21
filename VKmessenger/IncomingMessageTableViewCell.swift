@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IncomingMessageTableViewCell: UITableViewCell {
+class IncomingMessageTableViewCell: MessageTableViewCell {
     
     @IBOutlet weak var textContentLabel: UILabel!
     
@@ -30,6 +30,13 @@ class IncomingMessageTableViewCell: UITableViewCell {
         textContentLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        textContentLabel.text = nil
+        timeLabel.text = nil
+        indicatorImageView.image = nil
+    }
+    
     func setup(_ message: Message) {
         switch message.kind {
         case .text(let text): textContentLabel.text = text
@@ -45,12 +52,20 @@ class IncomingMessageTableViewCell: UITableViewCell {
         
         timeLabel.text = "\(hourString):\(minuteString)"
         timeLabel.textColor = UIColor.systemGray
+        
+        let interaction = UIContextMenuInteraction(delegate: self)
+        bubbleView.addInteraction(interaction)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-    
+}
+
+extension IncomingMessageTableViewCell: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        
+        return self.returnContextMenuConfiguration(0)
+    }
 }

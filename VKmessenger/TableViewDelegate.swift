@@ -44,4 +44,12 @@ extension ChatsMenuViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: "GoToChat", sender: nil)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить", handler: { _,_,_ in
+            self.visibleChats.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        })
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }

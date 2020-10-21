@@ -13,7 +13,7 @@ extension ChatViewController {
             messages.append(Message(sender: otherUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("What's up nigga?")))
         }
         for _ in 1...5 {
-            messages.append(Message(sender: currentUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("What's up\n nigga?")))
+            messages.append(Message(sender: currentUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("What's up nigga?")))
         }
     }
     
@@ -44,13 +44,13 @@ extension ChatViewController {
         messages.append(message)
         messagesTableView.performBatchUpdates({
             let indexPath = IndexPath(row: messages.count - 1, section: 0)
-            messagesTableView.insertRows(at: [indexPath], with: .automatic)
+            messagesTableView.insertRows(at: [indexPath], with: .none)
             if messages.count >= 2 {
                 let indexPath = IndexPath(row: messages.count - 2, section: 0)
-                messagesTableView.reloadRows(at: [indexPath], with: .automatic)
+                messagesTableView.reloadRows(at: [indexPath], with: .none)
             }
         }, completion: { [weak self] _ in
-            self?.messagesTableView.scrollToLast()
+            self?.messagesTableView.scrollToLast(true)
         })
     }
 }

@@ -13,7 +13,7 @@ extension ChatsMenuViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = foldersView.dequeueReusableCell(withReuseIdentifier: "FolderCell", for: indexPath) as! FolderCell
+        let cell = foldersCollectionView.dequeueReusableCell(withReuseIdentifier: "FolderCell", for: indexPath) as! FolderCell
         cell.setup(folders[indexPath.item])
         return cell
     }
@@ -31,6 +31,25 @@ extension ChatsMenuViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedChatFolderName = folders[indexPath.item]
+        
+        let selectedCell = foldersCollectionView.cellForItem(at: indexPath)
+        
+        if let cell = selectedCell{
+            sliderViewWidthConstraint?.isActive = false
+            sliderViewLeftAnchorConstraint?.isActive = false
+            
+            sliderViewWidthConstraint = sliderView.widthAnchor.constraint(equalTo: cell.widthAnchor)
+            sliderViewLeftAnchorConstraint = sliderView.leftAnchor.constraint(equalTo: cell.leftAnchor)
+            
+            sliderViewLeftAnchorConstraint?.isActive = true
+            sliderViewWidthConstraint?.isActive = true
+            
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+        
+        
         let chatIDs = chatsOfFolderIDs(name: selectedChatFolderName)
         visibleChats = chats.filter {
             chatIDs.contains($0[0])

@@ -6,6 +6,4 @@ target 'VKmessenger' do
   use_frameworks!
 
   # Pods for VKmessenger
-	pod 'Firebase/Database'
-    pod 'BTNavigationDropdownMenu'
 end

@@ -15,11 +15,11 @@
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="V1S-gf-PVZ" customClass="ChatViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kmd-TU-RlU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIz-Ip-1lA">
-                                <rect key="frame" x="0.0" y="721.5" width="414" height="86.5"/>
+                                <rect key="frame" x="0.0" y="809.5" width="414" height="86.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCB-7D-wmA">
                                         <rect key="frame" x="5" y="8.5" width="40" height="35"/>
@@ -36,7 +36,7 @@
                                         <rect key="frame" x="45" y="7" width="324" height="36.5"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" text="Сообщение" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sOY-tw-ZUo">
-                                                <rect key="frame" x="20" y="0.0" width="284" height="36.5"/>
+                                                <rect key="frame" x="8" y="0.0" width="308" height="36.5"/>
                                                 <color key="backgroundColor" name="InputViewColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="7ng-wK-85E"/>
@@ -49,9 +49,9 @@
                                         <color key="backgroundColor" name="InputViewColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" secondItem="sOY-tw-ZUo" secondAttribute="height" id="BRc-bD-ton"/>
-                                            <constraint firstItem="sOY-tw-ZUo" firstAttribute="leading" secondItem="I9a-wB-KBG" secondAttribute="leading" constant="20" id="U8O-L5-TX2"/>
+                                            <constraint firstItem="sOY-tw-ZUo" firstAttribute="leading" secondItem="I9a-wB-KBG" secondAttribute="leading" constant="8" id="U8O-L5-TX2"/>
                                             <constraint firstAttribute="bottom" secondItem="sOY-tw-ZUo" secondAttribute="bottom" id="ZLz-ob-4sV"/>
-                                            <constraint firstAttribute="trailing" secondItem="sOY-tw-ZUo" secondAttribute="trailing" constant="20" id="gaO-ik-FRa"/>
+                                            <constraint firstAttribute="trailing" secondItem="sOY-tw-ZUo" secondAttribute="trailing" constant="8" id="gaO-ik-FRa"/>
                                             <constraint firstItem="sOY-tw-ZUo" firstAttribute="top" secondItem="I9a-wB-KBG" secondAttribute="top" id="mIP-Rf-akJ"/>
                                         </constraints>
                                     </view>
@@ -83,7 +83,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ze9-dy-26W">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="721.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="721.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="MessageCell" id="Gq7-N0-YiJ">
@@ -123,8 +123,6 @@
                             </connections>
                         </button>
                     </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="attachButton" destination="cCB-7D-wmA" id="MZU-Em-euN"/>
                         <outlet property="dropdownMenu" destination="TxD-ls-RHk" id="fCF-ln-gLl"/>
@@ -178,42 +176,55 @@
                                 <rect key="frame" x="0.0" y="128" width="414" height="685"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wlB-oa-G3q">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHv-lo-YKx">
                                 <rect key="frame" x="0.0" y="88" width="414" height="40"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wlB-oa-G3q">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                        <color key="backgroundColor" name="BackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="sKi-mW-BTg"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="contentLayoutGuide" id="6p3-Aq-0Ng"/>
+                                        <viewLayoutGuide key="frameLayoutGuide" id="P5I-rE-trv"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="VH2-mj-e1E">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FolderCell" id="4Vp-XY-fhP" customClass="FolderCell" customModule="VKmessenger" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="-44" width="128" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="AIR-rQ-WT1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </collectionViewCellContentView>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="sKi-mW-BTg"/>
+                                    <constraint firstAttribute="bottom" secondItem="wlB-oa-G3q" secondAttribute="bottom" id="3VW-O5-ldU"/>
+                                    <constraint firstItem="wlB-oa-G3q" firstAttribute="leading" secondItem="aHv-lo-YKx" secondAttribute="leading" id="ZSg-hx-nDx"/>
+                                    <constraint firstAttribute="trailing" secondItem="wlB-oa-G3q" secondAttribute="trailing" id="j3H-4C-ZEA"/>
+                                    <constraint firstAttribute="height" constant="40" id="lwB-xB-wqQ"/>
+                                    <constraint firstItem="wlB-oa-G3q" firstAttribute="top" secondItem="aHv-lo-YKx" secondAttribute="top" id="pcn-rF-Qnj"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="6p3-Aq-0Ng"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="P5I-rE-trv"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="VH2-mj-e1E">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FolderCell" id="4Vp-XY-fhP" customClass="FolderCell" customModule="VKmessenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-44" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="AIR-rQ-WT1">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wlB-oa-G3q" secondAttribute="trailing" id="10E-4l-JvF"/>
-                            <constraint firstItem="XGe-0L-RYk" firstAttribute="top" secondItem="wlB-oa-G3q" secondAttribute="bottom" id="4pF-lE-q3l"/>
                             <constraint firstItem="XGe-0L-RYk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8Br-nD-uG0"/>
+                            <constraint firstItem="XGe-0L-RYk" firstAttribute="top" secondItem="aHv-lo-YKx" secondAttribute="bottom" id="CIM-vC-Xxe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XGe-0L-RYk" secondAttribute="trailing" id="CXc-Iu-oCp"/>
-                            <constraint firstItem="wlB-oa-G3q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="iqb-AT-TSi"/>
-                            <constraint firstItem="wlB-oa-G3q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sHM-VB-zbw"/>
+                            <constraint firstAttribute="trailing" secondItem="aHv-lo-YKx" secondAttribute="trailing" id="Fn0-JX-LUL"/>
+                            <constraint firstItem="aHv-lo-YKx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="s88-MM-JpB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XGe-0L-RYk" secondAttribute="bottom" id="tea-lO-KGC"/>
+                            <constraint firstItem="aHv-lo-YKx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yQO-bY-d6H"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Чаты" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="8W2-Lh-CsV">
@@ -225,10 +236,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chatsTableView" destination="XGe-0L-RYk" id="G5U-fd-agW"/>
-                        <outlet property="foldersView" destination="wlB-oa-G3q" id="fXX-kx-IIH"/>
+                        <outlet property="foldersBar" destination="aHv-lo-YKx" id="jIG-4v-6p7"/>
+                        <outlet property="foldersCollectionView" destination="wlB-oa-G3q" id="fXX-kx-IIH"/>
                         <segue destination="V1S-gf-PVZ" kind="show" identifier="GoToChat" id="rDy-Fa-mwb"/>
                     </connections>
                 </viewController>
@@ -283,11 +294,11 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="126-ol-nQE">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DcN-bf-5mt"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="126-ol-nQE" secondAttribute="bottom" id="Fzx-iX-HEK"/>
                             <constraint firstItem="126-ol-nQE" firstAttribute="leading" secondItem="DcN-bf-5mt" secondAttribute="leading" id="KYy-9e-XbY"/>
@@ -314,11 +325,11 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B3Y-xJ-iaM">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RvN-Ve-8Mr"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="B3Y-xJ-iaM" secondAttribute="bottom" id="9PS-si-AsY"/>
                             <constraint firstItem="RvN-Ve-8Mr" firstAttribute="trailing" secondItem="B3Y-xJ-iaM" secondAttribute="trailing" id="XlR-jn-ZMN"/>
@@ -404,7 +415,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="teK-0e-ZDE"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Uo3-d2-rFe"/>
                 </viewController>
@@ -420,7 +431,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="N2h-9f-tES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="CXr-Vm-lDO"/>
                 </viewController>
@@ -436,7 +447,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="HqR-Nw-Cvc"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="iWJ-2F-XVX"/>
                 </viewController>
@@ -452,7 +463,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="7ev-NZ-6XB"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="z09-YF-z4z"/>
                 </viewController>

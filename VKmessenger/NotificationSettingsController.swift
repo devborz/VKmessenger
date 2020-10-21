@@ -15,11 +15,9 @@ class NotificationSettingsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addTableView()
         fillInCells()
-        view.layoutIfNeeded()
+        addTableView()
         title = "Уведомления"
-        // Do any additional setup after loading the view.
     }
     
     private func addTableView() {
@@ -27,15 +25,16 @@ class NotificationSettingsController: UIViewController {
         tableView.tableHeaderView?.tintColor = .systemGray3
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "NotificationSettingCell", bundle: nil), forCellReuseIdentifier: "NotificationSettingCell")
     }
     
     private func fillInCells() {
-        let messageSettings: [NotificationSetting] = [NotificationSetting(name: "Личные сообщения", image: UIImage(systemName: "message.circle.fill")!, tintColor: .systemGray3),
-                                                      NotificationSetting(name: "Групповые чаты", image: UIImage(systemName: "person.2.circle.fill")!, tintColor: .systemGray3),
-                                                      NotificationSetting(name: "Сообщения сообществ", image: UIImage(systemName: "message.circle.fill")!, tintColor: .systemOrange)]
-        let feedbackSettings: [NotificationSetting] = [NotificationSetting(name: "Упоминания в беседе", image: UIImage(systemName: "message.circle.fill")!, tintColor: .systemGreen)]
-        let eventsSettings: [NotificationSetting] = [NotificationSetting(name: "Запросы на переписку", image: UIImage(systemName: "message.circle.fill")!, tintColor: .systemBlue)]
+        let messageSettings: [NotificationSetting] = [
+            NotificationSetting(name: "Личные сообщения", imageName: "message.circle.fill", tintColor: .systemGray),
+            NotificationSetting(name: "Групповые чаты", imageName: "person.2.circle.fill", tintColor: .systemGray),
+            NotificationSetting(name: "Сообщения сообществ", imageName: "message.circle.fill", tintColor: .brown)]
+        let feedbackSettings: [NotificationSetting] = [NotificationSetting(name: "Упоминания в беседе", imageName: "message.circle.fill", tintColor: .green)]
+        let eventsSettings: [NotificationSetting] = [NotificationSetting(name: "Запросы на переписку", imageName: "message.circle.fill", tintColor: .blue
+        )]
         settings.append(messageSettings)
         settings.append(feedbackSettings)
         settings.append(eventsSettings)
@@ -44,20 +43,22 @@ class NotificationSettingsController: UIViewController {
 
 extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 12))
-        returnedView.backgroundColor = .white
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 34))
+        let label = UILabel(frame: CGRect(x: 15, y: 10, width: view.bounds.width, height: 14))
         
-        let label = UILabel(frame: CGRect(x: 10, y: 1, width: view.bounds.width, height: 12))
-        label.textColor = .systemGray4
-        label.font = UIFont.boldSystemFont(ofSize: 12.0)
+        label.textColor = .systemGray2
+        label.font = UIFont.boldSystemFont(ofSize: 14.0)
         switch section {
         case 0: label.text = "СООБЩЕНИЯ"
         case 1: label.text = "ОБРАТНАЯ СВЯЗЬ"
         case 2: label.text = "СОБЫТИЯ"
         default: label.text = nil
         }
-        returnedView.addSubview(label)
-        return returnedView
+        
+        headerView.addSubview(label)
+        headerView.backgroundColor = UIColor(named: "BackgroundColor")
+        
+        return headerView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -69,19 +70,27 @@ extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationSettingCell", for: indexPath) as! NotificationSettingCell
-        cell.setup(settings[indexPath.section][indexPath.row])
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "NotificationCell")
+        cell.imageView?.image = UIImage(systemName:  settings[indexPath.section][indexPath.row].imageName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
+        cell.imageView?.tintColor = settings[indexPath.section][indexPath.row].tintColor
+        cell.textLabel?.text = settings[indexPath.section][indexPath.row].name
+        cell.detailTextLabel?.text = settings[indexPath.section][indexPath.row].value
+        cell.backgroundColor = UIColor(named: "BackgroundColor")
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 
 struct NotificationSetting {
     var name: String
     var value: String = "not"
-    var image: UIImage
+    var imageName: String
     var tintColor: UIColor
 }

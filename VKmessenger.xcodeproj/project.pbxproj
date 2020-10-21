@@ -21,7 +21,6 @@
 		B63CC1182524D59600D76A4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B63CC1162524D59600D76A4C /* LaunchScreen.storyboard */; };
 		B63CC1232524D8E600D76A4C /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1212524D8E600D76A4C /* ChatTableViewCell.swift */; };
 		B63CC1242524D8E600D76A4C /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B63CC1222524D8E600D76A4C /* ChatTableViewCell.xib */; };
-		B63CC1292524DBEF00D76A4C /* ChatsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1282524DBEF00D76A4C /* ChatsMenuViewController.swift */; };
 		B63CC14725253B6600D76A4C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B63CC14625253B6600D76A4C /* GoogleService-Info.plist */; };
 		B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1552525D21000D76A4C /* ChatViewController.swift */; };
 		B63CC18925273DCA00D76A4C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC18825273DCA00D76A4C /* SettingsViewController.swift */; };
@@ -31,9 +30,8 @@
 		B68B94C1252DF9F1001AE2EF /* ChatMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B68B94BF252DF9F1001AE2EF /* ChatMenuCell.xib */; };
 		B6ADB5CF252B7A27006598FF /* FolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADB5CD252B7A27006598FF /* FolderCell.swift */; };
 		B6ADB5D0252B7A27006598FF /* FolderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6ADB5CE252B7A27006598FF /* FolderCell.xib */; };
+		B6BB1E26254058C800CFCFC5 /* ChatsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BB1E25254058C800CFCFC5 /* ChatsMenuViewController.swift */; };
 		B6C22AAC2528DF04001D33C0 /* MediaPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22AAB2528DF04001D33C0 /* MediaPickerController.swift */; };
-		B6C22AB5252928FE001D33C0 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22AB3252928FE001D33C0 /* SettingTableViewCell.swift */; };
-		B6C22AB6252928FE001D33C0 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6C22AB4252928FE001D33C0 /* SettingTableViewCell.xib */; };
 		B6C22ABC2529F6BC001D33C0 /* NotificationSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22ABB2529F6BC001D33C0 /* NotificationSettingsController.swift */; };
 		B6C22ABF2529F6EC001D33C0 /* DoNotDisturbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22ABE2529F6EC001D33C0 /* DoNotDisturbController.swift */; };
 		B6C22AC22529F719001D33C0 /* AccountSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22AC12529F719001D33C0 /* AccountSettingsController.swift */; };
@@ -45,6 +43,8 @@
 		B6E233FF253B21C200FF3510 /* IncomingMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6E233FD253B21C200FF3510 /* IncomingMessageTableViewCell.xib */; };
 		B6E23406253B398700FF3510 /* OutgoingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E23404253B398700FF3510 /* OutgoingMessageTableViewCell.swift */; };
 		B6E23407253B398700FF3510 /* OutgoingMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6E23405253B398700FF3510 /* OutgoingMessageTableViewCell.xib */; };
+		B6E2340D253D859000FF3510 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6E2340C253D858F00FF3510 /* View.xib */; };
+		B6E23410253D874200FF3510 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E2340F253D874200FF3510 /* MessageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +66,6 @@
 		B63CC1192524D59600D76A4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B63CC1212524D8E600D76A4C /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		B63CC1222524D8E600D76A4C /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
-		B63CC1282524DBEF00D76A4C /* ChatsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsMenuViewController.swift; sourceTree = "<group>"; };
 		B63CC14625253B6600D76A4C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B63CC1552525D21000D76A4C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B63CC18825273DCA00D76A4C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -76,9 +75,8 @@
 		B68B94BF252DF9F1001AE2EF /* ChatMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMenuCell.xib; sourceTree = "<group>"; };
 		B6ADB5CD252B7A27006598FF /* FolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCell.swift; sourceTree = "<group>"; };
 		B6ADB5CE252B7A27006598FF /* FolderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderCell.xib; sourceTree = "<group>"; };
+		B6BB1E25254058C800CFCFC5 /* ChatsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsMenuViewController.swift; sourceTree = "<group>"; };
 		B6C22AAB2528DF04001D33C0 /* MediaPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerController.swift; sourceTree = "<group>"; };
-		B6C22AB3252928FE001D33C0 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		B6C22AB4252928FE001D33C0 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
 		B6C22ABB2529F6BC001D33C0 /* NotificationSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsController.swift; sourceTree = "<group>"; };
 		B6C22ABE2529F6EC001D33C0 /* DoNotDisturbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoNotDisturbController.swift; sourceTree = "<group>"; };
 		B6C22AC12529F719001D33C0 /* AccountSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsController.swift; sourceTree = "<group>"; };
@@ -90,6 +88,8 @@
 		B6E233FD253B21C200FF3510 /* IncomingMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingMessageTableViewCell.xib; sourceTree = "<group>"; };
 		B6E23404253B398700FF3510 /* OutgoingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		B6E23405253B398700FF3510 /* OutgoingMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutgoingMessageTableViewCell.xib; sourceTree = "<group>"; };
+		B6E2340C253D858F00FF3510 /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		B6E2340F253D874200FF3510 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +116,7 @@
 		B62C167E2530FDC10066E537 /* ChatsMenuViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B63CC1282524DBEF00D76A4C /* ChatsMenuViewController.swift */,
+				B6BB1E25254058C800CFCFC5 /* ChatsMenuViewController.swift */,
 				B62C16842530FE350066E537 /* TableViewDelegate.swift */,
 				B62C16872530FE650066E537 /* CollectionViewDelegate.swift */,
 				B68B94A0252BB956001AE2EF /* ChatFolders.swift */,
@@ -145,6 +145,7 @@
 				B6E233FD253B21C200FF3510 /* IncomingMessageTableViewCell.xib */,
 				B6E23404253B398700FF3510 /* OutgoingMessageTableViewCell.swift */,
 				B6E23405253B398700FF3510 /* OutgoingMessageTableViewCell.xib */,
+				B6E2340F253D874200FF3510 /* MessageTableViewCell.swift */,
 			);
 			name = ChatController;
 			sourceTree = "<group>";
@@ -198,12 +199,11 @@
 			children = (
 				B63CC1212524D8E600D76A4C /* ChatTableViewCell.swift */,
 				B63CC1222524D8E600D76A4C /* ChatTableViewCell.xib */,
-				B6C22AB3252928FE001D33C0 /* SettingTableViewCell.swift */,
-				B6C22AB4252928FE001D33C0 /* SettingTableViewCell.xib */,
 				B6C22ACB2529FDA8001D33C0 /* NotificationSettingCell.swift */,
 				B6C22ACC2529FDA8001D33C0 /* NotificationSettingCell.xib */,
 				B6ADB5CD252B7A27006598FF /* FolderCell.swift */,
 				B6ADB5CE252B7A27006598FF /* FolderCell.xib */,
+				B6E2340C253D858F00FF3510 /* View.xib */,
 			);
 			path = NIbs;
 			sourceTree = "<group>";
@@ -279,8 +279,8 @@
 				B6E233FF253B21C200FF3510 /* IncomingMessageTableViewCell.xib in Resources */,
 				B6C22ACE2529FDA8001D33C0 /* NotificationSettingCell.xib in Resources */,
 				B63CC1242524D8E600D76A4C /* ChatTableViewCell.xib in Resources */,
+				B6E2340D253D859000FF3510 /* View.xib in Resources */,
 				B6ADB5D0252B7A27006598FF /* FolderCell.xib in Resources */,
-				B6C22AB6252928FE001D33C0 /* SettingTableViewCell.xib in Resources */,
 				B68B94C1252DF9F1001AE2EF /* ChatMenuCell.xib in Resources */,
 				B63CC1152524D59600D76A4C /* Assets.xcassets in Resources */,
 				B63CC14725253B6600D76A4C /* GoogleService-Info.plist in Resources */,
@@ -349,15 +349,15 @@
 				B63CC10C2524D59100D76A4C /* AppDelegate.swift in Sources */,
 				B6ADB5CF252B7A27006598FF /* FolderCell.swift in Sources */,
 				B6E233FE253B21C200FF3510 /* IncomingMessageTableViewCell.swift in Sources */,
-				B6C22AB5252928FE001D33C0 /* SettingTableViewCell.swift in Sources */,
+				B6E23410253D874200FF3510 /* MessageTableViewCell.swift in Sources */,
 				B62C169825312F540066E537 /* ChatMenu.swift in Sources */,
 				B6E23406253B398700FF3510 /* OutgoingMessageTableViewCell.swift in Sources */,
 				B63CC10E2524D59100D76A4C /* SceneDelegate.swift in Sources */,
+				B6BB1E26254058C800CFCFC5 /* ChatsMenuViewController.swift in Sources */,
 				B62C1691253125BF0066E537 /* DropDownMenu.swift in Sources */,
 				B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */,
 				B62C168C25311D080066E537 /* Authorization.swift in Sources */,
 				B6C22AC62529F73F001D33C0 /* MainSettingsController.swift in Sources */,
-				B63CC1292524DBEF00D76A4C /* ChatsMenuViewController.swift in Sources */,
 				B63CC18D2527490300D76A4C /* StartCommunicationViewController.swift in Sources */,
 				B68B94C0252DF9F1001AE2EF /* ChatMenuCell.swift in Sources */,
 				B62C16852530FE350066E537 /* TableViewDelegate.swift in Sources */,

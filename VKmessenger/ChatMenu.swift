@@ -8,6 +8,18 @@
 import UIKit
 
 extension ChatViewController {
+     
+    var chatMenuOptions: [ChatMenuOption] {
+        let chatMenuOptions: [ChatMenuOption] = [
+            ChatMenuOption(name: "Открыть профиль", image: UIImage(systemName: "person.crop.circle")!, action: nil),
+            ChatMenuOption(name: "Добавить в беседу", image: UIImage(systemName: "plus.message")!, action: nil),
+            ChatMenuOption(name: "Поиск сообщений", image: UIImage(systemName: "magnifyingglass")!, action: nil),
+            ChatMenuOption(name: "Показать вложения", image: UIImage(systemName: "photo")!, action: nil),
+            ChatMenuOption(name: "Отключить уведомления", image: UIImage(systemName: "volume.slash")!, action: nil),
+            ChatMenuOption(name: "Очистить историю", image: UIImage(systemName: "trash")!, action: nil),
+        ]
+        return chatMenuOptions
+    }
     
     internal func setupDropDownMenu() {
         setupTransaparentView()

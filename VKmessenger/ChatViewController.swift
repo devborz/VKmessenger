@@ -6,9 +6,7 @@
 //
 
 import UIKit
-//import MessageKit
 import InputBarAccessoryView
-import BTNavigationDropdownMenu
 
 enum MessageKind {
     case text(String)
@@ -48,15 +46,6 @@ class ChatViewController: UIViewController {
     let otherUser = Sender(senderId: "other", displayName: "InterLocutor")
     var messages = [Message]()
     
-    var chatMenuOptions: [ChatMenuOption] = [
-        ChatMenuOption(name: "Открыть профиль", image: UIImage(systemName: "person.crop.circle")!, action: nil),
-        ChatMenuOption(name: "Добавить в беседу", image: UIImage(systemName: "plus.message")!, action: nil),
-        ChatMenuOption(name: "Поиск сообщений", image: UIImage(systemName: "magnifyingglass")!, action: nil),
-        ChatMenuOption(name: "Показать вложения", image: UIImage(systemName: "photo")!, action: nil),
-        ChatMenuOption(name: "Отключить уведомления", image: UIImage(systemName: "volume.slash")!, action: nil),
-        ChatMenuOption(name: "Очистить историю", image: UIImage(systemName: "trash")!, action: nil),
-    ]
-    
     @IBOutlet var transparentView: UIView!
     
     @IBOutlet weak var dropdownMenuTableView: UITableView!
@@ -81,7 +70,11 @@ class ChatViewController: UIViewController {
     
     @IBOutlet weak var sendButton: UIButton!
     
+    var didFirstLayoutOfSubviews = false
+    
     var keyboardIsShown = false
+    
+    var shouldScrollToLastRow = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +87,18 @@ class ChatViewController: UIViewController {
         setupNavigationBar()
         setupDropDownMenu()
         setupKeyBoardObservers()
-        messagesTableView.scrollToLast()
+        shouldScrollToLastRow = true;
+    }
+
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        // Scroll table view to the last row
+        if shouldScrollToLastRow {
+            shouldScrollToLastRow = false;
+            messagesTableView.scrollToLast(false)
+        }
     }
     
     private func setupColorScheme() {
@@ -117,8 +121,7 @@ class ChatViewController: UIViewController {
         messagesTableView.separatorStyle = .none
     }
     
-    @objc
-    private func hideKeyboard() {
+    @objc private func hideKeyboard() {
         inputTextView.resignFirstResponder()
     }
     
@@ -135,15 +138,16 @@ class ChatViewController: UIViewController {
     private func setupSendButton() {
         sendButton.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
         sendButton.setTitle(nil, for: .normal)
-        let config = UIImage.SymbolConfiguration(pointSize: 20)
+        let config = UIImage.SymbolConfiguration(pointSize: 30)
         sendButton.setPreferredSymbolConfiguration(config, forImageIn: .normal)
         sendButton.contentMode = .scaleAspectFit
+        sendButton.isEnabled = false
     }
     
     private func setupAttachButton() {
         attachButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
         attachButton.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: .horizontal)
-        let config = UIImage.SymbolConfiguration(pointSize: 20)
+        let config = UIImage.SymbolConfiguration(pointSize: 25)
         attachButton.setPreferredSymbolConfiguration(config, forImageIn: .normal)
         attachButton.contentMode = .scaleAspectFit
     }
@@ -228,6 +232,7 @@ extension ChatViewController: UITextViewDelegate {
         if inputTextView.textColor == .lightGray {
             inputTextView.text = nil
             inputTextView.textColor = .black
+            sendButton.isEnabled = true
         }
     }
     
@@ -235,12 +240,13 @@ extension ChatViewController: UITextViewDelegate {
         if inputTextView.text.isEmpty {
             inputTextView.text = "Сообщение"
             inputTextView.textColor = .lightGray
+            sendButton.isEnabled = false
         }
     }
 }
 
 extension UITableView {
-    func scrollToLast() {
+    func scrollToLast(_ animated: Bool) {
         guard numberOfSections > 0 else {
             return
         }
@@ -253,7 +259,7 @@ extension UITableView {
 
         let lastRowIndexPath = IndexPath(row: numberOfRows(inSection: lastSection) - 1,
                                           section: lastSection)
-        scrollToRow(at: lastRowIndexPath, at: .bottom, animated: true)
+        scrollToRow(at: lastRowIndexPath, at: .bottom, animated: animated)
     }
 }
 
@@ -286,10 +292,9 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == messagesTableView {
-            messagesTableView.deselectRow(at: indexPath, animated: true)
+            messagesTableView.deselectRow(at: indexPath, animated: false)
         } else {
-            dropdownMenuTableView.deselectRow(at: indexPath, animated: true)
+            dropdownMenuTableView.deselectRow(at: indexPath, animated: false)
         }
     }
 }
-

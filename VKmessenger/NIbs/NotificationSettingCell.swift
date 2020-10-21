@@ -25,7 +25,7 @@ class NotificationSettingCell: UITableViewCell {
     }
     
     func setup(_ setting: NotificationSetting) {
-        settingImageView.image = setting.image
+        settingImageView.image = UIImage(systemName: setting.imageName)
         settingNameLabel.text = setting.name
         valueLabel.text = setting.value
         self.tintColor = setting.tintColor

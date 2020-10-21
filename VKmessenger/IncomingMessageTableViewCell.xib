@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="246" id="KGk-i7-Jjw" customClass="IncomingMessageTableViewCell" customModule="VKmessenger" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="246" id="KGk-i7-Jjw" customClass="IncomingMessageTableViewCell" customModule="VKmessenger" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="339" height="246"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -18,14 +18,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="b7o-7f-Gci">
-                        <rect key="frame" x="5" y="221.5" width="20" height="19"/>
+                        <rect key="frame" x="5" y="211.5" width="30" height="29"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="Ha0-ny-9Z6"/>
+                            <constraint firstAttribute="width" constant="30" id="Ha0-ny-9Z6"/>
                             <constraint firstAttribute="width" secondItem="b7o-7f-Gci" secondAttribute="height" multiplier="1:1" id="fea-Ga-jOs"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGn-qi-kjN">
-                        <rect key="frame" x="30" y="5" width="51.5" height="236"/>
+                        <rect key="frame" x="40" y="5" width="51.5" height="236"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rv7-O6-XrC">
                                 <rect key="frame" x="5" y="5" width="41.5" height="212"/>
@@ -57,7 +57,7 @@
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YEg-gs-KKS">
-                        <rect key="frame" x="86.5" y="205.5" width="10" height="9"/>
+                        <rect key="frame" x="96.5" y="205.5" width="10" height="9"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="DCb-R7-E4P"/>
                             <constraint firstAttribute="width" constant="10" id="b1B-Tc-e2S"/>
@@ -76,6 +76,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="BackgroundColor"/>
             <connections>
                 <outlet property="avatarImageView" destination="b7o-7f-Gci" id="Cvb-O6-OXU"/>
                 <outlet property="bubbleView" destination="vGn-qi-kjN" id="Xo6-2e-Yl0"/>
@@ -89,6 +90,9 @@
     <resources>
         <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="BackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="OtherUserMessageBackgroundColor">
             <color red="0.92199999094009399" green="0.92900002002716064" blue="0.94099998474121094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

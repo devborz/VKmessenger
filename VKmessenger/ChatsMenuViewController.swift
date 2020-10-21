@@ -6,11 +6,21 @@
 //
 
 import UIKit
-import FirebaseDatabase
 
 class ChatsMenuViewController: UIViewController {
     
-    @IBOutlet weak var foldersView: UICollectionView!
+    
+    @IBOutlet weak var foldersBar: UIView!
+    
+    @IBOutlet weak var foldersCollectionView: UICollectionView!
+    
+    @IBOutlet weak var chatsTableView: UITableView!
+    
+    let sliderView = UIView()
+    
+    var sliderViewLeftAnchorConstraint: NSLayoutConstraint?
+    
+    var sliderViewWidthConstraint: NSLayoutConstraint?
     
     var selectedChat = IndexPath()
     
@@ -28,24 +38,24 @@ class ChatsMenuViewController: UIViewController {
     
     var selectedChatFolderName: String = "Все"
     
-    let chats: [[String]] = [
+    var foldersViewExists: Bool = false
+    
+    var chats: [[String]] = [
         ["1", "Test chat 1", "Hello", "14:24"],
         ["2", "Test chat 2", "wassap", "13:20"],
         ["3", "Test chat 3", "Yooooo", "12:20"],
         ["4", "Test chat 4", "cho kak", "14:24"],
         ["5", "Test chat 5", "vaçok", "13:20"],
         ["6", "Test chat 6", "Muha vu", "12:20"],
-        ["6", "Test chat 6", "Muha vu", "12:20"],
-        ["6", "Test chat 6", "Muha vu", "12:20"],
-        ["6", "Test chat 6", "Muha vu", "12:20"],
-        ["6", "Test chat 6", "Muha vu", "12:20"],
-        ["6", "Test chat 6", "Muha vu", "12:20"],
+        ["6", "Test chat 7", "Muha vu", "12:20"],
+        ["6", "Test chat 8", "Muha vu", "12:20"],
+        ["6", "Test chat 9", "Muha vu", "12:20"],
+        ["6", "Test chat 10", "Muha vu", "12:20"],
+        ["6", "Test chat 11", "Muha vu", "12:20"],
     ]
     
     var visibleChats = [[String]]()
     let folders: [String] = ["Все", "Учеба", "Кино"]
-    
-    @IBOutlet weak var chatsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +69,16 @@ class ChatsMenuViewController: UIViewController {
         chatSearchController.searchBar.resignFirstResponder()
     }
     
+    override func viewDidLayoutSubviews() {
+        if !foldersViewExists {
+            setupSliderView()
+        }
+    }
+    
     private func setupNavigationBar() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.backgroundColor = UIColor(named: "BackgroundColor")
         navigationController?.navigationBar.layoutIfNeeded()
         navigationController?.navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold)]
@@ -70,12 +87,33 @@ class ChatsMenuViewController: UIViewController {
     }
     
     private func setupFolderView() {
-        foldersView.translatesAutoresizingMaskIntoConstraints = false
+        foldersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        foldersView.delegate = self
-        foldersView.dataSource = self
-        foldersView.register(UINib(nibName: "FolderCell", bundle: nil), forCellWithReuseIdentifier: "FolderCell")
-        foldersView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+        foldersCollectionView.delegate = self
+        foldersCollectionView.dataSource = self
+        foldersCollectionView.register(UINib(nibName: "FolderCell", bundle: nil), forCellWithReuseIdentifier: "FolderCell")
+        foldersCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
+    }
+    
+    private func setupSliderView() {
+        sliderView.backgroundColor = .link
+        sliderView.translatesAutoresizingMaskIntoConstraints = false
+        
+        foldersBar.addSubview(sliderView)
+        
+        let firstFolderCell = foldersCollectionView.cellForItem(at: IndexPath(item: 0, section: 0))
+        if let cell = firstFolderCell {
+            sliderViewWidthConstraint = sliderView.widthAnchor.constraint(equalTo: cell.widthAnchor)
+            sliderViewLeftAnchorConstraint = sliderView.leftAnchor.constraint(equalTo: cell.leftAnchor)
+            
+            sliderViewLeftAnchorConstraint?.isActive = true
+            sliderViewWidthConstraint?.isActive = true
+            
+            sliderView.bottomAnchor.constraint(equalTo: foldersCollectionView.bottomAnchor).isActive = true
+            sliderView.heightAnchor.constraint(equalToConstant: 3).isActive = true
+            
+            foldersViewExists = true
+        }
     }
     
     private func setupChatsTableView() {

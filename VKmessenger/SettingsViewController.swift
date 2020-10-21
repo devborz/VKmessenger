@@ -15,21 +15,19 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsTableView.register(UINib(nibName: "SettingTableViewCell", bundle: nil),
-                                   forCellReuseIdentifier: "SettingTableViewCell")
+        fillInSettings()
+        settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "SettingCell")
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
         settingsTableView.separatorStyle = .none
-        // Do any additional setup after loading the view.
-        fillInSettings()
     }
     
     private func fillInSettings() {
-        settings.append(Setting(name: "Уведомления", image: UIImage(systemName: "bell")!))
-        settings.append(Setting(name: "Не беспокоить", image: UIImage(systemName: "nosign")!))
-        settings.append(Setting(name: "Аккаунт", image: UIImage(systemName: "person")!))
-        settings.append(Setting(name: "Основные", image: UIImage(systemName: "gearshape")!))
-        settings.append(Setting(name: "Внешний вид", image: UIImage(systemName: "paintpalette")!))
+        settings.append(Setting(name: "Уведомления", imageName: "bell"))
+        settings.append(Setting(name: "Не беспокоить", imageName: "nosign"))
+                        settings.append(Setting(name: "Аккаунт", imageName: "person"))
+        settings.append(Setting(name: "Основные", imageName: "gearshape"))
+        settings.append(Setting(name: "Внешний вид", imageName: "paintpalette"))
     }
 }
 
@@ -39,8 +37,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = settingsTableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell", for: indexPath) as! SettingTableViewCell
-        cell.setup(settings[indexPath.row])
+        let cell = settingsTableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath)
+        cell.textLabel?.text = settings[indexPath.row].name
+        cell.imageView?.image = UIImage(systemName: settings[indexPath.row].imageName)
+        cell.backgroundColor = UIColor(named: "BackgroundColor")
         return cell
     }
     
@@ -67,5 +67,5 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 struct Setting {
     var name: String
-    var image: UIImage
+    var imageName: String
 }
