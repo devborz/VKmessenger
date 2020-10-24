@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,25 +17,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="253" height="123"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2DG-P4-OY5">
-                        <rect key="frame" x="0.0" y="0.0" width="253" height="123"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="highlightedColor" systemColor="systemBlueColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pFk-rb-Svl">
+                        <rect key="frame" x="8" y="8" width="237" height="107"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2DG-P4-OY5">
+                                <rect key="frame" x="0.0" y="0.0" width="237" height="107"/>
+                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" systemColor="systemBlueColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2DG-P4-OY5" firstAttribute="top" secondItem="pFk-rb-Svl" secondAttribute="top" id="674-wf-qk8"/>
+                            <constraint firstAttribute="trailing" secondItem="2DG-P4-OY5" secondAttribute="trailing" id="7Es-QC-91Y"/>
+                            <constraint firstItem="2DG-P4-OY5" firstAttribute="leading" secondItem="pFk-rb-Svl" secondAttribute="leading" id="gdm-hY-TYz"/>
+                            <constraint firstAttribute="bottom" secondItem="2DG-P4-OY5" secondAttribute="bottom" id="myF-8X-geB"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="2DG-P4-OY5" secondAttribute="trailing" id="9Ny-DF-pRF"/>
-                <constraint firstItem="2DG-P4-OY5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Adt-BE-awc"/>
-                <constraint firstAttribute="bottom" secondItem="2DG-P4-OY5" secondAttribute="bottom" id="Ff4-6t-7RI"/>
-                <constraint firstItem="2DG-P4-OY5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="RFG-7U-hC1"/>
+                <constraint firstAttribute="bottom" secondItem="pFk-rb-Svl" secondAttribute="bottom" constant="8" id="DL0-iX-gtj"/>
+                <constraint firstItem="pFk-rb-Svl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="F8j-Jd-q8R"/>
+                <constraint firstItem="pFk-rb-Svl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Kr7-nh-ha0"/>
+                <constraint firstAttribute="trailing" secondItem="pFk-rb-Svl" secondAttribute="trailing" constant="8" id="w8A-nA-l3c"/>
             </constraints>
             <size key="customSize" width="253" height="123"/>
             <connections>
                 <outlet property="nameLabel" destination="2DG-P4-OY5" id="Bim-HT-F2a"/>
+                <outlet property="nameView" destination="pFk-rb-Svl" id="78R-zF-FK4"/>
             </connections>
             <point key="canvasLocation" x="284.78260869565219" y="104.12946428571428"/>
         </collectionViewCell>
@@ -44,6 +57,9 @@
         <namedColor name="BackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -10,8 +10,11 @@ import UIKit
 class ChatTableViewCell: UITableViewCell {
     
     @IBOutlet weak var chatNameLabel: UILabel!
+    
     @IBOutlet weak var chatImageView: UIImageView!
+    
     @IBOutlet weak var lastMessageLabel: UILabel!
+    
     var chatID: String?
     var chatImage: UIImage?
     var chatName: String?
@@ -47,5 +50,6 @@ class ChatTableViewCell: UITableViewCell {
         self.lastTime = lastTime
         self.chatNameLabel.text = self.chatName
         self.lastMessageLabel.text = self.lastMessage! + " " + self.lastTime!
-        chatImageView.backgroundColor = .white    }
+        chatImageView.backgroundColor = .white
+    }
 }

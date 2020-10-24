@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		19268856C9564D651F83F31D /* Pods_VKmessenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A9A89C641D424C697D68E0 /* Pods_VKmessenger.framework */; };
-		B62C16852530FE350066E537 /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C16842530FE350066E537 /* TableViewDelegate.swift */; };
-		B62C16882530FE650066E537 /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C16872530FE650066E537 /* CollectionViewDelegate.swift */; };
 		B62C168C25311D080066E537 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C168B25311D080066E537 /* Authorization.swift */; };
 		B62C1691253125BF0066E537 /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C1690253125BF0066E537 /* DropDownMenu.swift */; };
 		B62C169825312F540066E537 /* ChatMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C169725312F540066E537 /* ChatMenu.swift */; };
@@ -25,12 +23,13 @@
 		B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC1552525D21000D76A4C /* ChatViewController.swift */; };
 		B63CC18925273DCA00D76A4C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC18825273DCA00D76A4C /* SettingsViewController.swift */; };
 		B63CC18D2527490300D76A4C /* StartCommunicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63CC18C2527490300D76A4C /* StartCommunicationViewController.swift */; };
+		B64B05F025438A03006D4063 /* ChatsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64B05EF25438A03006D4063 /* ChatsMainViewController.swift */; };
 		B68B94A1252BB956001AE2EF /* ChatFolders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68B94A0252BB956001AE2EF /* ChatFolders.swift */; };
 		B68B94C0252DF9F1001AE2EF /* ChatMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68B94BE252DF9F1001AE2EF /* ChatMenuCell.swift */; };
 		B68B94C1252DF9F1001AE2EF /* ChatMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B68B94BF252DF9F1001AE2EF /* ChatMenuCell.xib */; };
 		B6ADB5CF252B7A27006598FF /* FolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADB5CD252B7A27006598FF /* FolderCell.swift */; };
 		B6ADB5D0252B7A27006598FF /* FolderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6ADB5CE252B7A27006598FF /* FolderCell.xib */; };
-		B6BB1E26254058C800CFCFC5 /* ChatsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BB1E25254058C800CFCFC5 /* ChatsMenuViewController.swift */; };
+		B6BB1E26254058C800CFCFC5 /* ChatsFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BB1E25254058C800CFCFC5 /* ChatsFolderViewController.swift */; };
 		B6C22AAC2528DF04001D33C0 /* MediaPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22AAB2528DF04001D33C0 /* MediaPickerController.swift */; };
 		B6C22ABC2529F6BC001D33C0 /* NotificationSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22ABB2529F6BC001D33C0 /* NotificationSettingsController.swift */; };
 		B6C22ABF2529F6EC001D33C0 /* DoNotDisturbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22ABE2529F6EC001D33C0 /* DoNotDisturbController.swift */; };
@@ -51,8 +50,6 @@
 		11A9A89C641D424C697D68E0 /* Pods_VKmessenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKmessenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC408FD6BAA81FD29AAEBA2 /* Pods-VKmessenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKmessenger.release.xcconfig"; path = "Target Support Files/Pods-VKmessenger/Pods-VKmessenger.release.xcconfig"; sourceTree = "<group>"; };
 		A8DF9C0F8192D216F9B5E704 /* Pods-VKmessenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKmessenger.debug.xcconfig"; path = "Target Support Files/Pods-VKmessenger/Pods-VKmessenger.debug.xcconfig"; sourceTree = "<group>"; };
-		B62C16842530FE350066E537 /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
-		B62C16872530FE650066E537 /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
 		B62C168B25311D080066E537 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		B62C1690253125BF0066E537 /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
 		B62C169725312F540066E537 /* ChatMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMenu.swift; sourceTree = "<group>"; };
@@ -70,12 +67,13 @@
 		B63CC1552525D21000D76A4C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B63CC18825273DCA00D76A4C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B63CC18C2527490300D76A4C /* StartCommunicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCommunicationViewController.swift; sourceTree = "<group>"; };
+		B64B05EF25438A03006D4063 /* ChatsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsMainViewController.swift; sourceTree = "<group>"; };
 		B68B94A0252BB956001AE2EF /* ChatFolders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFolders.swift; sourceTree = "<group>"; };
 		B68B94BE252DF9F1001AE2EF /* ChatMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuCell.swift; sourceTree = "<group>"; };
 		B68B94BF252DF9F1001AE2EF /* ChatMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMenuCell.xib; sourceTree = "<group>"; };
 		B6ADB5CD252B7A27006598FF /* FolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCell.swift; sourceTree = "<group>"; };
 		B6ADB5CE252B7A27006598FF /* FolderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderCell.xib; sourceTree = "<group>"; };
-		B6BB1E25254058C800CFCFC5 /* ChatsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsMenuViewController.swift; sourceTree = "<group>"; };
+		B6BB1E25254058C800CFCFC5 /* ChatsFolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsFolderViewController.swift; sourceTree = "<group>"; };
 		B6C22AAB2528DF04001D33C0 /* MediaPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerController.swift; sourceTree = "<group>"; };
 		B6C22ABB2529F6BC001D33C0 /* NotificationSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsController.swift; sourceTree = "<group>"; };
 		B6C22ABE2529F6EC001D33C0 /* DoNotDisturbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoNotDisturbController.swift; sourceTree = "<group>"; };
@@ -116,9 +114,8 @@
 		B62C167E2530FDC10066E537 /* ChatsMenuViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B6BB1E25254058C800CFCFC5 /* ChatsMenuViewController.swift */,
-				B62C16842530FE350066E537 /* TableViewDelegate.swift */,
-				B62C16872530FE650066E537 /* CollectionViewDelegate.swift */,
+				B64B05EF25438A03006D4063 /* ChatsMainViewController.swift */,
+				B6BB1E25254058C800CFCFC5 /* ChatsFolderViewController.swift */,
 				B68B94A0252BB956001AE2EF /* ChatFolders.swift */,
 				B62C1690253125BF0066E537 /* DropDownMenu.swift */,
 			);
@@ -353,15 +350,14 @@
 				B62C169825312F540066E537 /* ChatMenu.swift in Sources */,
 				B6E23406253B398700FF3510 /* OutgoingMessageTableViewCell.swift in Sources */,
 				B63CC10E2524D59100D76A4C /* SceneDelegate.swift in Sources */,
-				B6BB1E26254058C800CFCFC5 /* ChatsMenuViewController.swift in Sources */,
+				B6BB1E26254058C800CFCFC5 /* ChatsFolderViewController.swift in Sources */,
 				B62C1691253125BF0066E537 /* DropDownMenu.swift in Sources */,
 				B63CC1562525D21000D76A4C /* ChatViewController.swift in Sources */,
+				B64B05F025438A03006D4063 /* ChatsMainViewController.swift in Sources */,
 				B62C168C25311D080066E537 /* Authorization.swift in Sources */,
 				B6C22AC62529F73F001D33C0 /* MainSettingsController.swift in Sources */,
 				B63CC18D2527490300D76A4C /* StartCommunicationViewController.swift in Sources */,
 				B68B94C0252DF9F1001AE2EF /* ChatMenuCell.swift in Sources */,
-				B62C16852530FE350066E537 /* TableViewDelegate.swift in Sources */,
-				B62C16882530FE650066E537 /* CollectionViewDelegate.swift in Sources */,
 				B6C22ACD2529FDA8001D33C0 /* NotificationSettingCell.swift in Sources */,
 				B63CC18925273DCA00D76A4C /* SettingsViewController.swift in Sources */,
 			);

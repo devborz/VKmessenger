@@ -2,11 +2,10 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rtE-LK-pBU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -167,65 +166,12 @@
         <!--Чаты-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ChatsMenuViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ChatsMainViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XGe-0L-RYk">
-                                <rect key="frame" x="0.0" y="128" width="414" height="685"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHv-lo-YKx">
-                                <rect key="frame" x="0.0" y="88" width="414" height="40"/>
-                                <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wlB-oa-G3q">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
-                                        <color key="backgroundColor" name="BackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="sKi-mW-BTg"/>
-                                        </constraints>
-                                        <viewLayoutGuide key="contentLayoutGuide" id="6p3-Aq-0Ng"/>
-                                        <viewLayoutGuide key="frameLayoutGuide" id="P5I-rE-trv"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="VH2-mj-e1E">
-                                            <size key="itemSize" width="128" height="128"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FolderCell" id="4Vp-XY-fhP" customClass="FolderCell" customModule="VKmessenger" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="-44" width="128" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="AIR-rQ-WT1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                        </cells>
-                                    </collectionView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="wlB-oa-G3q" secondAttribute="bottom" id="3VW-O5-ldU"/>
-                                    <constraint firstItem="wlB-oa-G3q" firstAttribute="leading" secondItem="aHv-lo-YKx" secondAttribute="leading" id="ZSg-hx-nDx"/>
-                                    <constraint firstAttribute="trailing" secondItem="wlB-oa-G3q" secondAttribute="trailing" id="j3H-4C-ZEA"/>
-                                    <constraint firstAttribute="height" constant="40" id="lwB-xB-wqQ"/>
-                                    <constraint firstItem="wlB-oa-G3q" firstAttribute="top" secondItem="aHv-lo-YKx" secondAttribute="top" id="pcn-rF-Qnj"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="XGe-0L-RYk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8Br-nD-uG0"/>
-                            <constraint firstItem="XGe-0L-RYk" firstAttribute="top" secondItem="aHv-lo-YKx" secondAttribute="bottom" id="CIM-vC-Xxe"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XGe-0L-RYk" secondAttribute="trailing" id="CXc-Iu-oCp"/>
-                            <constraint firstAttribute="trailing" secondItem="aHv-lo-YKx" secondAttribute="trailing" id="Fn0-JX-LUL"/>
-                            <constraint firstItem="aHv-lo-YKx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="s88-MM-JpB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XGe-0L-RYk" secondAttribute="bottom" id="tea-lO-KGC"/>
-                            <constraint firstItem="aHv-lo-YKx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yQO-bY-d6H"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Чаты" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="8W2-Lh-CsV">
                         <barButtonItem key="backBarButtonItem" title=" " image="bubble_full" id="CZl-TU-fot"/>
@@ -237,9 +183,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="chatsTableView" destination="XGe-0L-RYk" id="G5U-fd-agW"/>
-                        <outlet property="foldersBar" destination="aHv-lo-YKx" id="jIG-4v-6p7"/>
-                        <outlet property="foldersCollectionView" destination="wlB-oa-G3q" id="fXX-kx-IIH"/>
                         <segue destination="V1S-gf-PVZ" kind="show" identifier="GoToChat" id="rDy-Fa-mwb"/>
                     </connections>
                 </viewController>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension ChatsMenuViewController {
+extension ChatsFolderViewController {
     //    @IBAction func chatsButtonTapped(_ sender: UIButton) {
     //        if sender.isSelected {
     //            hideDropDownMenu()
