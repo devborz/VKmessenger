@@ -195,7 +195,6 @@
         <!--Чаты-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ChatsMainViewController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -226,6 +225,7 @@
                         <segue destination="V1S-gf-PVZ" kind="show" identifier="GoToChat" id="rDy-Fa-mwb"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1576.8115942028987" y="589.95535714285711"/>
         </scene>
@@ -387,7 +387,6 @@
         <!--Настройки-->
         <scene sceneID="XA2-tS-MGC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ocf-1p-ePs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="TIu-Hx-t9f" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Настройки" image="gear" catalog="system" id="ETi-Bh-MpM"/>
                     <navigationItem key="navigationItem" id="4SX-1H-mOn"/>
@@ -399,6 +398,7 @@
                         <segue destination="8m4-zN-w0C" kind="relationship" relationship="rootViewController" id="VBg-mT-ZGH"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ocf-1p-ePs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-84" y="1373"/>
         </scene>
@@ -545,7 +545,7 @@
                                     <color key="titleColor" name="BackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="rtE-LK-pBU" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="iW5-cu-TMO"/>
+                                    <segue destination="rtE-LK-pBU" kind="show" id="iW5-cu-TMO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -566,6 +566,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Y1W-cn-OQt"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="loginButton" destination="qqG-eK-g1I" id="gmN-4C-BTy"/>
                         <outlet property="loginInputView" destination="6PN-Hr-9hX" id="rwx-tC-A1s"/>
@@ -576,12 +577,11 @@
             </objects>
             <point key="canvasLocation" x="-928.98550724637687" y="589.95535714285711"/>
         </scene>
-        <!--Item-->
+        <!--Чаты-->
         <scene sceneID="9w6-3t-N6z">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DvL-o8-2EW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="W1N-2x-sLL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="7ot-k9-Z6f"/>
+                    <tabBarItem key="tabBarItem" title="Чаты" id="7ot-k9-Z6f"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QLB-Ej-n5w">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -590,13 +590,14 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="oWO-In-FBO"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DvL-o8-2EW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="764" y="590"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Un4-bo-HLt">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="rtE-LK-pBU" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="currentContext" id="rtE-LK-pBU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Hzu-Qg-cff"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JfG-Bh-32h">
@@ -605,8 +606,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="TIu-Hx-t9f" kind="relationship" relationship="viewControllers" id="KfH-EU-0s3"/>
                         <segue destination="W1N-2x-sLL" kind="relationship" relationship="viewControllers" id="erM-Q2-itA"/>
+                        <segue destination="TIu-Hx-t9f" kind="relationship" relationship="viewControllers" id="KfH-EU-0s3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8O-g8-bGX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

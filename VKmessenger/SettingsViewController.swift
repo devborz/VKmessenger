@@ -45,7 +45,7 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func didTapSignOutButton(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
 }
 
