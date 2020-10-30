@@ -16,9 +16,6 @@ class ChatsFolderViewController: UIViewController {
     var selectedChat = IndexPath()
     
     var mainVC: ChatsMainViewController?
-//    var userToken: String?
-//
-//    var userID: String?
     
     var folderName = String()
     
@@ -40,13 +37,7 @@ class ChatsFolderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupNavigationBar()
-//        setupSearchBar()
         setupChatsTableView()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-//        chatSearchController.searchBar.resignFirstResponder()
     }
     
     private func setupChatsTableView() {
@@ -54,7 +45,6 @@ class ChatsFolderViewController: UIViewController {
         chatsTableView.delegate = self
         chatsTableView.dataSource = self
         
-        chatsTableView.backgroundColor = UIColor(named: "BackgroundColor")
         chatsTableView.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(chatsTableView)
@@ -66,9 +56,9 @@ class ChatsFolderViewController: UIViewController {
         
         chatsTableView.register(UINib(nibName: "ChatTableViewCell", bundle: nil), forCellReuseIdentifier: "ChatTableViewCell\(folderName)")
         
-        chatsTableView.backgroundColor = UIColor(named: "BackgroundColor")
+        chatsTableView.backgroundColor = UIColor(named: "background")!
         chatsTableView.showsVerticalScrollIndicator = true
-        chatsTableView.separatorStyle = .none
+        chatsTableView.tableFooterView = UIView()
         
         let chatIDs = chatsOfFolderIDs(name: folderName)
         for chat in chats {
@@ -78,12 +68,6 @@ class ChatsFolderViewController: UIViewController {
         }
     }    
 
-}
-
-extension ChatsFolderViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
 }
 
 extension ChatsFolderViewController: UITableViewDelegate, UITableViewDataSource {

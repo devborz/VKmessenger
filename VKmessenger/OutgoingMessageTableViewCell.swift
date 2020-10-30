@@ -49,22 +49,8 @@ class OutgoingMessageTableViewCell: MessageTableViewCell {
         timeLabel.text = "\(hourString):\(minuteString)"
         timeLabel.textColor = UIColor.systemGray
         
-        let interaction = UIContextMenuInteraction(delegate: self)
-        bubbleView.addInteraction(interaction)
-        
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
-        self.addGestureRecognizer(gesture)
+//        let interaction = UIContextMenuInteraction(delegate: self)
+//        bubbleView.addInteraction(interaction)
     }
     
-    @objc private func didLongPress() {
-        
-    }
-    
-}
-
-extension OutgoingMessageTableViewCell: UIContextMenuInteractionDelegate {
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        
-        return self.returnContextMenuConfiguration(0)
-    }
 }

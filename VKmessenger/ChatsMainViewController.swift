@@ -13,8 +13,6 @@ class ChatsMainViewController: TabmanViewController {
     
     var userID = "Me"
     
-    var chatSearchController = UISearchController(searchResultsController: nil)
-    
     var chatsFoldersViewControllers = [ChatsFolderViewController]()
     
     var folderNames = ["Все", "Универ", "Работа", "Семья"]
@@ -28,7 +26,6 @@ class ChatsMainViewController: TabmanViewController {
         setupChatsFoldersViewControllers()
         setupFoldersBar()
         setupNavigationBar()
-        setupSearchBar()
     }
     
     func setupChatsFoldersViewControllers() {
@@ -48,8 +45,7 @@ class ChatsMainViewController: TabmanViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold)]
         navigationController?.navigationBar.isTranslucent = false
 
-        navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.searchController = chatSearchController
+        definesPresentationContext = true
     }
     
     private func setupFoldersBar() {
@@ -77,16 +73,6 @@ class ChatsMainViewController: TabmanViewController {
         }
     }
     
-    private func setupSearchBar() {
-        chatSearchController.searchResultsUpdater = self
-        chatSearchController.searchBar.delegate = self
-        
-        chatSearchController.obscuresBackgroundDuringPresentation = false
-        chatSearchController.searchBar.placeholder = "Поиск"
-        chatSearchController.searchBar.backgroundColor = UIColor(named: "BackgroundColor")
-        chatSearchController.searchBar.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToChat" {
             let chatVC = segue.destination as! ChatViewController
@@ -95,6 +81,7 @@ class ChatsMainViewController: TabmanViewController {
             chatVC.userID = self.userID
         }
     }
+    
 }
 
 extension ChatsMainViewController: PageboyViewControllerDataSource, TMBarDataSource {
@@ -146,11 +133,5 @@ extension ChatsMainViewController: UIContextMenuInteractionDelegate {
         
             return UIMenu(title: "", image: nil, children: [configureFolderAction, addChatsAction, removeAction])
         }
-    }
-}
-
-extension ChatsMainViewController: UISearchResultsUpdating, UISearchBarDelegate {
-    func updateSearchResults(for searchController: UISearchController) {
-        
     }
 }

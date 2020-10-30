@@ -53,19 +53,12 @@ class IncomingMessageTableViewCell: MessageTableViewCell {
         timeLabel.text = "\(hourString):\(minuteString)"
         timeLabel.textColor = UIColor.systemGray
         
-        let interaction = UIContextMenuInteraction(delegate: self)
-        bubbleView.addInteraction(interaction)
+//        let interaction = UIContextMenuInteraction(delegate: self)
+//        bubbleView.addInteraction(interaction)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-    }
-}
-
-extension IncomingMessageTableViewCell: UIContextMenuInteractionDelegate {
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        
-        return self.returnContextMenuConfiguration(0)
     }
 }

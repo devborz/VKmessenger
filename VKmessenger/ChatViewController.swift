@@ -39,11 +39,16 @@ struct ChatMenuOption {
 
 class ChatViewController: UIViewController {
     var chatID: String?
+    
     var userID: String?
     
     let currentUser = Sender(senderId: "self", displayName: "Me")
+    
     let otherUser = Sender(senderId: "other", displayName: "InterLocutor")
+    
     var messages = [Message]()
+    
+    var indexPathOfDeletedMessage: IndexPath?
     
     @IBOutlet var transparentView: UIView!
     
@@ -88,8 +93,7 @@ class ChatViewController: UIViewController {
         setupKeyBoardObservers()
         shouldScrollToLastRow = true;
     }
-
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -102,7 +106,7 @@ class ChatViewController: UIViewController {
     
     private func setupColorScheme() {
         view.backgroundColor = UIColor(named: "BackgroundColor")!
-        messagesTableView.backgroundColor = UIColor(named: "BackgroundColor")!
+        messagesTableView.backgroundColor = .systemBackground
         messageInputBar.backgroundColor = UIColor(named: "BackgroundColor")!
     }
     
@@ -129,6 +133,7 @@ class ChatViewController: UIViewController {
         inputBar.layer.borderWidth = 0
         inputBar.clipsToBounds = true
         inputBar.layer.masksToBounds = true
+        
         inputTextView.delegate = self
         inputTextView.textColor = .lightGray
         inputTextView.endEditing(true)
@@ -137,6 +142,7 @@ class ChatViewController: UIViewController {
     private func setupSendButton() {
         sendButton.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
         sendButton.setTitle(nil, for: .normal)
+        
         let config = UIImage.SymbolConfiguration(pointSize: 30)
         sendButton.setPreferredSymbolConfiguration(config, forImageIn: .normal)
         sendButton.contentMode = .scaleAspectFit
@@ -146,6 +152,7 @@ class ChatViewController: UIViewController {
     private func setupAttachButton() {
         attachButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
         attachButton.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: .horizontal)
+        
         let config = UIImage.SymbolConfiguration(pointSize: 25)
         attachButton.setPreferredSymbolConfiguration(config, forImageIn: .normal)
         attachButton.contentMode = .scaleAspectFit
@@ -224,14 +231,28 @@ class ChatViewController: UIViewController {
         inputTextView.delegate = self
         sendMessage(message)
     }
+    
+    
+    @IBAction func didTapTopRightButton(_ sender: Any) {
+        print("hello")
+        let viewControllers = self.navigationController?.viewControllers as! NSArray
+        self.navigationController?.popToRootViewController(animated: true)
+    }
 }
 
 extension ChatViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        if inputTextView.text.isEmpty {
+            sendButton.isEnabled = false
+        } else {
+            sendButton.isEnabled = true
+        }
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if inputTextView.textColor == .lightGray {
             inputTextView.text = nil
-            inputTextView.textColor = .black
-            sendButton.isEnabled = true
+            inputTextView.textColor = UIColor(named: "TextColor")
         }
     }
     
@@ -239,7 +260,6 @@ extension ChatViewController: UITextViewDelegate {
         if inputTextView.text.isEmpty {
             inputTextView.text = "Сообщение"
             inputTextView.textColor = .lightGray
-            sendButton.isEnabled = false
         }
     }
 }
@@ -266,8 +286,9 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == messagesTableView {
             return messages.count
+        } else {
+            return chatMenuOptions.count
         }
-        return chatMenuOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -296,4 +317,87 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             dropdownMenuTableView.deselectRow(at: indexPath, animated: false)
         }
     }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return self.contextMenuConfiguration(indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        animator.addCompletion {
+            if let viewController = animator.previewViewController {
+                self.show(viewController, sender: self)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return contextMenuTargetPreview(configuration)
+    }
+    
+    func tableView(_ tableView: UITableView,
+        previewForHighlightingContextMenuWithConfiguration
+        configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return contextMenuTargetPreview(configuration)
+    }
+    
+    private func contextMenuConfiguration(_ indexPath: IndexPath) -> UIContextMenuConfiguration? {
+        let identifier = "\(indexPath.row)" as NSString
+        
+        return UIContextMenuConfiguration(
+            identifier: identifier, previewProvider: nil) { _ in
+
+            let answerAction = UIAction(
+                title: "Ответить",
+                image: UIImage(systemName: "arrowshape.turn.up.backward")) { _ in
+            }
+            
+            let copyAction = UIAction(
+                title: "Скопировать",
+                image: UIImage(systemName: "square.on.square")) { _ in
+            }
+            
+            let shareAction = UIAction(
+                title: "Переслать",
+                image: UIImage(systemName: "arrowshape.turn.up.forward")) { _ in
+            }
+            
+            let deleteAction = UIAction(
+                title: "Удалить",
+                image: UIImage(systemName: "trash"),
+                attributes: .destructive) { _ in
+                self.messages.remove(at: indexPath.row)
+                self.messagesTableView.deleteRows(at: [indexPath], with: .fade)
+                self.indexPathOfDeletedMessage = indexPath
+            }
+            
+            return UIMenu(title: "", image: nil, children: [answerAction, copyAction, shareAction, deleteAction])
+        }
+    }
+    
+    private func contextMenuTargetPreview(_ configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let identifier = configuration.identifier as? String,
+              let index = Int(identifier) else {
+              return nil
+        }
+         
+        guard indexPathOfDeletedMessage == nil else {
+            indexPathOfDeletedMessage = nil
+            return nil
+        }
+        
+        var bubbleView: UIView?
+        
+        if messages[index].sender.senderId == currentUser.senderId {
+          let cell = messagesTableView.cellForRow(at: IndexPath(row: index, section: 0))
+              as? OutgoingMessageTableViewCell
+          bubbleView = cell?.bubbleView
+        } else {
+          let cell = messagesTableView.cellForRow(at: IndexPath(row: index, section: 0))
+              as? IncomingMessageTableViewCell
+          bubbleView = cell?.bubbleView
+        }
+
+        return UITargetedPreview(view: bubbleView!)
+    }
 }
+

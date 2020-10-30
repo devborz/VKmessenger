@@ -11,10 +11,9 @@ class ChatMenuCell: UITableViewCell {
 
     @IBOutlet weak var cellNameLabel: UILabel!
     @IBOutlet weak var cellImageView: UIImageView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.frame.size.height = 45
     }
 }
