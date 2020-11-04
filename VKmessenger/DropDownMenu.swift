@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension ChatsFolderViewController {
+//extension ChatsFolderViewController {
     //    @IBAction func chatsButtonTapped(_ sender: UIButton) {
     //        if sender.isSelected {
     //            hideDropDownMenu()
@@ -75,4 +75,4 @@ extension ChatsFolderViewController {
     //                              forCellReuseIdentifier: "DropDownMenuCell")
     //        dropDownMenu.separatorStyle = .none
     //    }
-}
+//}

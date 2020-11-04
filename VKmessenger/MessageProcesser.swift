@@ -8,14 +8,6 @@
 import Foundation
 
 extension ChatViewController {
-    func getMessages() {
-        for _ in 1...4 {
-            messages.append(Message(sender: otherUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("Hello! How it's going?")))
-        }
-        for _ in 1...4 {
-            messages.append(Message(sender: currentUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("Hello! I'm fine")))
-        }
-    }
     
     func formatMessage(_ message: String) -> String {
         var text = message
@@ -42,7 +34,6 @@ extension ChatViewController {
     
     func sendMessage(_ message: Message) {
         messages.append(message)
-        print(messages.count)
         messagesTableView.performBatchUpdates({
             let indexPath = IndexPath(row: messages.count - 1, section: 0)
             messagesTableView.insertRows(at: [indexPath], with: .none)

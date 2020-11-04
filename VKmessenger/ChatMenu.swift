@@ -7,6 +7,12 @@
 
 import UIKit
 
+struct ChatMenuOption {
+    var name: String
+    var image: UIImage
+    var action: (()->Void)?
+}
+
 extension ChatViewController {
      
     var chatMenuOptions: [ChatMenuOption] {
@@ -21,7 +27,7 @@ extension ChatViewController {
         return chatMenuOptions
     }
     
-    internal func setupDropDownMenu() {
+    func setupDropDownMenu() {
         setupTransaparentView()
         
         view.addSubview(dropdownMenu)
@@ -33,23 +39,33 @@ extension ChatViewController {
         dropdownMenuTableView.separatorStyle = .none
         dropdownMenuTableView.isScrollEnabled = false
         dropdownMenuTableView.rowHeight = 45
-        dropdownMenu.translatesAutoresizingMaskIntoConstraints = false
         
-        let topConstraint = dropdownMenu.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        let leftConstraint = dropdownMenu.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
-        let rightConstraint = dropdownMenu.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
+        dropdownMenu.translatesAutoresizingMaskIntoConstraints = false
+        dropdownMenuTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        dropdownMenu.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        dropdownMenu.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        dropdownMenu.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         dropdownMenuHeightConstraint = dropdownMenu.heightAnchor.constraint(equalToConstant: 0)
         
-        NSLayoutConstraint.activate([topConstraint, leftConstraint, rightConstraint, dropdownMenuHeightConstraint!])
+        NSLayoutConstraint.activate([ dropdownMenuHeightConstraint!])
+        
+        
+        dropdownMenu.addSubview(dropdownMenuTableView)
+        
+        dropdownMenuTableView.topAnchor.constraint(equalTo: dropdownMenu.topAnchor).isActive = true
+        dropdownMenuTableView.leftAnchor.constraint(equalTo: dropdownMenu.leftAnchor).isActive = true
+        dropdownMenuTableView.rightAnchor.constraint(equalTo: dropdownMenu.rightAnchor).isActive = true
+        dropdownMenuTableView.bottomAnchor.constraint(equalTo: dropdownMenu.bottomAnchor).isActive = true
         view.layoutIfNeeded()
     }
     
-    private func setupTransaparentView() {
+    func setupTransaparentView() {
         transparentView.translatesAutoresizingMaskIntoConstraints = false
         transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         transparentView.alpha = 0
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideChatMenu))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTransparentView))
         tapGesture.numberOfTapsRequired = 1
         tapGesture.numberOfTouchesRequired = 1
         
@@ -65,32 +81,37 @@ extension ChatViewController {
         view.layoutIfNeeded()
     }
     
-    internal func showChatMenu() {
+    @objc func didTapTransparentView() {
+        chatTitleView.isSelected = false
+    }
+    
+    func showChatMenu() {
         dropdownMenuTableView.scrollToRow(at: IndexPath(row: 5, section: 0), at: .bottom, animated: true)
         dropdownMenuHeightConstraint?.constant = 270
         
+        chatTitleView.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.3) {
             self.transparentView.alpha = 0.5
             self.view.layoutIfNeeded()
-            self.titleButton.imageView?.transform = (self.titleButton.imageView?.transform.rotated(by: CGFloat(Double.pi)))!
         } completion: { completed in
             if completed {
-                self.titleButton.isSelected = true
+                self.chatTitleView.isUserInteractionEnabled = true
             }
         }
     }
 
-    @objc internal func hideChatMenu() {
+    func hideChatMenu() {
         dropdownMenuTableView.scrollToRow(at: IndexPath(row: 5, section: 0), at: .bottom, animated: true)
         dropdownMenuHeightConstraint?.constant = 0
         
+        
+        chatTitleView.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.3) {
             self.transparentView.alpha = 0
             self.view.layoutIfNeeded()
-            self.titleButton.imageView?.transform = (self.titleButton.imageView?.transform.rotated(by: CGFloat(Double.pi)))!
         } completion: { (completed) in
             if completed {
-                self.titleButton.isSelected = false
+                self.chatTitleView.isUserInteractionEnabled = true
             }
         }
     }

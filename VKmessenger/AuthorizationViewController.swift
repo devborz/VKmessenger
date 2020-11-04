@@ -17,9 +17,12 @@ class AuthorizationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loginInputView.delegate = self
         passwordInputView.delegate = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.performSegue(withIdentifier: "SignedIn", sender: nil)
     }
 }
 

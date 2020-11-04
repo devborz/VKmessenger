@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" rowHeight="75" id="KGk-i7-Jjw" customClass="ChatTableViewCell" customModule="VKmessenger" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="361" height="75"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="361" height="75"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CP1-1M-pFt">
+                        <rect key="frame" x="75" y="5" width="44.5" height="19"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZO-0j-0PI">
+                        <rect key="frame" x="75" y="24" width="259" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CqF-wA-XgV">
+                        <rect key="frame" x="10" y="10.5" width="55" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="CqF-wA-XgV" secondAttribute="height" multiplier="1:1" id="fCl-Qj-jS6"/>
+                        </constraints>
+                        <imageReference key="image" image="person.circle" catalog="system" symbolScale="default"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrG-Pg-FCB">
+                        <rect key="frame" x="318" y="5" width="40" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="hYC-bi-blJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker.slash.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sjj-uD-C9o">
+                        <rect key="frame" x="124.5" y="8.5" width="15" height="13"/>
+                        <color key="tintColor" systemColor="systemGrayColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="1F5-EV-pDB"/>
+                            <constraint firstAttribute="width" constant="15" id="Gd9-iv-gLI"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bt3-J5-jpC">
+                        <rect key="frame" x="334" y="24.5" width="22" height="50"/>
+                        <color key="tintColor" systemColor="systemGrayColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="ZeG-xJ-cY0"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="iZO-0j-0PI" firstAttribute="leading" secondItem="CqF-wA-XgV" secondAttribute="trailing" constant="10" id="36P-MG-m1K"/>
+                    <constraint firstItem="CqF-wA-XgV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="4Fu-bB-aqp"/>
+                    <constraint firstItem="CP1-1M-pFt" firstAttribute="leading" secondItem="CqF-wA-XgV" secondAttribute="trailing" constant="10" id="C5E-re-Kmx"/>
+                    <constraint firstItem="mrG-Pg-FCB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="QWR-Hl-A7Y"/>
+                    <constraint firstAttribute="trailing" secondItem="mrG-Pg-FCB" secondAttribute="trailing" constant="3" id="T9J-jS-Ohf"/>
+                    <constraint firstItem="bt3-J5-jpC" firstAttribute="leading" secondItem="iZO-0j-0PI" secondAttribute="trailing" id="UNb-ln-38K"/>
+                    <constraint firstItem="mrG-Pg-FCB" firstAttribute="height" secondItem="CP1-1M-pFt" secondAttribute="height" id="WL3-hJ-v54"/>
+                    <constraint firstAttribute="bottom" secondItem="CqF-wA-XgV" secondAttribute="bottom" constant="10" id="XMS-aj-nHN"/>
+                    <constraint firstItem="bt3-J5-jpC" firstAttribute="top" secondItem="mrG-Pg-FCB" secondAttribute="bottom" id="YwE-Cy-IHl"/>
+                    <constraint firstItem="sjj-uD-C9o" firstAttribute="leading" secondItem="CP1-1M-pFt" secondAttribute="trailing" constant="5" id="ZNd-Cj-cJW"/>
+                    <constraint firstItem="iZO-0j-0PI" firstAttribute="top" secondItem="CP1-1M-pFt" secondAttribute="bottom" id="b01-Px-2kY"/>
+                    <constraint firstItem="sjj-uD-C9o" firstAttribute="centerY" secondItem="CP1-1M-pFt" secondAttribute="centerY" id="eq7-c8-2zt"/>
+                    <constraint firstItem="CP1-1M-pFt" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.25" id="hKN-7m-eAx"/>
+                    <constraint firstItem="CP1-1M-pFt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="hpB-7f-rFq"/>
+                    <constraint firstItem="CqF-wA-XgV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="n2Y-qN-JCD"/>
+                    <constraint firstAttribute="trailing" secondItem="bt3-J5-jpC" secondAttribute="trailing" constant="5" id="oBg-h0-fRX"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="iZO-0j-0PI" secondAttribute="bottom" constant="5" id="r8r-jg-yai"/>
+                    <constraint firstItem="mrG-Pg-FCB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sjj-uD-C9o" secondAttribute="trailing" id="wLM-rU-ViU"/>
+                    <constraint firstAttribute="bottom" secondItem="bt3-J5-jpC" secondAttribute="bottom" id="xGD-1i-4Qb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="background"/>
+            <connections>
+                <outlet property="chatImageView" destination="CqF-wA-XgV" id="D73-fk-JPG"/>
+                <outlet property="chatNameLabel" destination="CP1-1M-pFt" id="oAM-S1-H0i"/>
+                <outlet property="lastMessageLabel" destination="iZO-0j-0PI" id="nAC-uT-Gpi"/>
+                <outlet property="muteImageView" destination="sjj-uD-C9o" id="3rH-dq-F5k"/>
+                <outlet property="timeLabel" destination="mrG-Pg-FCB" id="StY-1X-2oE"/>
+            </connections>
+            <point key="canvasLocation" x="41.304347826086961" y="-17.075892857142858"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="3.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="speaker.slash.fill" catalog="system" width="124" height="128"/>
+        <namedColor name="background">
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

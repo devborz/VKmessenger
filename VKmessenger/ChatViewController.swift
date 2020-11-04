@@ -7,110 +7,85 @@
 
 import UIKit
 
-enum MessageKind {
-    case text(String)
-    case image(UIImage)
-}
-
-struct Sender {
-    var senderId: String
-    var displayName: String
-}
-
-struct Message {
-    var sender: Sender
-    var messageId: String
-    var sentDate: Date
-    var kind: MessageKind
-}
-
-struct Media {
-    var url: URL?
-    var image: UIImage?
-    var placeholderImage: UIImage
-    var size: CGSize
-}
-
-struct ChatMenuOption {
-    var name: String
-    var image: UIImage
-    var action: (()->Void)?
-}
-
 class ChatViewController: UIViewController {
+    
     var chatID: String?
     
     var userID: String?
-    
-    let currentUser = Sender(senderId: "self", displayName: "Me")
-    
-    let otherUser = Sender(senderId: "other", displayName: "InterLocutor")
     
     var messages = [Message]()
     
     var indexPathOfDeletedMessage: IndexPath?
     
-    @IBOutlet var transparentView: UIView!
+    var transparentView = UIView()
     
-    @IBOutlet weak var dropdownMenuTableView: UITableView!
+    var dropdownMenuTableView = UITableView()
     
-    @IBOutlet var dropdownMenu: UIView!
+    var dropdownMenu = UIView()
     
     var dropdownMenuHeightConstraint: NSLayoutConstraint?
     
-    @IBOutlet weak var titleButton: UIButton!
+    var messagesTableView = UITableView()
     
-    @IBOutlet weak var messagesTableView: UITableView!
+    var inputBar = InputBarView()
     
-    @IBOutlet weak var messageInputBar: UIView!
+    var inputBarBottomConstraint: NSLayoutConstraint?
     
-    var messageInputBarBottomConstraint: NSLayoutConstraint?
+    var chatTitleView = ChatTitleView()
     
-    @IBOutlet weak var inputTextView: UITextView!
-    
-    @IBOutlet weak var inputBar: UIView!
-    
-    @IBOutlet weak var attachButton: UIButton!
-    
-    @IBOutlet weak var sendButton: UIButton!
-    
-    var didFirstLayoutOfSubviews = false
+    var chatInfo: Chat?
     
     var keyboardIsShown = false
     
     var shouldScrollToLastRow = true
     
+    var bottomBarHeight: CGFloat?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        getMessages()
-        setupAttachButton()
-        setupSendButton()
-        setupInputBar()
+        setupDissmissalGestureRecognizer()
         setupColorScheme()
-        setupMessagesView()
         setupNavigationBar()
+        setupMessagesTableView()
+        setupInputBar()
         setupDropDownMenu()
         setupKeyBoardObservers()
-        shouldScrollToLastRow = true;
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        // Scroll table view to the last row
+        bottomBarHeight = view.frame.height - view.safeAreaLayoutGuide.layoutFrame.maxY
         if shouldScrollToLastRow {
-            shouldScrollToLastRow = false;
-            messagesTableView.scrollToLast(false)
+            shouldScrollToLastRow = false
+            messagesTableView.scrollTableViewToBottom(false)
         }
     }
     
-    private func setupColorScheme() {
-        view.backgroundColor = UIColor(named: "BackgroundColor")!
-        messagesTableView.backgroundColor = .systemBackground
-        messageInputBar.backgroundColor = UIColor(named: "BackgroundColor")!
+    func setupDissmissalGestureRecognizer() {
+        let popGestureRecognizer = self.navigationController!.interactivePopGestureRecognizer!
+        if let targets = popGestureRecognizer.value(forKey: "targets") as? NSMutableArray {
+          let gestureRecognizer = UIPanGestureRecognizer()
+          gestureRecognizer.setValue(targets, forKey: "targets")
+          self.view.addGestureRecognizer(gestureRecognizer)
+        }
     }
     
-    private func setupMessagesView() {
+    func setupColorScheme() {
+        view.backgroundColor = UIColor(named: "BackgroundColor")!
+        messagesTableView.backgroundColor = .systemBackground
+        inputBar.backgroundColor = UIColor(named: "BackgroundColor")!
+    }
+    
+    func setupMessagesTableView() {
+        messages = Data.getMessages(chatInfo!)
+        view.addSubview(messagesTableView)
+        
+        messagesTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        messagesTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        messagesTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        messagesTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
         messagesTableView.register(UINib(nibName: "OutgoingMessageTableViewCell", bundle: nil), forCellReuseIdentifier: "OutgoingMessageCell")
         messagesTableView.register(UINib(nibName: "IncomingMessageTableViewCell", bundle: nil), forCellReuseIdentifier: "IncomingMessageCell")
         
@@ -122,72 +97,76 @@ class ChatViewController: UIViewController {
         messagesTableView.addGestureRecognizer(tap)
         
         messagesTableView.separatorStyle = .none
-    }
-    
-    @objc private func hideKeyboard() {
-        inputTextView.resignFirstResponder()
-    }
-    
-    private func setupInputBar() {
-        inputBar.layer.cornerRadius = 17
-        inputBar.layer.borderWidth = 0
-        inputBar.clipsToBounds = true
-        inputBar.layer.masksToBounds = true
         
-        inputTextView.delegate = self
-        inputTextView.textColor = .lightGray
-        inputTextView.endEditing(true)
+        shouldScrollToLastRow = true
     }
     
-    private func setupSendButton() {
-        sendButton.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
-        sendButton.setTitle(nil, for: .normal)
+    @objc func hideKeyboard() {
+        inputBar.inputTextView.resignFirstResponder()
+    }
+    
+    func setupInputBar() {
         
-        let config = UIImage.SymbolConfiguration(pointSize: 30)
-        sendButton.setPreferredSymbolConfiguration(config, forImageIn: .normal)
-        sendButton.contentMode = .scaleAspectFit
-        sendButton.isEnabled = false
-    }
-    
-    private func setupAttachButton() {
-        attachButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
-        attachButton.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: .horizontal)
+        inputBar.translatesAutoresizingMaskIntoConstraints = false
         
-        let config = UIImage.SymbolConfiguration(pointSize: 25)
-        attachButton.setPreferredSymbolConfiguration(config, forImageIn: .normal)
-        attachButton.contentMode = .scaleAspectFit
+        view.addSubview(inputBar)
+        
+        inputBar.topAnchor.constraint(equalTo: messagesTableView.bottomAnchor).isActive = true
+        inputBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        inputBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        inputBar.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
+ 
+        let messageInputBarBottomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        messageInputBarBottomConstraint.isActive = true
+        messageInputBarBottomConstraint.priority = UILayoutPriority(rawValue: 500)
+        
+        inputBar.delegate = self
     }
     
-    //    private func isLastSectionVisible() -> Bool {
-    //        guard !messages.isEmpty else { return false }
-    //
-    //        let lastIndexPath = IndexPath(item: 0, section: messages.count - 1)
-    //
-    //        return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
-    //    }
-    
-    private func setupNavigationBar() {
+    func setupNavigationBar() {
         navigationController?.navigationBar.layer.borderWidth = 0
         navigationController?.navigationBar.layoutIfNeeded()
         navigationController?.navigationBar.backgroundColor = UIColor(named: "BackgroundColor")
-        titleButton.setTitle(self.title, for: .normal)
+        setupTitleView()
     }
     
-    private func setupKeyBoardObservers() {
+    func setupTitleView() {
+        navigationItem.title = nil
+        navigationItem.leftItemsSupplementBackButton = true
+        
+        chatTitleView.delegate = self
+        chatTitleView.dataSource = self
+        
+        chatTitleView.widthAnchor.constraint(equalToConstant: view.frame.width * 0.7).isActive = true
+        
+        let barItem = UIBarButtonItem(customView: chatTitleView)
+        navigationItem.setLeftBarButton(barItem, animated: false)
+    }
+    
+    func setupKeyBoardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillChangeFrame), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
     }
     
-    @objc private func handleKeyboardWillShow(notification: NSNotification) {
+    @objc func handleKeyboardWillChangeFrame(notification: NSNotification) {
+        if keyboardIsShown {
+        
+        }
+    }
+    
+    @objc func handleKeyboardWillShow(notification: NSNotification) {
         if !keyboardIsShown {
             let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+            
             let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+            
             if let frame = keyboardFrame, let duration = animationDuration {
-                messageInputBarBottomConstraint?.isActive = false
-                messageInputBarBottomConstraint = messageInputBar.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -frame.height + 40)
-                NSLayoutConstraint.activate([messageInputBarBottomConstraint!])
+                inputBarBottomConstraint?.isActive = false
+                inputBarBottomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -frame.height + bottomBarHeight!)
+                NSLayoutConstraint.activate([inputBarBottomConstraint!])
                 UIView.animate(withDuration: duration, animations: {
-                    self.messagesTableView.contentOffset.y += frame.height - 40
+                    self.messagesTableView.contentOffset.y += frame.height - self.bottomBarHeight!
                     self.view.layoutIfNeeded()
                 }) { (completed) in
                     if completed {
@@ -198,14 +177,17 @@ class ChatViewController: UIViewController {
         }
     }
     
-    @objc private func handleKeyboardWillHide(notification: NSNotification) {
+    @objc func handleKeyboardWillHide(notification: NSNotification) {
         if keyboardIsShown {
+
             let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+            
             let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+            
             if let frame = keyboardFrame, let duration = animationDuration {
-                messageInputBarBottomConstraint?.isActive = false
+                inputBarBottomConstraint?.isActive = false
                 UIView.animate(withDuration: duration, animations: {
-                    self.messagesTableView.contentOffset.y += -frame.height + 40
+                    self.messagesTableView.contentOffset.y += -frame.height + self.bottomBarHeight!
                     self.view.layoutIfNeeded()
                 }) { (completed) in
                     if completed {
@@ -215,189 +197,61 @@ class ChatViewController: UIViewController {
             }
         }
     }
-
-    @IBAction func didTapTitleButton(_ sender: Any) {
-        if titleButton.isSelected {
-            hideChatMenu()
-        } else {
-            showChatMenu()
-        }
-    }
     
-    @IBAction func didTapSendButton(_ sender: Any) {
-        let text = formatMessage(inputTextView.text)
-        let message = Message(sender: currentUser, messageId: "2", sentDate: Date().addingTimeInterval(-86400), kind: .text(text))
-        inputTextView.text = nil
-        inputTextView.delegate = self
-        sendMessage(message)
-    }
-    
-    
-    @IBAction func didTapTopRightButton(_ sender: Any) {
-        print("hello")
-        let viewControllers = self.navigationController?.viewControllers as! NSArray
+    @objc func didTapTopRightButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
 }
 
-extension ChatViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        if inputTextView.text.isEmpty {
-            sendButton.isEnabled = false
-        } else {
-            sendButton.isEnabled = true
-        }
+extension ChatViewController: InputBarViewDelegate {
+    
+    func didEndRecording(_ inputBarView: InputBarView, voiceMesage: String) {
+        
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if inputTextView.textColor == .lightGray {
-            inputTextView.text = nil
-            inputTextView.textColor = UIColor(named: "TextColor")
-        }
+    func didPressSendButton(_ inputBarView: InputBarView, with textInTextView: String) {
+        let text = formatMessage(inputBarView.inputTextView.text)
+        let message = Message(sender: chatInfo!.currentUser, messageId: "2", sentDate: Date().addingTimeInterval(-86400), kind: .text(text))
+        sendMessage(message)
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if inputTextView.text.isEmpty {
-            inputTextView.text = "Сообщение"
-            inputTextView.textColor = .lightGray
-        }
+    func didPressAttachButton(_ inputBar: InputBarView) {
+        
     }
+    
+}
+
+extension ChatViewController: ChatTitleViewDelegate, ChatTitleViewDataSource {
+    
+    func didSelectTitleView(_ chatTitleView: ChatTitleView) {
+        inputBar.inputTextView.resignFirstResponder()
+        showChatMenu()
+    }
+    
+    func didDeselectTitleView(_ chatTitleView: ChatTitleView) {
+        hideChatMenu()
+    }
+    
+    func setImage(_ chatTitleView: ChatTitleView) -> UIImage? {
+        return chatInfo?.chatImage
+    }
+    
+    func setName(_ chatTitleView: ChatTitleView) -> String? {
+        return chatInfo?.name
+    }
+    
 }
 
 extension UITableView {
-    func scrollToLast(_ animated: Bool) {
-        guard numberOfSections > 0 else {
-            return
-        }
-
-        let lastSection = numberOfSections - 1
-
-        guard numberOfRows(inSection: lastSection) > 0 else {
-            return
-        }
-
-        let lastRowIndexPath = IndexPath(row: numberOfRows(inSection: lastSection) - 1,
-                                          section: lastSection)
-        scrollToRow(at: lastRowIndexPath, at: .bottom, animated: animated)
+    func scrollTableViewToBottom(_ animated: Bool) {
+        guard let dataSource = dataSource else { return }
+        
+        let lastRow = dataSource.tableView(self, numberOfRowsInSection: 0) - 1
+        
+        guard lastRow > -1 else { return }
+        
+        let bottomIndex = IndexPath(row: lastRow, section: 0)
+        
+        scrollToRow(at: bottomIndex, at: .bottom, animated: animated)
     }
 }
-
-extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == messagesTableView {
-            return messages.count
-        } else {
-            return chatMenuOptions.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == messagesTableView {
-            if messages[indexPath.row].sender.senderId == currentUser.senderId {
-                let cell = messagesTableView.dequeueReusableCell(withIdentifier: "OutgoingMessageCell", for: indexPath) as! OutgoingMessageTableViewCell
-                cell.setup(messages[indexPath.row])
-                return cell
-            } else {
-                let cell = messagesTableView.dequeueReusableCell(withIdentifier: "IncomingMessageCell", for: indexPath) as! IncomingMessageTableViewCell
-                cell.setup(messages[indexPath.row])
-                return cell
-            }
-        } else {
-            let cell = dropdownMenuTableView.dequeueReusableCell(withIdentifier: "ChatMenuCell", for: indexPath) as! ChatMenuCell
-            cell.cellNameLabel.text = chatMenuOptions[indexPath.row].name
-            cell.cellImageView.image = chatMenuOptions[indexPath.row].image
-            return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == messagesTableView {
-            messagesTableView.deselectRow(at: indexPath, animated: false)
-        } else {
-            dropdownMenuTableView.deselectRow(at: indexPath, animated: false)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        return self.contextMenuConfiguration(indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
-        animator.addCompletion {
-            if let viewController = animator.previewViewController {
-                self.show(viewController, sender: self)
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        return contextMenuTargetPreview(configuration)
-    }
-    
-    func tableView(_ tableView: UITableView,
-        previewForHighlightingContextMenuWithConfiguration
-        configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        return contextMenuTargetPreview(configuration)
-    }
-    
-    private func contextMenuConfiguration(_ indexPath: IndexPath) -> UIContextMenuConfiguration? {
-        let identifier = "\(indexPath.row)" as NSString
-        
-        return UIContextMenuConfiguration(
-            identifier: identifier, previewProvider: nil) { _ in
-
-            let answerAction = UIAction(
-                title: "Ответить",
-                image: UIImage(systemName: "arrowshape.turn.up.backward")) { _ in
-            }
-            
-            let copyAction = UIAction(
-                title: "Скопировать",
-                image: UIImage(systemName: "square.on.square")) { _ in
-            }
-            
-            let shareAction = UIAction(
-                title: "Переслать",
-                image: UIImage(systemName: "arrowshape.turn.up.forward")) { _ in
-            }
-            
-            let deleteAction = UIAction(
-                title: "Удалить",
-                image: UIImage(systemName: "trash"),
-                attributes: .destructive) { _ in
-                self.messages.remove(at: indexPath.row)
-                self.messagesTableView.deleteRows(at: [indexPath], with: .fade)
-                self.indexPathOfDeletedMessage = indexPath
-            }
-            
-            return UIMenu(title: "", image: nil, children: [answerAction, copyAction, shareAction, deleteAction])
-        }
-    }
-    
-    private func contextMenuTargetPreview(_ configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        guard let identifier = configuration.identifier as? String,
-              let index = Int(identifier) else {
-              return nil
-        }
-         
-        guard indexPathOfDeletedMessage == nil else {
-            indexPathOfDeletedMessage = nil
-            return nil
-        }
-        
-        var bubbleView: UIView?
-        
-        if messages[index].sender.senderId == currentUser.senderId {
-          let cell = messagesTableView.cellForRow(at: IndexPath(row: index, section: 0))
-              as? OutgoingMessageTableViewCell
-          bubbleView = cell?.bubbleView
-        } else {
-          let cell = messagesTableView.cellForRow(at: IndexPath(row: index, section: 0))
-              as? IncomingMessageTableViewCell
-          bubbleView = cell?.bubbleView
-        }
-
-        return UITargetedPreview(view: bubbleView!)
-    }
-}
-

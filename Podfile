@@ -6,5 +6,5 @@ target 'VKmessenger' do
   use_frameworks!
 
   # Pods for VKmessenger
-  pod 'Tabman', '~> 2.9'
+
 end
