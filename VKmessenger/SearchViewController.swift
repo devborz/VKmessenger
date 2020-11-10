@@ -31,7 +31,7 @@ class SearchViewController: UIViewController {
         }
         
         searchBar?.scopeButtonTitles = ["Чаты", "Сообщения"]
-        searchBar?.scopeBarBackgroundImage = UIImage().withTintColor(UIColor(named: "BackgroundColor")!)
+        searchBar?.scopeBarBackgroundImage = UIImage().withTintColor(.systemBackground)
         
         searchBar?.placeholder = "Поиск"
     }

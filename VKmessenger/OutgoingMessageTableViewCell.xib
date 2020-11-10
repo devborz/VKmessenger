@@ -66,6 +66,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="bubbleView" destination="nlW-p7-dPP" id="Dml-29-dOv"/>
                 <outlet property="indicatorImageView" destination="8R6-yr-zoo" id="ipE-RW-pB8"/>

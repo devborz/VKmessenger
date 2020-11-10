@@ -46,13 +46,20 @@ class ChatTitleView: UIView {
         chatActivityLabel.translatesAutoresizingMaskIntoConstraints = false
         accessoryImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addSubview(chatImageView)
+        setupAvatarView()
         
-        chatImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        chatImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
-        chatImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
-        chatImageView.heightAnchor.constraint(equalTo: chatImageView.widthAnchor).isActive = true
+        setupNameLabel()
         
+        setupActivityLabel()
+        
+        setupAccessoryImageView()
+        
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapTitleView))
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    private func setupNameLabel() {
         self.addSubview(chatNameLabel)
         
         chatNameLabel.leftAnchor.constraint(equalTo: chatImageView.rightAnchor, constant: 5).isActive = true
@@ -60,6 +67,25 @@ class ChatTitleView: UIView {
             .isActive = true
         chatNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5).isActive = true
         
+        chatNameLabel.textColor = .white
+        chatNameLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+    }
+    
+    private func setupAvatarView() {
+        self.addSubview(chatImageView)
+        
+        chatImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        chatImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+        chatImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+        chatImageView.heightAnchor.constraint(equalTo: chatImageView.widthAnchor).isActive = true
+        
+        chatImageView.clipsToBounds = true
+        chatImageView.layer.cornerRadius = 17
+        chatImageView.contentMode = .scaleAspectFill
+    }
+    
+    
+    private func setupActivityLabel() {
         self.addSubview(chatActivityLabel)
         
         chatActivityLabel.leftAnchor.constraint(equalTo: chatImageView.rightAnchor, constant: 5).isActive = true
@@ -67,6 +93,12 @@ class ChatTitleView: UIView {
         chatActivityLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         chatActivityLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         
+        chatActivityLabel.text = "Activity"
+        chatActivityLabel.font = UIFont.systemFont(ofSize: 14)
+        chatActivityLabel.textColor = .lightGray
+    }
+    
+    private func setupAccessoryImageView() {
         self.addSubview(accessoryImageView)
         
         accessoryImageView.heightAnchor.constraint(equalToConstant: 17).isActive = true
@@ -76,20 +108,11 @@ class ChatTitleView: UIView {
         accessoryImageView.leftAnchor.constraint(equalTo: chatNameLabel.rightAnchor, constant: 3).isActive = true
         accessoryImageView.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor, constant: 0).isActive = true
         accessoryImageView.centerYAnchor.constraint(equalTo: chatNameLabel.centerYAnchor).isActive = true
-        
-        chatImageView.clipsToBounds = true
-        chatImageView.layer.cornerRadius = 17
-        chatImageView.contentMode = .scaleAspectFill
-        
+    
         let config = UIImage.SymbolConfiguration(weight: .bold)
         accessoryImageView.image = UIImage(systemName: "chevron.down")?.withConfiguration(config)
         
-        chatActivityLabel.text = "Activity"
-        chatActivityLabel.font = UIFont.systemFont(ofSize: 14)
-        chatActivityLabel.textColor = .systemGray
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapTitleView))
-        self.addGestureRecognizer(tapGestureRecognizer)
     }
     
     required init?(coder: NSCoder) {

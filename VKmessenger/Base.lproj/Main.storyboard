@@ -6,6 +6,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -50,42 +51,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wWl-JL-3oa">
-                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
+                                <rect key="frame" x="0.0" y="128" width="414" height="685"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zbS-za-Ks3">
+                                <rect key="frame" x="0.0" y="88" width="414" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kga-JU-94R"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9Eq-q6-nG1">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eTZ-3V-Njp">
+                                        <rect key="frame" x="0.0" y="-44" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4mD-kX-chF">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="zbS-za-Ks3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1Qb-pZ-P5n"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wWl-JL-3oa" secondAttribute="trailing" id="3sF-tx-Jw8"/>
+                            <constraint firstItem="zbS-za-Ks3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Gi0-N7-Biy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wWl-JL-3oa" secondAttribute="bottom" id="e4L-cj-MwA"/>
-                            <constraint firstItem="wWl-JL-3oa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" priority="500" constant="50" id="oMn-Sz-spv"/>
+                            <constraint firstItem="zbS-za-Ks3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ikj-hl-1R6"/>
+                            <constraint firstItem="wWl-JL-3oa" firstAttribute="top" secondItem="zbS-za-Ks3" secondAttribute="bottom" id="nnT-KA-WEE"/>
                             <constraint firstItem="wWl-JL-3oa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="y9z-sx-VfK"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Чаты" image="message" catalog="system" id="SRD-1j-STK"/>
                     <navigationItem key="navigationItem" title="Чаты" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="8W2-Lh-CsV">
                         <barButtonItem key="backBarButtonItem" title=" " id="CZl-TU-fot"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="zQu-OQ-Drv">
-                            <button key="customView" opaque="NO" clipsSubviews="YES" contentMode="left" semanticContentAttribute="playback" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MQq-Aw-aZt">
-                                <rect key="frame" x="20" y="5" width="60" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Изм.">
-                                    <color key="titleColor" systemColor="systemBlueColor"/>
-                                </state>
-                                <state key="selected" title="Готово"/>
-                                <connections>
-                                    <action selector="didTapEditButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="28S-AC-ZUd"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Изм." style="done" id="SEc-jz-xE1"/>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="square.and.pencil" catalog="system" id="oiS-dE-bKG">
+                            <barButtonItem style="done" systemItem="compose" id="oiS-dE-bKG">
                                 <connections>
                                     <segue destination="uLc-nu-Gzf" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="Js8-Ca-5e7"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="magnifyingglass" catalog="system" width="20" id="CSU-cl-gJd">
+                            <barButtonItem style="done" systemItem="search" id="CSU-cl-gJd">
                                 <connections>
                                     <action selector="didTapSearchButton:" destination="BYZ-38-t0r" id="5xp-xQ-Fr8"/>
                                     <segue destination="egj-u8-ggn" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="Vn5-Yg-GMi"/>
@@ -96,6 +111,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chatsTableView" destination="wWl-JL-3oa" id="Arp-P8-JwS"/>
+                        <outlet property="editBarButton" destination="SEc-jz-xE1" id="zcW-Cg-yoB"/>
+                        <outlet property="foldersCollectionView" destination="zbS-za-Ks3" id="3Sg-rA-Wja"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -148,13 +165,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="126-ol-nQE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="126-ol-nQE">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" name="backColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DcN-bf-5mt"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="126-ol-nQE" secondAttribute="bottom" id="Fzx-iX-HEK"/>
                             <constraint firstItem="126-ol-nQE" firstAttribute="leading" secondItem="DcN-bf-5mt" secondAttribute="leading" id="KYy-9e-XbY"/>
@@ -169,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rWu-Bt-Fxa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2562" y="2192"/>
+            <point key="canvasLocation" x="-2562.3188405797105" y="2191.0714285714284"/>
         </scene>
         <!--Настройки-->
         <scene sceneID="lFq-uF-qJh">
@@ -181,7 +198,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B3Y-xJ-iaM">
                                 <rect key="frame" x="0.0" y="312" width="414" height="461"/>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ib-Mu-2Yj">
                                 <rect key="frame" x="0.0" y="88" width="414" height="224"/>
@@ -199,7 +216,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="background"/>
                                 <constraints>
                                     <constraint firstItem="dH0-eH-Nt2" firstAttribute="centerX" secondItem="2Ib-Mu-2Yj" secondAttribute="centerX" id="1bf-GF-uyd"/>
                                     <constraint firstItem="dH0-eH-Nt2" firstAttribute="top" secondItem="2Ib-Mu-2Yj" secondAttribute="top" constant="20" id="Aoi-kK-GQW"/>
@@ -513,7 +529,7 @@
         <!--Чаты-->
         <scene sceneID="9w6-3t-N6z">
             <objects>
-                <navigationController id="W1N-2x-sLL" sceneMemberID="viewController">
+                <navigationController id="W1N-2x-sLL" customClass="ChatsNavigationController" customModule="VKmessenger" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Чаты" image="message" catalog="system" id="7ot-k9-Z6f"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QLB-Ej-n5w">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -556,10 +572,8 @@
         <image name="DefaultPhoto" width="480" height="480"/>
         <image name="VKlogo" width="1024" height="1024"/>
         <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="person.2" catalog="system" width="128" height="81"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <namedColor name="BackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -569,14 +583,14 @@
         <namedColor name="TintColor2">
             <color red="0.28627450980392155" green="0.52549019607843139" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="backColor">
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="background">
             <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OutgoingMessageTableViewCell: MessageTableViewCell {
+class OutgoingMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var textContentLabel: UILabel!
     
     @IBOutlet weak var timeLabel: UILabel!
@@ -34,6 +34,15 @@ class OutgoingMessageTableViewCell: MessageTableViewCell {
         indicatorImageView.image = nil
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if editing {
+            self.selectionStyle = .default
+        } else {
+            self.selectionStyle = .none
+        }
+    }
+    
     func setup(_ message: Message) {
         switch message.kind {
         case .text(let text): textContentLabel.text = text
@@ -48,9 +57,6 @@ class OutgoingMessageTableViewCell: MessageTableViewCell {
         
         timeLabel.text = "\(hourString):\(minuteString)"
         timeLabel.textColor = UIColor.systemGray
-        
-//        let interaction = UIContextMenuInteraction(delegate: self)
-//        bubbleView.addInteraction(interaction)
     }
     
 }

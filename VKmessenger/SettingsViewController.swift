@@ -61,7 +61,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
         
         cell.imageView?.image = UIImage(systemName: settings[indexPath.row].imageName)
-        cell.backgroundColor = UIColor(named: "BackgroundColor")
+        cell.backgroundColor = .systemBackground
         return cell
     }
     
@@ -83,16 +83,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         if let id = segueID {
             self.performSegue(withIdentifier: id, sender: nil)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: "background")
-        return view
     }
 }
 

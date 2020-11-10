@@ -57,7 +57,7 @@ extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSo
         }
         
         headerView.addSubview(label)
-        headerView.backgroundColor = UIColor(named: "background")
+        headerView.backgroundColor = UIColor(named: "backColor")
         
         return headerView
     }
@@ -76,7 +76,7 @@ extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSo
         cell.imageView?.tintColor = settings[indexPath.section][indexPath.row].tintColor
         cell.textLabel?.text = settings[indexPath.section][indexPath.row].name
         cell.detailTextLabel?.text = settings[indexPath.section][indexPath.row].value
-        cell.backgroundColor = UIColor(named: "BackgroundColor")
+//        cell.backgroundColor = UIColor(named: "BackgroundColor")
         return cell
     }
     

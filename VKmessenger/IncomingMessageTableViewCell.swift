@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IncomingMessageTableViewCell: MessageTableViewCell {
+class IncomingMessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var textContentLabel: UILabel!
     
@@ -52,9 +52,15 @@ class IncomingMessageTableViewCell: MessageTableViewCell {
         
         timeLabel.text = "\(hourString):\(minuteString)"
         timeLabel.textColor = UIColor.systemGray
-        
-//        let interaction = UIContextMenuInteraction(delegate: self)
-//        bubbleView.addInteraction(interaction)
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if editing {
+            self.selectionStyle = .default
+        } else {
+            self.selectionStyle = .none
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
