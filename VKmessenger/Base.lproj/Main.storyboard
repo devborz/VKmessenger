@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ya3-PR-fTq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ya3-PR-fTq">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -90,7 +91,10 @@
                             <constraint firstItem="wWl-JL-3oa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="y9z-sx-VfK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Чаты" image="message" catalog="system" id="SRD-1j-STK"/>
+                    <tabBarItem key="tabBarItem" title="Чаты" id="SRD-1j-STK">
+                        <imageReference key="image" image="message" catalog="system" symbolScale="large"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" title="Чаты" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="8W2-Lh-CsV">
                         <barButtonItem key="backBarButtonItem" title=" " id="CZl-TU-fot"/>
                         <barButtonItem key="leftBarButtonItem" title="Изм." style="done" id="SEc-jz-xE1"/>
@@ -303,7 +307,9 @@
         <scene sceneID="ORk-R0-Wwc">
             <objects>
                 <navigationController id="loe-Ql-fah" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Люди" image="person.2" catalog="system" id="oXy-NF-8Pk"/>
+                    <tabBarItem key="tabBarItem" title="Люди" id="oXy-NF-8Pk">
+                        <imageReference key="image" image="person.2" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PUG-Ut-8TI">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -320,7 +326,9 @@
         <scene sceneID="XA2-tS-MGC">
             <objects>
                 <navigationController id="TIu-Hx-t9f" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Настройки" image="gear" catalog="system" id="ETi-Bh-MpM"/>
+                    <tabBarItem key="tabBarItem" title="Настройки" id="ETi-Bh-MpM">
+                        <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="4SX-1H-mOn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h3j-Q7-hVE">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -553,6 +561,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="TintColor1"/>
                     </tabBar>
                     <connections>
                         <segue destination="loe-Ql-fah" kind="relationship" relationship="viewControllers" id="YTM-7Y-1cC"/>
@@ -579,6 +588,9 @@
         </namedColor>
         <namedColor name="InputViewColor">
             <color red="0.94901960784313721" green="0.95294117647058818" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TintColor1">
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TintColor2">
             <color red="0.28627450980392155" green="0.52549019607843139" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

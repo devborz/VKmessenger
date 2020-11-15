@@ -24,16 +24,15 @@ class SearchViewController: UIViewController {
         searchBar?.becomeFirstResponder()
         
         searchBar?.showsCancelButton = true
-        searchBar?.showsScopeBar = true
         
         if let cancelButton = searchBar?.value(forKey: "cancelButton") as? UIButton {
             cancelButton.setTitle("Отменить", for: .normal)
         }
         
-        searchBar?.scopeButtonTitles = ["Чаты", "Сообщения"]
-        searchBar?.scopeBarBackgroundImage = UIImage().withTintColor(.systemBackground)
-        
         searchBar?.placeholder = "Поиск"
+        
+        searchBar?.showsScopeBar = true
+        searchBar?.scopeButtonTitles = ["Чаты", "Сообщения"]
     }
 }
 
@@ -48,6 +47,51 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+    }
+}
+
+class SearchInChatViewController: UIViewController {
+    
+    var searchBar: UISearchBar?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupSearchBar()
+        view.backgroundColor = .white
+    }
+    
+    func setupSearchBar() {
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 100))
+        navigationItem.titleView = searchBar
+        
+        searchBar?.delegate = self
+        searchBar?.becomeFirstResponder()
+        
+        searchBar?.showsCancelButton = true
+        
+        if let cancelButton = searchBar?.value(forKey: "cancelButton") as? UIButton {
+            cancelButton.setTitle("Отменить", for: .normal)
+        }
+        
+        searchBar?.placeholder = "Поиск"
+    }
+}
+
+extension SearchInChatViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

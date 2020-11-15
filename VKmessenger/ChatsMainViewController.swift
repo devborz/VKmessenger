@@ -18,8 +18,6 @@ class ChatsMainViewController: UIViewController {
     
     // MARK - Properties
     
-    var userID = "Me"
-    
     var selectedChat: Chat?
     
     let toolBar = UIToolbar()
@@ -44,11 +42,7 @@ class ChatsMainViewController: UIViewController {
     
     var folderName = "Все"
     
-    var chats: [Chat] = [
-        Chat(id: "1", name: "Elon Mask", lastMessage: "Как тебе такое?", lastMessageTime: "14:20", chatImage: UIImage(named: "Elon")!, currentUser: User(userId: "Me", userName: "Me"), otherUser: User(userId: "other", userName: "Other")),
-        Chat(id: "2", name: "Хабиб Нурмагомедов", lastMessage: "Перезвони", lastMessageTime: "21:00", chatImage: UIImage(named: "Khabib")!, currentUser: User(userId: "Me", userName: "Me"), otherUser: User(userId: "other", userName: "Other")),
-        Chat(id: "3", name: "Хамзат Чимаев", lastMessage: "Smeesh all these guys", lastMessageTime: "09:00", chatImage: UIImage(named: "Khamzat")!, currentUser: User(userId: "Me", userName: "Me"), otherUser: User(userId: "other", userName: "Other")),
-    ]
+    var chats: [Chat] = DataProcesser.myChats
     
     var visibleChats = [Chat]()
     
@@ -60,13 +54,6 @@ class ChatsMainViewController: UIViewController {
         setupFoldersCollectionView()
         setupNavigationBar()
         setupToolBar()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.2) {
-            self.setNeedsStatusBarAppearanceUpdate()
-        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -124,9 +111,21 @@ class ChatsMainViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToChat" {
             let chatVC = segue.destination as! ChatViewController
-            chatVC.title = selectedChat?.name
-            chatVC.chatID = selectedChat?.id
-            chatVC.userID = self.userID
+            
+            var chatName: String?
+            
+            switch selectedChat?.type {
+            case .groupChat(let name, _): chatName = name
+            case .privateChat(let user): chatName = user.userName
+            case .none:
+                return
+            }
+            
+            guard let name = chatName else {
+                return
+            }
+            
+            chatVC.title = name
             chatVC.chatInfo = selectedChat
         }
     }
@@ -191,8 +190,8 @@ extension ChatsMainViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 30
     }
 }
 

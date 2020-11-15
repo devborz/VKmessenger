@@ -10,8 +10,6 @@ import UIKit
 struct Chat {
     var id: String
     
-    var name: String
-    
     var lastMessage: String
     
     var lastMessageTime: String
@@ -20,10 +18,13 @@ struct Chat {
     
     var currentUser: User
     
-    var otherUser: User
+    var type: ChatType
+    
+    var isMuted: Bool
 }
 
 enum ChatType {
-    case privateChat
-    case group
+    case privateChat(user: User)
+    
+    case groupChat(name: String, users: [User])
 }

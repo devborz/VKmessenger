@@ -170,9 +170,14 @@ extension ChatDropDownMenuView: UITableViewDelegate, UITableViewDataSource {
     func didTapTransparentView()
     
     @objc optional func didSelectMenuOption(withName name: String)
+    
+    func didChangeMute()
 }
 
 protocol ChatDropDownMenuViewDataSource {
+    
+    func isChatMuted() -> Bool
+    
     func titleView() -> ChatTitleView
     
     func numberOfRows() -> Int

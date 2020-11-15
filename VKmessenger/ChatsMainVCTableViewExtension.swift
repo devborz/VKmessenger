@@ -33,9 +33,20 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chatsTableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell", for: indexPath) as! ChatTableViewCell
+        var chatName: String?
+        
+        switch visibleChats[indexPath.row].type {
+        case .groupChat(let name, _): chatName = name
+        case .privateChat(let user): chatName = user.userName
+        }
+        
+        guard let name = chatName else {
+            return UITableViewCell()
+        }
+        
         cell.setup(visibleChats[indexPath.row].id,
             chatImage: visibleChats[indexPath.row].chatImage,
-            chatName: visibleChats[indexPath.row].name,
+            chatName: name,
             lastMessage: visibleChats[indexPath.row].lastMessage,
             lastTime: visibleChats[indexPath.row].lastMessageTime
         )
@@ -66,9 +77,19 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
             selectedChat = visibleChats[indexPath.row]
             
             let chatVC = ChatViewController()
-            chatVC.title = self.visibleChats[indexPath.row].name
-            chatVC.chatID = self.visibleChats[indexPath.row].id
-            chatVC.userID = self.userID
+            
+            var chatName: String?
+            
+            switch visibleChats[indexPath.row].type {
+            case .groupChat(let name, _): chatName = name
+            case .privateChat(let user): chatName = user.userName
+            }
+            
+            guard let name = chatName else {
+                return
+            }
+            
+            chatVC.title = name
             chatVC.chatInfo = self.visibleChats[indexPath.row]
             chatVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(chatVC, animated: true)
@@ -114,9 +135,19 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
                   return
             }
             let chatVC = ChatViewController()
-            chatVC.title = self.visibleChats[index].name
-            chatVC.chatID = self.visibleChats[index].id
-            chatVC.userID = self.userID
+            
+            var chatName: String?
+            
+            switch self.visibleChats[index].type {
+            case .groupChat(let name, _): chatName = name
+            case .privateChat(let user): chatName = user.userName
+            }
+            
+            guard let name = chatName else {
+                return
+            }
+            
+            chatVC.title = name
             chatVC.chatInfo = self.visibleChats[index]
             chatVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(chatVC, animated: true)
@@ -126,9 +157,19 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
     private func contextMenuConfiguration(_ indexPath: IndexPath) -> UIContextMenuConfiguration? {
         let identifier = "\(indexPath.row)" as NSString
         let chatVC = ChatViewController()
-        chatVC.title = self.visibleChats[indexPath.row].name
-        chatVC.chatID = self.visibleChats[indexPath.row].id
-        chatVC.userID = self.userID
+        
+        var chatName: String?
+        
+        switch visibleChats[indexPath.row].type {
+        case .groupChat(let name, _): chatName = name
+        case .privateChat(let user): chatName = user.userName
+        }
+        
+        guard let name = chatName else {
+            return nil
+        }
+        
+        chatVC.title = name
         chatVC.chatInfo = self.visibleChats[indexPath.row]
         return UIContextMenuConfiguration(
             identifier: identifier, previewProvider: { chatVC }) { _ in

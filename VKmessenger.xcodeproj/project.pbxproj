@@ -46,6 +46,7 @@
 		B6A0F85A255434DC008044B7 /* IncomingVoiceMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6A0F858255434DC008044B7 /* IncomingVoiceMessageTableViewCell.xib */; };
 		B6A0F85E2554351F008044B7 /* OutgoingVoiceMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0F85C2554351F008044B7 /* OutgoingVoiceMessageTableViewCell.swift */; };
 		B6A0F85F2554351F008044B7 /* OutgoingVoiceMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6A0F85D2554351F008044B7 /* OutgoingVoiceMessageTableViewCell.xib */; };
+		B6A45281255C9FE200C13D42 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A45280255C9FE200C13D42 /* UserProfileViewController.swift */; };
 		B6B16B4225522162007B1CB2 /* ChatTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B16B4125522162007B1CB2 /* ChatTitleView.swift */; };
 		B6C22AAC2528DF04001D33C0 /* MediaPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22AAB2528DF04001D33C0 /* MediaPickerController.swift */; };
 		B6C22ABC2529F6BC001D33C0 /* NotificationSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C22ABB2529F6BC001D33C0 /* NotificationSettingsController.swift */; };
@@ -104,6 +105,7 @@
 		B6A0F858255434DC008044B7 /* IncomingVoiceMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingVoiceMessageTableViewCell.xib; sourceTree = "<group>"; };
 		B6A0F85C2554351F008044B7 /* OutgoingVoiceMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingVoiceMessageTableViewCell.swift; sourceTree = "<group>"; };
 		B6A0F85D2554351F008044B7 /* OutgoingVoiceMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutgoingVoiceMessageTableViewCell.xib; sourceTree = "<group>"; };
+		B6A45280255C9FE200C13D42 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		B6B16B4125522162007B1CB2 /* ChatTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTitleView.swift; sourceTree = "<group>"; };
 		B6C22AAB2528DF04001D33C0 /* MediaPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerController.swift; sourceTree = "<group>"; };
 		B6C22ABB2529F6BC001D33C0 /* NotificationSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		B62C167E2530FDC10066E537 /* ChatsMenuViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B62C169325312E830066E537 /* ChatController */,
 				B679029B2559B8FE00578508 /* FolderCollectionViewCell */,
 				B679029A2559B8E400578508 /* ChatTableViewCell */,
 				B64B05EF25438A03006D4063 /* ChatsMainViewController.swift */,
@@ -151,6 +154,7 @@
 				B6D0A41A2548B5A400B4D225 /* SearchViewController.swift */,
 				B68B94A0252BB956001AE2EF /* ChatFolders.swift */,
 				B67902A12559F2E400578508 /* ChatsNavigationController.swift */,
+				B6A45280255C9FE200C13D42 /* UserProfileViewController.swift */,
 			);
 			name = ChatsMenuViewController;
 			sourceTree = "<group>";
@@ -204,7 +208,6 @@
 			children = (
 				B6A0F83125534C51008044B7 /* DataStructures */,
 				B66F5D22254C61E3003DA32E /* People */,
-				B62C169325312E830066E537 /* ChatController */,
 				B62C168A25311CC60066E537 /* Authorization */,
 				B62C167E2530FDC10066E537 /* ChatsMenuViewController */,
 				B66F5D21254C61B2003DA32E /* Settings */,
@@ -416,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6C22AC22529F719001D33C0 /* AccountSettingsController.swift in Sources */,
+				B6A45281255C9FE200C13D42 /* UserProfileViewController.swift in Sources */,
 				B66F5D18254C5D4A003DA32E /* TabBarController.swift in Sources */,
 				B6C22AAC2528DF04001D33C0 /* MediaPickerController.swift in Sources */,
 				B6A0F83925534CE5008044B7 /* Message.swift in Sources */,
@@ -601,7 +605,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = VKmessenger/VKmessenger.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 826VQ4NPS4;
 				INFOPLIST_FILE = VKmessenger/Info.plist;
@@ -623,7 +626,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = VKmessenger/VKmessenger.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 826VQ4NPS4;
 				INFOPLIST_FILE = VKmessenger/Info.plist;
