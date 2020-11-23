@@ -33,6 +33,7 @@
 		B679029E2559B93600578508 /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B679029C2559B93600578508 /* FolderCollectionViewCell.swift */; };
 		B679029F2559B93600578508 /* FolderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B679029D2559B93600578508 /* FolderCollectionViewCell.xib */; };
 		B67902A22559F2E400578508 /* ChatsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67902A12559F2E400578508 /* ChatsNavigationController.swift */; };
+		B679E5CC256AF722003B7F39 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B679E5CB256AF722003B7F39 /* LocationPickerViewController.swift */; };
 		B68B94A1252BB956001AE2EF /* ChatFolders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68B94A0252BB956001AE2EF /* ChatFolders.swift */; };
 		B68B94C0252DF9F1001AE2EF /* ChatMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68B94BE252DF9F1001AE2EF /* ChatMenuCell.swift */; };
 		B68B94C1252DF9F1001AE2EF /* ChatMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B68B94BF252DF9F1001AE2EF /* ChatMenuCell.xib */; };
@@ -92,6 +93,7 @@
 		B679029C2559B93600578508 /* FolderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCollectionViewCell.swift; sourceTree = "<group>"; };
 		B679029D2559B93600578508 /* FolderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderCollectionViewCell.xib; sourceTree = "<group>"; };
 		B67902A12559F2E400578508 /* ChatsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsNavigationController.swift; sourceTree = "<group>"; };
+		B679E5CB256AF722003B7F39 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 		B68B94A0252BB956001AE2EF /* ChatFolders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFolders.swift; sourceTree = "<group>"; };
 		B68B94BE252DF9F1001AE2EF /* ChatMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuCell.swift; sourceTree = "<group>"; };
 		B68B94BF252DF9F1001AE2EF /* ChatMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMenuCell.xib; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				B6A0F83125534C51008044B7 /* DataStructures */,
+				B679E5C9256AF501003B7F39 /* GeoLocation */,
 				B66F5D22254C61E3003DA32E /* People */,
 				B62C168A25311CC60066E537 /* Authorization */,
 				B62C167E2530FDC10066E537 /* ChatsMenuViewController */,
@@ -262,6 +265,14 @@
 				B679029D2559B93600578508 /* FolderCollectionViewCell.xib */,
 			);
 			name = FolderCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		B679E5C9256AF501003B7F39 /* GeoLocation */ = {
+			isa = PBXGroup;
+			children = (
+				B679E5CB256AF722003B7F39 /* LocationPickerViewController.swift */,
+			);
+			name = GeoLocation;
 			sourceTree = "<group>";
 		};
 		B6A0F83125534C51008044B7 /* DataStructures */ = {
@@ -426,6 +437,7 @@
 				B6C22ABC2529F6BC001D33C0 /* NotificationSettingsController.swift in Sources */,
 				B62C169B2532216E0066E537 /* MessageProcesser.swift in Sources */,
 				B6A0F83325534C77008044B7 /* Chat.swift in Sources */,
+				B679E5CC256AF722003B7F39 /* LocationPickerViewController.swift in Sources */,
 				B67902932559AC4E00578508 /* ChatsMainVCToolBArExtension.swift in Sources */,
 				B6C22ABF2529F6EC001D33C0 /* DoNotDisturbController.swift in Sources */,
 				B6A0F859255434DC008044B7 /* IncomingVoiceMessageTableViewCell.swift in Sources */,

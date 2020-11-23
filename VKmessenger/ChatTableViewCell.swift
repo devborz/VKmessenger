@@ -36,14 +36,46 @@ class ChatTableViewCell: UITableViewCell {
 
     }
     
-    func setup(_ chatID: String, chatImage: UIImage, chatName: String, lastMessage: String, lastTime: String) {
-        chatNameLabel.text = chatName
-        lastMessageLabel.text = lastMessage
+    func setup(_ chat: Chat) {
+        var chatName: String?
+        var chatImage: UIImage?
+
+        switch chat.type {
+        case .groupChat(let name, _, let image): chatName = name; chatImage = image
+        case .privateChat(let user): chatName = user.userName; chatImage = user.avatar
+        }
+        
+        guard let name = chatName, let image = chatImage else {
+            return
+        }
+        
+        chatNameLabel.text = name
+        
+        if let message = chat.lastMessage {
+            switch message.kind {
+            case .text(let text): lastMessageLabel.text = text
+            case .image(_): print("image")
+            case .voice: print("voice")
+            }
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            
+            timeLabel.text = formatter.string(from: message.sentDate)
+            timeLabel.textColor = UIColor.systemGray
+        }
+        
         chatImageView.backgroundColor = .white
-        timeLabel.text = lastTime
-        chatImageView.image = chatImage
+        chatImageView.image = image
         
         chatImageView.clipsToBounds = true
         chatImageView.layer.cornerRadius = chatImageView.frame.width / 2
+        
+        if (!chat.isMuted) {
+            muteImageView.image = nil
+        } else {
+            muteImageView.image = UIImage(systemName: "speaker.slash.fill")
+            muteImageView.tintColor = .systemGray
+        }
     }
 }

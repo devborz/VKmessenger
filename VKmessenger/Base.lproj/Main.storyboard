@@ -564,7 +564,6 @@
                         <color key="selectedImageTintColor" name="TintColor1"/>
                     </tabBar>
                     <connections>
-                        <segue destination="loe-Ql-fah" kind="relationship" relationship="viewControllers" id="YTM-7Y-1cC"/>
                         <segue destination="W1N-2x-sLL" kind="relationship" relationship="viewControllers" id="erM-Q2-itA"/>
                         <segue destination="TIu-Hx-t9f" kind="relationship" relationship="viewControllers" id="KfH-EU-0s3"/>
                     </connections>

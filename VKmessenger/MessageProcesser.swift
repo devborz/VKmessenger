@@ -33,12 +33,17 @@ extension ChatViewController {
     }
     
     func sendMessage(_ message: Message) {
-        messages[1].append(message)
+        if messages.count == 0 {
+            messages.append([Message]())
+            messagesTableView.reloadData()
+        }
+        
+        messages[0].append(message)
         messagesTableView.performBatchUpdates({
-            let indexPath = IndexPath(row: messages.count - 1, section: 1)
+            let indexPath = IndexPath(row: messages[0].count - 1, section: 0)
             messagesTableView.insertRows(at: [indexPath], with: .none)
             if messages.count >= 2 {
-                let indexPath = IndexPath(row: messages.count - 2, section: 1)
+                let indexPath = IndexPath(row: messages[0].count - 2, section: 0)
                 messagesTableView.reloadRows(at: [indexPath], with: .none)
             }
         }, completion: { [weak self] _ in

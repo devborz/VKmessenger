@@ -33,23 +33,9 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chatsTableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell", for: indexPath) as! ChatTableViewCell
-        var chatName: String?
         
-        switch visibleChats[indexPath.row].type {
-        case .groupChat(let name, _): chatName = name
-        case .privateChat(let user): chatName = user.userName
-        }
+        cell.setup(visibleChats[indexPath.row])
         
-        guard let name = chatName else {
-            return UITableViewCell()
-        }
-        
-        cell.setup(visibleChats[indexPath.row].id,
-            chatImage: visibleChats[indexPath.row].chatImage,
-            chatName: name,
-            lastMessage: visibleChats[indexPath.row].lastMessage,
-            lastTime: visibleChats[indexPath.row].lastMessageTime
-        )
         return cell
     }
     
@@ -81,7 +67,7 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
             var chatName: String?
             
             switch visibleChats[indexPath.row].type {
-            case .groupChat(let name, _): chatName = name
+            case .groupChat(let name, _, _): chatName = name
             case .privateChat(let user): chatName = user.userName
             }
             
@@ -98,28 +84,26 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Удалить", handler: { _,_,_ in
-            let alertController = UIAlertController(title: nil, message: "Вы действительно хотите удалить историю сообщений?", preferredStyle: .actionSheet)
-            
-            let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+            self.presentAlert {
                 self.deleteChat(indexPath)
                 self.chatsTableView.deleteRows(at: [indexPath], with: .automatic)
+            } completionForCancel: {
             }
-            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-            alertController.addAction(deleteAction)
-            alertController.addAction(cancelAction)
-            self.present(alertController, animated: true) {
-                tableView.cellForRow(at: indexPath)?.endEditing(true)
-            }
+
         })
-        let muteAction = UIContextualAction(style: .normal, title: "Убрать звук", handler: { _,_,_ in
-            tableView.cellForRow(at: indexPath)?.endEditing(true)
+        let muteActionTitle = visibleChats[indexPath.row].isMuted ? "Включить звук" : "Убрать звук"
+        
+        let muteAction = UIContextualAction(style: .normal, title: muteActionTitle, handler: { _,_,complete in
+            self.muteChat(indexPath)
+            self.chatsTableView.reloadRows(at: [indexPath], with: .none)
+            complete(true)
         })
         return UISwipeActionsConfiguration(actions: [deleteAction, muteAction])
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let readAction = UIContextualAction(style: .normal, title: "Прочитать", handler: { _,_,_ in
-            
+        let readAction = UIContextualAction(style: .normal, title: "Прочитать", handler: { _,_,complete in
+            complete(true)
         })
         return UISwipeActionsConfiguration(actions: [readAction])
     }
@@ -139,7 +123,7 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
             var chatName: String?
             
             switch self.visibleChats[index].type {
-            case .groupChat(let name, _): chatName = name
+            case .groupChat(let name, _, _): chatName = name
             case .privateChat(let user): chatName = user.userName
             }
             
@@ -161,7 +145,7 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
         var chatName: String?
         
         switch visibleChats[indexPath.row].type {
-        case .groupChat(let name, _): chatName = name
+        case .groupChat(let name, _, _): chatName = name
         case .privateChat(let user): chatName = user.userName
         }
         
@@ -174,14 +158,14 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
         return UIContextMenuConfiguration(
             identifier: identifier, previewProvider: { chatVC }) { _ in
             
+            let muteActionTitle = self.visibleChats[indexPath.row].isMuted ? "Включить звук" : "Выключить звук"
+            let muteActionImageName = self.visibleChats[indexPath.row].isMuted ? "volume.2" : "volume.slash"
+            
             let muteAction = UIAction(
-                title: "Отключить уведомления",
-                image: UIImage(systemName: "volume.slash")) { _ in
-            }
-                
-            let unmuteAction = UIAction(
-                title: "Включить уведомления",
-                image: UIImage(systemName: "volume.2")) { _ in
+                title: muteActionTitle,
+                image: UIImage(systemName: muteActionImageName)) { _ in
+                self.muteChat(indexPath)
+                self.chatsTableView.reloadRows(at: [indexPath], with: .fade)
             }
                 
             let readAction = UIAction(
@@ -189,28 +173,38 @@ extension ChatsMainViewController: UITableViewDelegate, UITableViewDataSource {
                 image: UIImage(systemName: "checkmark")) { _ in
             }
             
-            let unreadAction = UIAction(
-                title: "Отметить непрочитанным",
-                image: UIImage(systemName: "circle.fill")) { _ in
-            }
-            
             let deleteAction = UIAction(
                 title: "Удалить",
                 image: UIImage(systemName: "trash"),
                 attributes: .destructive) { _ in
-                let alertController = UIAlertController(title: nil, message: "Вы действительно хотите удалить историю сообщений?", preferredStyle: .actionSheet)
-                
-                let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+                self.presentAlert {
                     self.deleteChat(indexPath)
                     self.chatsTableView.deleteRows(at: [indexPath], with: .automatic)
+                } completionForCancel: {
                 }
-                let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-                alertController.addAction(deleteAction)
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true, completion: nil)
+
+                
             }
             
-            return UIMenu(title: "", image: nil, children: [muteAction, unmuteAction, readAction, unreadAction, deleteAction])
+            return UIMenu(title: "", image: nil, children: [muteAction, readAction, deleteAction])
         }
+    }
+    
+    func presentAlert(_ completionForDelete: @escaping () -> Void, completionForCancel: (() -> Void)?) {
+        let alertController = UIAlertController(title: nil, message: "Вы действительно хотите удалить историю сообщений?", preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+            completionForDelete()
+        }
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
+            if let completion = completionForCancel {
+                completion()
+            }
+        }
+        
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 }

@@ -47,7 +47,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         timeLabel.layer.cornerRadius = 8
         timeLabel.textColor = .systemGray
     
-        
+        if messages[section].count > 0 {
         let dateFormatter = DateFormatter()
         
         let date = messages[section][0].sentDate
@@ -56,7 +56,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         timeLabel.widthAnchor.constraint(equalToConstant: (timeLabel.attributedText?.size().width)! + 16).isActive = true
-        
+        }
         return headerView
     }
     

@@ -42,16 +42,14 @@ class IncomingMessageTableViewCell: UITableViewCell {
         case .text(let text): textContentLabel.text = text
         default: print("image")
         }
-        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
         
-        let hour = calendar.component(.hour, from: message.sentDate)
-        let minute = calendar.component(.minute, from: message.sentDate)
-        
-        let hourString = String(hour).count > 1 ? String(hour) : "0" + String(hour)
-        let minuteString = String(minute).count > 1 ? String(minute) : "0" + String(minute)
-        
-        timeLabel.text = "\(hourString):\(minuteString)"
+        timeLabel.text = formatter.string(from: message.sentDate)
         timeLabel.textColor = UIColor.systemGray
+        
+        avatarImageView.image = message.sender.avatar
+        avatarImageView.layer.cornerRadius = avatarImageView.bounds.width / 2
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {

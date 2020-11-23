@@ -37,6 +37,14 @@ class IncomingVoiceMessageTableViewCell: UITableViewCell {
     }
     
     func setup(_ message: Message) {
+        avatarImageView.image = message.sender.avatar
+        avatarImageView.layer.cornerRadius = avatarImageView.bounds.width / 2
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        timeLabel.text = formatter.string(from: message.sentDate)
+        timeLabel.textColor = UIColor.systemGray
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {

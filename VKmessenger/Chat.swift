@@ -10,11 +10,7 @@ import UIKit
 struct Chat {
     var id: String
     
-    var lastMessage: String
-    
-    var lastMessageTime: String
-    
-    var chatImage: UIImage
+    var lastMessage: Message?
     
     var currentUser: User
     
@@ -26,5 +22,5 @@ struct Chat {
 enum ChatType {
     case privateChat(user: User)
     
-    case groupChat(name: String, users: [User])
+    case groupChat(name: String, users: [User], image: UIImage)
 }

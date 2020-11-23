@@ -108,6 +108,15 @@ class ChatsMainViewController: UIViewController {
         visibleChats.remove(at: indexPath.row)
     }
     
+    func muteChat(_ indexPath: IndexPath) {
+        if let chatIndex = chats.firstIndex(where: { (chat) -> Bool in
+            return chat.id == visibleChats[indexPath.row].id
+        }) {
+            chats[chatIndex].isMuted = !chats[chatIndex].isMuted
+        }
+        visibleChats[indexPath.row].isMuted = !visibleChats[indexPath.row].isMuted
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToChat" {
             let chatVC = segue.destination as! ChatViewController
@@ -115,7 +124,7 @@ class ChatsMainViewController: UIViewController {
             var chatName: String?
             
             switch selectedChat?.type {
-            case .groupChat(let name, _): chatName = name
+            case .groupChat(let name, _, _): chatName = name
             case .privateChat(let user): chatName = user.userName
             case .none:
                 return

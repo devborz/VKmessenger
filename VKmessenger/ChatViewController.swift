@@ -135,7 +135,7 @@ class ChatViewController: UIViewController {
         bottomBarHeight = view.frame.height - view.safeAreaLayoutGuide.layoutFrame.maxY
         if shouldScrollToLastRow {
             shouldScrollToLastRow = false
-            messagesTableView.scrollTableViewToBottom(false)
+            messagesTableView.scrollToLast(false)
         }
     }
     
@@ -294,6 +294,7 @@ class ChatViewController: UIViewController {
     }
     
     func startEditingMode() {
+        chatTitleView.isUserInteractionEnabled = false
         messagesTableView.setEditing(true, animated: true)
         inputBar.removeFromSuperview()
     
@@ -312,6 +313,7 @@ class ChatViewController: UIViewController {
     }
     
     func endEditingMode() {
+        chatTitleView.isUserInteractionEnabled = true
         messagesTableView.setEditing(false, animated: true)
         navigationController?.setToolbarHidden(true, animated: true)
         setupInputBar()
@@ -365,7 +367,7 @@ extension ChatViewController: InputBarViewDelegate {
     }
     
     func didPressAttachButton(_ inputBar: InputBarView) {
-        
+        presentInputActionSheet()
     }
 }
 
@@ -382,13 +384,18 @@ extension ChatViewController: ChatTitleViewDelegate, ChatTitleViewDataSource {
     }
     
     func setImage(_ chatTitleView: ChatTitleView) -> UIImage? {
-        return chatInfo?.chatImage
+        switch chatInfo?.type {
+        case .groupChat(_,_, let image): return image
+        case .privateChat(let user): return user.avatar
+        case .none:
+            return nil
+        }
     }
     
     func setName(_ chatTitleView: ChatTitleView) -> String? {
         switch chatInfo?.type {
         case .privateChat(let user): return user.userName
-        case .groupChat(let name, _): return name
+        case .groupChat(let name, _, _): return name
         default: return nil
         }
     }

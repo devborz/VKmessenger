@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -91,7 +90,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="bubbleView" destination="62D-H1-9Vo" id="o0H-WH-eYs"/>
-                <outlet property="indicatorImagView" destination="UaT-Yt-jVH" id="v1m-rG-Xob"/>
+                <outlet property="indicatorImageView" destination="UaT-Yt-jVH" id="v1m-rG-Xob"/>
                 <outlet property="playButton" destination="byO-iz-vkN" id="S4A-Wm-7qp"/>
                 <outlet property="progressSliderView" destination="k14-Qx-3cz" id="J4J-pI-kbm"/>
                 <outlet property="progressTimeLabel" destination="Icj-8U-iRl" id="GkZ-V9-Mn8"/>

@@ -9,7 +9,7 @@ import UIKit
 
 class OutgoingVoiceMessageTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var indicatorImagView: UIImageView!
+    @IBOutlet weak var indicatorImageView: UIImageView!
     
     @IBOutlet weak var progressSliderView: UISlider!
     
@@ -44,6 +44,11 @@ class OutgoingVoiceMessageTableViewCell: UITableViewCell {
     }
     
     func setup(_ message: Message) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        timeLabel.text = formatter.string(from: message.sentDate)
+        timeLabel.textColor = UIColor.systemGray
     }
     
     

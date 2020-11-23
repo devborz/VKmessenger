@@ -70,7 +70,15 @@ extension ChatsMainViewController {
     }
     
     @objc private func didTapDeleteButton() {
-        deleteSelectedChats()
+        presentAlert {
+            self.deleteSelectedChats()
+        } completionForCancel: { [self] in
+            for chat in self.selectedChatsWhileEditing {
+                self.chatsTableView.deselectRow(at: chat, animated: true)
+            }
+            self.selectedChatsWhileEditing = []
+        }
+
     }
     
     func readSelectedChats() {
