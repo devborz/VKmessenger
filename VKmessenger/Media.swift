@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import AVKit
 
 struct Media {
-    var url: URL?
-    var image: UIImage?
-    var placeholderImage: UIImage
-    var size: CGSize
+    var url: URL
+    var thumbnail: UIImage
+    var duration: CMTime
 }

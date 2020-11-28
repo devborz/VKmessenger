@@ -28,6 +28,14 @@ class LocationPickerViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     
+    var annotation: MKPointAnnotation? {
+        didSet {
+            if annotation != nil {
+                sendButton.isEnabled = true
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -40,6 +48,19 @@ class LocationPickerViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         mapView.setCenter((locationManager.location?.coordinate)!, animated: true)
         mapView.setRegion(MKCoordinateRegion(center: (locationManager.location?.coordinate)!, latitudinalMeters: CLLocationDistance(800), longitudinalMeters: 800), animated: true)
+        
+        checkPermissions()
+    }
+    
+    func checkPermissions() {
+        if !CLLocationManager.locationServicesEnabled() {
+            let alertController = UIAlertController(title: "Ваша геопозиция недосупна", message: "Вы можете разрешить приложению получать данные о вашей геопозиции в настройках" , preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ок", style: .default) { _ in
+                alertController.dismiss(animated: true, completion: nil)
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func setupTopBar() {
@@ -92,6 +113,9 @@ class LocationPickerViewController: UIViewController {
         locationManager.startUpdatingLocation()
         
         mapView.showsUserLocation = true
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapMapView))
+        mapView.addGestureRecognizer(gestureRecognizer)
     }
     
     func setupSendButton() {
@@ -108,6 +132,8 @@ class LocationPickerViewController: UIViewController {
         
         sendButton.setTitle("Отправить", for: .normal)
         sendButton.setTitleColor(.systemBlue, for: .normal)
+        sendButton.setTitleColor(.systemGray, for: .disabled)
+        sendButton.isEnabled = false
     }
     
     @objc func didTapCancelButton() {
@@ -126,6 +152,22 @@ class LocationPickerViewController: UIViewController {
     @objc func didTapSearchBarCancelButton() {
         
     }
+    
+    @objc func didTapMapView(sender: UILongPressGestureRecognizer) {
+        let locationInView = sender.location(in: mapView)
+        let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+        addAnnotation(location: locationOnMap)
+    }
+    
+    func addAnnotation(location: CLLocationCoordinate2D){
+        if let lastAnnotation = self.annotation {
+            mapView.removeAnnotation(lastAnnotation)
+        }
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        self.annotation = annotation
+        mapView.addAnnotation(annotation)
+    }
 }
 
 extension LocationPickerViewController: UISearchBarDelegate {
@@ -135,7 +177,17 @@ extension LocationPickerViewController: UISearchBarDelegate {
 }
 
 extension LocationPickerViewController: MKMapViewDelegate {
+   
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
     }
+
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+        }
+    }
+}
+
+extension LocationPickerViewController: UIGestureRecognizerDelegate {
+    
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19268856C9564D651F83F31D /* Pods_VKmessenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A9A89C641D424C697D68E0 /* Pods_VKmessenger.framework */; };
+		8D3698F3256E7D82009BCEC4 /* AttachedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3698F2256E7D82009BCEC4 /* AttachedItemCell.swift */; };
 		B60E5BD02550CD780010183D /* InputBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60E5BCF2550CD770010183D /* InputBarView.swift */; };
 		B6256A3D254A2704002EDEB2 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6256A3C254A2704002EDEB2 /* AuthorizationViewController.swift */; };
 		B62C168C25311D080066E537 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C168B25311D080066E537 /* Authorization.swift */; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		11A9A89C641D424C697D68E0 /* Pods_VKmessenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKmessenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC408FD6BAA81FD29AAEBA2 /* Pods-VKmessenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKmessenger.release.xcconfig"; path = "Target Support Files/Pods-VKmessenger/Pods-VKmessenger.release.xcconfig"; sourceTree = "<group>"; };
+		8D3698F2256E7D82009BCEC4 /* AttachedItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachedItemCell.swift; sourceTree = "<group>"; };
 		A8DF9C0F8192D216F9B5E704 /* Pods-VKmessenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKmessenger.debug.xcconfig"; path = "Target Support Files/Pods-VKmessenger/Pods-VKmessenger.debug.xcconfig"; sourceTree = "<group>"; };
 		B60E5BCF2550CD770010183D /* InputBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputBarView.swift; sourceTree = "<group>"; };
 		B6256A3C254A2704002EDEB2 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
@@ -143,10 +145,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8D3698D5256E79F4009BCEC4 /* AttachedItemCell */ = {
+			isa = PBXGroup;
+			children = (
+				8D3698F2256E7D82009BCEC4 /* AttachedItemCell.swift */,
+			);
+			name = AttachedItemCell;
+			sourceTree = "<group>";
+		};
 		B62C167E2530FDC10066E537 /* ChatsMenuViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B62C169325312E830066E537 /* ChatController */,
 				B679029B2559B8FE00578508 /* FolderCollectionViewCell */,
 				B679029A2559B8E400578508 /* ChatTableViewCell */,
 				B64B05EF25438A03006D4063 /* ChatsMainViewController.swift */,
@@ -173,6 +182,7 @@
 		B62C169325312E830066E537 /* ChatController */ = {
 			isa = PBXGroup;
 			children = (
+				8D3698D5256E79F4009BCEC4 /* AttachedItemCell */,
 				B6A0F8612554352A008044B7 /* VoiceMessageCells */,
 				B6A0F84B2553501A008044B7 /* MessageCells */,
 				B6A0F84A25534FFC008044B7 /* ChatMenuCell */,
@@ -209,10 +219,11 @@
 			isa = PBXGroup;
 			children = (
 				B6A0F83125534C51008044B7 /* DataStructures */,
+				B62C167E2530FDC10066E537 /* ChatsMenuViewController */,
+				B62C169325312E830066E537 /* ChatController */,
 				B679E5C9256AF501003B7F39 /* GeoLocation */,
 				B66F5D22254C61E3003DA32E /* People */,
 				B62C168A25311CC60066E537 /* Authorization */,
-				B62C167E2530FDC10066E537 /* ChatsMenuViewController */,
 				B66F5D21254C61B2003DA32E /* Settings */,
 				B66F5D17254C5D4A003DA32E /* TabBarController.swift */,
 				B63CC10D2524D59100D76A4C /* SceneDelegate.swift */,
@@ -441,6 +452,7 @@
 				B67902932559AC4E00578508 /* ChatsMainVCToolBArExtension.swift in Sources */,
 				B6C22ABF2529F6EC001D33C0 /* DoNotDisturbController.swift in Sources */,
 				B6A0F859255434DC008044B7 /* IncomingVoiceMessageTableViewCell.swift in Sources */,
+				8D3698F3256E7D82009BCEC4 /* AttachedItemCell.swift in Sources */,
 				B6A0F83C25534D33008044B7 /* Media.swift in Sources */,
 				B68B94A1252BB956001AE2EF /* ChatFolders.swift in Sources */,
 				B6C22AC92529F781001D33C0 /* AppearanceSettingsController.swift in Sources */,

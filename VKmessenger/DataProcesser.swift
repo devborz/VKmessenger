@@ -45,12 +45,12 @@ class DataProcesser: NSObject {
     class var myChats: [Chat] {
         get {
             let chats: [Chat] = [
-            Chat(id: "1", lastMessage: Message(sender: User(userId: "id474874848", userName: "Elon Mask",
+            Chat(id: "1", lastMessage: Message(sender: User(userId: "id474874848", userName: "Elon Musk",
                                                             avatar: UIImage(named: "Elon")!), messageId: "1", sentDate: Date().addingTimeInterval(-86400), kind: .text("Как тебе такое?")),
-                 currentUser: currentUser, type: .privateChat(user: User(userId: "id474874848", userName: "Elon Mask",
+                 currentUser: currentUser, type: .privateChat(user: User(userId: "id474874848", userName: "Elon Musk",
                  avatar: UIImage(named: "Elon")!)), isMuted: false),
             Chat(id: "2", lastMessage: Message(sender: User(userId: "id373975957", userName: "Elon Mask",
-                                                            avatar: UIImage(named: "Elon")!), messageId: "1", sentDate: Date().addingTimeInterval(-86400), kind: .text("Без 'The' круче")),
+                                                            avatar: UIImage(named: "Mark")!), messageId: "1", sentDate: Date().addingTimeInterval(-86400), kind: .text("Без 'The' круче")),
                 currentUser: currentUser, type: .privateChat(user: User(userId: "id373975957", userName: "Mark Zuckerberg",
                 avatar: UIImage(named: "Mark")!)), isMuted: false),
             Chat(id: "3", lastMessage: Message(sender: User(userId: "id3484357487", userName: "Ivan Ivanov",

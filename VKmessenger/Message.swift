@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 struct Message {
     var sender: User
@@ -18,4 +19,12 @@ enum MessageKind {
     case text(String)
     case image(UIImage)
     case voice
+}
+
+enum AttachedItem {
+    case Image(UIImage)
+    case Video(Media)
+    case Music
+    case Document
+    case Locaion
 }

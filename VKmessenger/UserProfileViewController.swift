@@ -113,7 +113,7 @@ class UserProfileViewController: UIViewController {
         goToChatButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         goToChatButton.backgroundColor = UIColor(named: "headerColor")
-        goToChatButton.layer.cornerRadius = 5
+        goToChatButton.layer.cornerRadius = 10
         goToChatButton.setTitle("Сообщение", for: .normal)
         goToChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         

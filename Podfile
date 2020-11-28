@@ -6,5 +6,4 @@ target 'VKmessenger' do
   use_frameworks!
 
   # Pods for VKmessenger
-
 end

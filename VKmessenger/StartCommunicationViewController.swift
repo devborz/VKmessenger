@@ -17,8 +17,7 @@ class StartCommunicationViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Отменить", style: .done, target: self, action: #selector(cancelTapped(_:)))
     }
     
-    @objc
-    func cancelTapped(_ sender: Any) {
+    @IBAction func cancelTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }
 }

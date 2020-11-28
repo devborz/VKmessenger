@@ -9,33 +9,41 @@ import UIKit
 
 class ChatViewController: UIViewController {
     
+    var chatInfo: Chat?
+    
     var messages = [[Message]]()
+    
+    var attachedItems = [AttachedItem]()
     
     var indexPathOfDeletedMessage: IndexPath?
     
-    var transparentView = UIView()
+    let chatTitleView = ChatTitleView()
     
-    var dropdownMenuTableView = UITableView()
+    let transparentView = UIView()
     
-    var dropdownMenu = ChatDropDownMenuView()
+    let dropdownMenu = ChatDropDownMenuView()
     
     var dropdownMenuHeightConstraint: NSLayoutConstraint?
     
-    var messagesTableView = UITableView()
+    let messagesTableView = UITableView()
     
-    var inputBar = InputBarView()
+    let inputBar = InputBarView()
     
     var inputBarBottomConstraint: NSLayoutConstraint?
     
-    var chatTitleView = ChatTitleView()
-    
-    var chatInfo: Chat?
+    var bottomBarHeight: CGFloat?
     
     var keyboardIsShown = false
     
     var shouldScrollToLastRow = true
     
-    var bottomBarHeight: CGFloat?
+    let imagePicker = UIImagePickerController()
+    
+    var itemProviders = [NSItemProvider]()
+    
+    var itemProvidersIterator: IndexingIterator<[NSItemProvider]>?
+    
+    var currentItemProvider: NSItemProvider?
     
     var privateChatMenuOptions: [ChatMenuOption] {
         let chatMenuOptions: [ChatMenuOption] = [
@@ -128,6 +136,7 @@ class ChatViewController: UIViewController {
         setupTitleView()
         setupMessagesTableView()
         setupInputBar()
+        setupPickers()
     }
     
     override func viewDidLayoutSubviews() {
@@ -146,6 +155,10 @@ class ChatViewController: UIViewController {
         removeKeyBoardObservers()
         
         navigationController?.setToolbarHidden(true, animated: false)
+    }
+    
+    func setupPickers() {
+        imagePicker.delegate = self
     }
     
     func setupNavigationBar() {
@@ -194,7 +207,7 @@ class ChatViewController: UIViewController {
     }
     
     @objc func hideKeyboard() {
-        inputBar.inputTextView.resignFirstResponder()
+        inputBar.textView.resignFirstResponder()
     }
     
     func setupInputBar() {
@@ -211,6 +224,8 @@ class ChatViewController: UIViewController {
         inputBarBottomConstraint?.isActive = true
         
         inputBar.delegate = self
+        inputBar.dataSource = self
+        
     }
     
     func setupTitleView() {
@@ -352,29 +367,61 @@ class ChatViewController: UIViewController {
     @objc func didTapToolBarShareButton() {
         
     }
+    
+    func sendMessage(_ message: Message) {
+        if messages.count == 0 {
+            messages.append([Message]())
+            messagesTableView.reloadData()
+        }
+        
+        messages[0].append(message)
+        messagesTableView.performBatchUpdates({
+            let indexPath = IndexPath(row: messages[0].count - 1, section: 0)
+            messagesTableView.insertRows(at: [indexPath], with: .none)
+            if messages.count >= 2 {
+                let indexPath = IndexPath(row: messages[0].count - 2, section: 0)
+                messagesTableView.reloadRows(at: [indexPath], with: .none)
+            }
+        }, completion: { [weak self] _ in
+            self?.messagesTableView.scrollToLast(true)
+        })
+    }
 }
 
-extension ChatViewController: InputBarViewDelegate {
+extension ChatViewController: InputBarViewDelegate, InputBarViewDataSource {
+    func currentSender(_ inputBarView: InputBarView) -> User {
+        return chatInfo!.currentUser
+    }
+    
+    func didDeleteItem(_ inputBarView: InputBarView, atIndexPath indexPath: IndexPath) {
+        attachedItems.remove(at: indexPath.item)
+    }
     
     func didEndRecording(_ inputBarView: InputBarView, voiceMesage: String) {
         
     }
     
-    func didPressSendButton(_ inputBarView: InputBarView, with textInTextView: String) {
-        let text = formatMessage(inputBarView.inputTextView.text)
-        let message = Message(sender: chatInfo!.currentUser, messageId: "2", sentDate: Date().addingTimeInterval(-86400), kind: .text(text))
+    func didPressSendButton(_ inputBarView: InputBarView, with message: Message) {
         sendMessage(message)
     }
     
     func didPressAttachButton(_ inputBar: InputBarView) {
         presentInputActionSheet()
     }
+    
+    func countOfAttachedItems(_ inputBarView: InputBarView) -> Int {
+        return attachedItems.count
+    }
+    
+    func attachedItem(_ inputBarView: InputBarView, forIndexPath indexPath: IndexPath) -> AttachedItem {
+        return attachedItems[indexPath.item]
+    }
 }
 
 extension ChatViewController: ChatTitleViewDelegate, ChatTitleViewDataSource {
     
     func didSelectTitleView(_ chatTitleView: ChatTitleView) {
-        inputBar.inputTextView.resignFirstResponder()
+        inputBar.textView.resignFirstResponder()
         setupDropDownMenu()
         dropdownMenu.show()
     }
