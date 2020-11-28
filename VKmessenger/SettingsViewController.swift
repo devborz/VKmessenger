@@ -11,15 +11,28 @@ class SettingsViewController: UIViewController {
     
     var settings = [Setting]()
     
+    @IBOutlet weak var avatarImageView: UIImageView!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var settingsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fillInSettings()
+        setupTableView()
+        setupProfileView()
+    }
+    
+    private func setupProfileView() {
+        avatarImageView.layer.cornerRadius = 10
+    }
+    
+    private func setupTableView() {
         settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "SettingCell")
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
-        settingsTableView.separatorStyle = .none
+        settingsTableView.tableFooterView = UIView()
     }
     
     private func fillInSettings() {
@@ -28,6 +41,11 @@ class SettingsViewController: UIViewController {
                         settings.append(Setting(name: "Аккаунт", imageName: "person"))
         settings.append(Setting(name: "Основные", imageName: "gearshape"))
         settings.append(Setting(name: "Внешний вид", imageName: "paintpalette"))
+    }
+    
+    
+    @IBAction func didTapSignOutButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -38,9 +56,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = settingsTableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath)
-        cell.textLabel?.text = settings[indexPath.row].name
+        cell.textLabel?.text =
+            settings[indexPath.row].name
+        cell.accessoryType = .disclosureIndicator
+        
         cell.imageView?.image = UIImage(systemName: settings[indexPath.row].imageName)
-        cell.backgroundColor = UIColor(named: "BackgroundColor")
+        cell.backgroundColor = .systemBackground
         return cell
     }
     

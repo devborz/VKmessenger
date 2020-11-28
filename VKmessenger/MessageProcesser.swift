@@ -7,17 +7,9 @@
 
 import Foundation
 
-extension ChatViewController {
-    func getMessages() {
-        for _ in 1...20 {
-            messages.append(Message(sender: otherUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("What's up nigga?")))
-        }
-        for _ in 1...5 {
-            messages.append(Message(sender: currentUser, messageId: "32", sentDate: Date().addingTimeInterval(-86400), kind: .text("What's up nigga?")))
-        }
-    }
+class MessageProccesser {
     
-    func formatMessage(_ message: String) -> String {
+    class func formatMessage(_ message: String) -> String {
         var text = message
         if text.isEmpty {
             return ""
@@ -38,19 +30,5 @@ extension ChatViewController {
             }
         }
         return text
-    }
-    
-    func sendMessage(_ message: Message) {
-        messages.append(message)
-        messagesTableView.performBatchUpdates({
-            let indexPath = IndexPath(row: messages.count - 1, section: 0)
-            messagesTableView.insertRows(at: [indexPath], with: .none)
-            if messages.count >= 2 {
-                let indexPath = IndexPath(row: messages.count - 2, section: 0)
-                messagesTableView.reloadRows(at: [indexPath], with: .none)
-            }
-        }, completion: { [weak self] _ in
-            self?.messagesTableView.scrollToLast(true)
-        })
     }
 }

@@ -21,10 +21,11 @@ class NotificationSettingsController: UIViewController {
     }
     
     private func addTableView() {
-        tableView.separatorStyle = .none
-        tableView.tableHeaderView?.tintColor = .systemGray3
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.isScrollEnabled = false
+        tableView.tableFooterView = UIView()
     }
     
     private func fillInCells() {
@@ -56,7 +57,7 @@ extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSo
         }
         
         headerView.addSubview(label)
-        headerView.backgroundColor = UIColor(named: "BackgroundColor")
+        headerView.backgroundColor = UIColor(named: "backColor")
         
         return headerView
     }
@@ -75,7 +76,7 @@ extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSo
         cell.imageView?.tintColor = settings[indexPath.section][indexPath.row].tintColor
         cell.textLabel?.text = settings[indexPath.section][indexPath.row].name
         cell.detailTextLabel?.text = settings[indexPath.section][indexPath.row].value
-        cell.backgroundColor = UIColor(named: "BackgroundColor")
+//        cell.backgroundColor = UIColor(named: "BackgroundColor")
         return cell
     }
     

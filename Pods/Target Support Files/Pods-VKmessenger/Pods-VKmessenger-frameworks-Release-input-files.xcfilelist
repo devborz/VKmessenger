@@ -1,8 +1,2 @@
 ${PODS_ROOT}/Target Support Files/Pods-VKmessenger/Pods-VKmessenger-frameworks.sh
-${BUILT_PRODUCTS_DIR}/BTNavigationDropdownMenu/BTNavigationDropdownMenu.framework
-${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework
-${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework
-${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework
-${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
-${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework
-${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
+${BUILT_PRODUCTS_DIR}/BSImagePicker/BSImagePicker.framework

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OutgoingMessageTableViewCell: MessageTableViewCell {
+class OutgoingMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var textContentLabel: UILabel!
     
     @IBOutlet weak var timeLabel: UILabel!
@@ -34,37 +34,26 @@ class OutgoingMessageTableViewCell: MessageTableViewCell {
         indicatorImageView.image = nil
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if editing {
+            self.selectionStyle = .default
+        } else {
+            self.selectionStyle = .none
+        }
+    }
+    
     func setup(_ message: Message) {
         switch message.kind {
         case .text(let text): textContentLabel.text = text
         default: print("image")
         }
-        let calendar = Calendar.current
         
-        let hour = calendar.component(.hour, from: message.sentDate)
-        let minute = calendar.component(.minute, from: message.sentDate)
-        let hourString = String(hour).count > 1 ? String(hour) : "0" + String(hour)
-        let minuteString = String(minute).count > 1 ? String(minute) : "0" + String(minute)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
         
-        timeLabel.text = "\(hourString):\(minuteString)"
+        timeLabel.text = formatter.string(from: message.sentDate)
         timeLabel.textColor = UIColor.systemGray
-        
-        let interaction = UIContextMenuInteraction(delegate: self)
-        bubbleView.addInteraction(interaction)
-        
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
-        self.addGestureRecognizer(gesture)
     }
     
-    @objc private func didLongPress() {
-        
-    }
-    
-}
-
-extension OutgoingMessageTableViewCell: UIContextMenuInteractionDelegate {
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        
-        return self.returnContextMenuConfiguration(0)
-    }
 }

@@ -10,9 +10,9 @@ import Foundation
 func chatsOfFolderIDs(name: String) -> [String] {
     var folderChats = [String]()
     switch name {
-    case "Все": folderChats = ["1", "2", "3", "4", "5", "6"]
-    case "Учеба": folderChats = ["3", "4"]
-    case "Кино": folderChats = ["5", "6"]
+    case "Все": folderChats = ["1", "2", "3"]
+    case "Работа": folderChats = ["1"]
+    case "Личные": folderChats = ["3", "2"]
     default: folderChats = []
     }
     return folderChats
