@@ -45,7 +45,7 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func didTapSignOutButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        tabBarController?.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -61,7 +61,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
         
         cell.imageView?.image = UIImage(systemName: settings[indexPath.row].imageName)
-        cell.backgroundColor = .systemBackground
+        cell.backgroundColor = .clear
         return cell
     }
     
@@ -71,17 +71,23 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        var segueID: String?
         switch settings[indexPath.row].name {
-        case "Уведомления": segueID = "Notifications" 
-        case "Не беспокоить": segueID = "DoNotDisturb"
-        case "Аккаунт": segueID = "Account"
-        case "Основные": segueID = "Main"
-        case "Внешний вид": segueID = "Appearance"
-        default: segueID = nil
-        }
-        if let id = segueID {
-            self.performSegue(withIdentifier: id, sender: nil)
+        case "Уведомления":
+            let vc = NotificationSettingsController()
+            navigationController?.pushViewController(vc, animated: true)
+        case "Не беспокоить":
+            let vc = DoNotDisturbController()
+            navigationController?.pushViewController(vc, animated: true)
+        case "Аккаунт":
+            let vc = AccountSettingsController()
+            navigationController?.pushViewController(vc, animated: true)
+        case "Основные":
+            let vc = MainSettingsController()
+            navigationController?.pushViewController(vc, animated: true)
+        case "Внешний вид":
+            let vc = AppearanceSettingsController()
+            navigationController?.pushViewController(vc, animated: true)
+        default: break
         }
     }
 }

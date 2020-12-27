@@ -10,9 +10,11 @@ import MapKit
 
 class LocationPickerViewController: UIViewController {
     
+    var delegate: LocationPickerDelegate?
+    
     let cancelButton = UIBarButtonItem(image: nil, style: .done, target: self, action: #selector(didTapCancelButton))
     
-    let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
+    let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didPressSearchButton))
     
     let sendButton = UIButton()
     
@@ -134,22 +136,26 @@ class LocationPickerViewController: UIViewController {
         sendButton.setTitleColor(.systemBlue, for: .normal)
         sendButton.setTitleColor(.systemGray, for: .disabled)
         sendButton.isEnabled = false
+        
+        sendButton.addTarget(self, action: #selector(didPressSendButton), for: .touchUpInside)
     }
     
     @objc func didTapCancelButton() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func didTapSearchButton() {
+    @objc func didPressSearchButton() {
         topBar.pushItem(topBarSearchItem, animated: true)
         searchBar.becomeFirstResponder()
     }
     
-    @objc func didTapSendButton() {
-        
+    @objc func didPressSendButton() {
+        guard let coordinate = annotation?.coordinate else { return }
+        let item: AttachedItem = .Location(coordinate: coordinate)
+        delegate?.locationPickerDidSelectLocation(item)
     }
     
-    @objc func didTapSearchBarCancelButton() {
+    @objc func didPressSearchBarCancelButton() {
         
     }
     
@@ -178,16 +184,10 @@ extension LocationPickerViewController: UISearchBarDelegate {
 
 extension LocationPickerViewController: MKMapViewDelegate {
    
-    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-    }
-
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-        }
     }
 }
 
-extension LocationPickerViewController: UIGestureRecognizerDelegate {
-    
+protocol LocationPickerDelegate {
+    func locationPickerDidSelectLocation(_ item: AttachedItem)
 }

@@ -9,12 +9,19 @@ import UIKit
 
 class NotificationSettingsController: UIViewController {
     
-    @IBOutlet var tableView: UITableView!
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.isScrollEnabled = false
+        tableView.tableFooterView = UIView()
+        tableView.backgroundColor = UIColor(named: "color")
+        return tableView
+    }()
     
     var settings = [[NotificationSetting]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "color")
         fillInCells()
         addTableView()
         title = "Уведомления"
@@ -24,8 +31,13 @@ class NotificationSettingsController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.isScrollEnabled = false
-        tableView.tableFooterView = UIView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     private func fillInCells() {
@@ -57,7 +69,7 @@ extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSo
         }
         
         headerView.addSubview(label)
-        headerView.backgroundColor = UIColor(named: "backColor")
+        headerView.backgroundColor = UIColor(named: "color")
         
         return headerView
     }
@@ -76,7 +88,7 @@ extension NotificationSettingsController: UITableViewDelegate, UITableViewDataSo
         cell.imageView?.tintColor = settings[indexPath.section][indexPath.row].tintColor
         cell.textLabel?.text = settings[indexPath.section][indexPath.row].name
         cell.detailTextLabel?.text = settings[indexPath.section][indexPath.row].value
-//        cell.backgroundColor = UIColor(named: "BackgroundColor")
+        cell.backgroundColor = UIColor(named: "color")
         return cell
     }
     

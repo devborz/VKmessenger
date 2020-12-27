@@ -67,7 +67,7 @@ class ChatTitleView: UIView {
             .isActive = true
         chatNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5).isActive = true
         
-        chatNameLabel.textColor = .white
+        chatNameLabel.textColor = .label
         chatNameLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     }
     

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -54,7 +55,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" name="OtherUserMessageBackgroundColor"/>
+                        <color key="backgroundColor" name="OutgoingMessageColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="k14-Qx-3cz" secondAttribute="trailing" constant="10" id="1a6-7G-tTE"/>
                             <constraint firstAttribute="width" constant="240" id="6Ou-bl-q4J"/>
@@ -103,8 +104,8 @@
         <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="pause.fill" catalog="system" width="116" height="128"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
-        <namedColor name="OtherUserMessageBackgroundColor">
-            <color red="0.92199999094009399" green="0.92900002002716064" blue="0.94099998474121094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="OutgoingMessageColor">
+            <color red="0.80000001192092896" green="0.89399999380111694" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -1,18 +1,16 @@
 //
-//  AttachedItemCell.swift
+//  AttachedItemInMessageCell.swift
 //  VKmessenger
 //
-//  Created by Усман Туркаев on 25.11.2020.
+//  Created by Усман Туркаев on 30.11.2020.
 //
 
 import UIKit
 import MapKit
 
-class AttachedItemCell: UICollectionViewCell {
+class AttachedItemInMessageCell: UICollectionViewCell {
     
-    var dataSource: AttachedItemCellDataSource?
-    
-    var delegate: AttachedItemCellDelegate?
+    var attachedItem: AttachedItem?
     
     override class func awakeFromNib() {
         super.awakeFromNib()
@@ -23,19 +21,22 @@ class AttachedItemCell: UICollectionViewCell {
         for subview in self.subviews {
             subview.removeFromSuperview()
         }
-        delegate = nil
-        dataSource = nil
+        attachedItem = nil
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
     }
     
     func setup(_ attachedItem: AttachedItem) {
+        self.attachedItem  = attachedItem
         switch attachedItem  {
         case .Image(let image): setupImageItem(image)
         case .Video(let media): setupVideoItem(media)
         case .Document(let document): setupDocumentItem(document)
         case .Location(let coordinate): setupLocationItem(coordinate)
-        case .Message(message: _): break
+        case .Message(message: let _): break
         }
-        setupDeleteButton()
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
     }
@@ -132,8 +133,7 @@ class AttachedItemCell: UICollectionViewCell {
         sizeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
         sizeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
         sizeLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        
+
         sizeLabel.text = ByteCountFormatter.string(fromByteCount: document.size, countStyle: .memory)
         sizeLabel.font = .systemFont(ofSize: 12)
     }
@@ -153,44 +153,10 @@ class AttachedItemCell: UICollectionViewCell {
         
         self.layer.borderWidth = 0.5
         self.layer.borderColor = UIColor.systemGray5.cgColor
-        mapView.isUserInteractionEnabled = false
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
     }
-    
-    func setupDeleteButton() {
-        let deleteButton = UIButton()
-        deleteButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        deleteButton.imageView?.contentMode = .center
-        deleteButton.imageView?.backgroundColor = .white
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.tintColor = .systemGray
-        
-        self.addSubview(deleteButton)
-        
-        deleteButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        deleteButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        deleteButton.imageView?.layer.cornerRadius = (deleteButton.imageView?.frame.width)! / 2
-        deleteButton.topAnchor.constraint(equalTo: self.topAnchor, constant: -2).isActive = true
-        deleteButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 2).isActive = true
-        
-        deleteButton.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
-    }
-    
-    @objc func didTapDeleteButton() {
-        guard let dataSource = dataSource, let indexPath = dataSource.indexPath(forCell: self) else {
-            return
-        }
-        delegate?.didTapDeleteItem(withIndexPath: indexPath)
-    }
 }
 
-protocol AttachedItemCellDelegate {
-    func didTapDeleteItem(withIndexPath indexPath: IndexPath)
-}
-
-protocol AttachedItemCellDataSource {
-    func indexPath(forCell cell: AttachedItemCell) -> IndexPath?
-}

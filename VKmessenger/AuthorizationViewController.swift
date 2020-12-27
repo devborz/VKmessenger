@@ -15,14 +15,28 @@ class AuthorizationViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     
+    var didPerformSegue = false
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        didPerformSegue = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loginInputView.delegate = self
         passwordInputView.delegate = self
+        
+        loginButton.layer.cornerRadius = 10
+        loginButton.clipsToBounds = true
     }
     
     override func viewDidLayoutSubviews() {
-        self.performSegue(withIdentifier: "SignedIn", sender: nil)
+        super.viewDidLayoutSubviews()
+//        if !didPerformSegue {
+//            self.performSegue(withIdentifier: "SignedIn", sender: nil)
+//            didPerformSegue = true
+//        }
     }
 }
 
