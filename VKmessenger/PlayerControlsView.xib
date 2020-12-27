@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerControlsView" customModule="VKmessenger" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="vkG-di-lBz"/>
+                <outlet property="progressSliderView" destination="Lux-1C-PNj" id="91S-Cy-gB5"/>
+                <outlet property="timeFromBeginLabel" destination="idA-vs-V3z" id="kcw-oj-Etg"/>
+                <outlet property="timeToEndLabel" destination="73F-qh-2T4" id="k8W-Kl-12k"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="729" height="107"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idA-vs-V3z">
+                    <rect key="frame" x="0.0" y="91" width="50" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="3jQ-pI-DFJ"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="uA5-cV-KWc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lux-1C-PNj">
+                    <rect key="frame" x="-2" y="0.0" width="733" height="92"/>
+                    <connections>
+                        <action selector="sliderDidBeginDrag:" destination="-1" eventType="touchDown" id="eLL-Zp-Abf"/>
+                        <action selector="sliderDidEndDrag:" destination="-1" eventType="valueChanged" id="rF8-7u-yHA"/>
+                    </connections>
+                </slider>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73F-qh-2T4">
+                    <rect key="frame" x="679" y="91" width="50" height="16"/>
+                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="N8O-Xn-e2r"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="OJf-F3-8sE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" systemColor="systemBlueColor"/>
+            <constraints>
+                <constraint firstItem="73F-qh-2T4" firstAttribute="top" secondItem="Lux-1C-PNj" secondAttribute="bottom" id="4Ys-fx-hTb"/>
+                <constraint firstAttribute="trailing" secondItem="Lux-1C-PNj" secondAttribute="trailing" id="Bbg-BX-Qho"/>
+                <constraint firstAttribute="bottom" secondItem="idA-vs-V3z" secondAttribute="bottom" id="GU7-nS-E45"/>
+                <constraint firstAttribute="bottom" secondItem="73F-qh-2T4" secondAttribute="bottom" id="JXe-vF-pNo"/>
+                <constraint firstItem="idA-vs-V3z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Oz6-CL-M2z"/>
+                <constraint firstItem="Lux-1C-PNj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SPk-oV-jrW"/>
+                <constraint firstItem="idA-vs-V3z" firstAttribute="top" secondItem="Lux-1C-PNj" secondAttribute="bottom" id="Ukg-fw-WwJ"/>
+                <constraint firstAttribute="trailing" secondItem="73F-qh-2T4" secondAttribute="trailing" id="j0g-OF-xE6"/>
+                <constraint firstItem="Lux-1C-PNj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jiH-5Z-bSg"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-170" y="-671"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -55,7 +55,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" name="OtherUserMessageBackgroundColor"/>
+                        <color key="backgroundColor" name="IncomingMessageColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="55" id="2Ci-eb-TK8"/>
                             <constraint firstItem="OSh-Jy-B86" firstAttribute="top" secondItem="uQV-Mf-JUq" secondAttribute="bottom" id="6cw-yT-aPv"/>
@@ -117,7 +117,7 @@
         <image name="pause.fill" catalog="system" width="116" height="128"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
-        <namedColor name="OtherUserMessageBackgroundColor">
+        <namedColor name="IncomingMessageColor">
             <color red="0.92199999094009399" green="0.92900002002716064" blue="0.94099998474121094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

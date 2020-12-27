@@ -1,5 +1,5 @@
 //
-//  MessagesTableView.swift
+//  ChatViewControllerTableViewDelegateExtension.swift
 //  VKmessenger
 //
 //  Created by Усман Туркаев on 31.10.2020.
@@ -70,34 +70,25 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let message = messages[indexPath.section][indexPath.row]
-        if message.sender.userId == chatInfo!.currentUser.userId {
-            switch message.kind {
-            case .voice:
-                let cell = messagesTableView.dequeueReusableCell(withIdentifier: "OutgoingVoiceMessageCell", for: indexPath) as! OutgoingVoiceMessageTableViewCell
-                cell.setup(message)
-                return cell
-            default:
-                let cell = messagesTableView.dequeueReusableCell(withIdentifier: "OutgoingMessageCell", for: indexPath) as! OutgoingMessageTableViewCell
-                cell.setup(message)
-                return cell
-            }
-        } else {
-            switch message.kind {
-            case .voice:
+    
+        switch message.kind {
+        case .voice:
+            switch message.type {
+            case .incoming:
                 let cell = messagesTableView.dequeueReusableCell(withIdentifier: "IncomingVoiceMessageCell", for: indexPath) as! IncomingVoiceMessageTableViewCell
                 cell.setup(message)
                 return cell
-            default:
-                let cell = messagesTableView.dequeueReusableCell(withIdentifier: "IncomingMessageCell", for: indexPath) as! IncomingMessageTableViewCell
+            case .outgoing:
+                let cell = messagesTableView.dequeueReusableCell(withIdentifier: "OutgoingVoiceMessageCell", for: indexPath) as! OutgoingVoiceMessageTableViewCell
                 cell.setup(message)
                 return cell
             }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !tableView.isEditing {
-            messagesTableView.deselectRow(at: indexPath, animated: true)
+        case .standart:
+            let cell = messagesTableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+            cell.delegate = self
+            cell.setup(message)
+            cell.backgroundColor = .clear
+            return cell
         }
     }
     
@@ -123,13 +114,36 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         return contextMenuTargetPreview(configuration)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !tableView.isEditing {
+            tableView.deselectRow(at: indexPath, animated: false)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard !tableView.isEditing else { return nil }
+        
+        let replyAction = UIContextualAction(style: .normal, title: "Ответить", handler: { _,_,complete in
+            let message = self.messages[indexPath.section][indexPath.row]
+            self.messagesDelegate?.didSelectMessageToReply(message)
+            complete(true)
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.impactOccurred()
+        })
+        replyAction.image = UIImage(systemName: "arrowshape.turn.up.left")!.withTintColor(UIColor(named: "AccentColor")!).withRenderingMode(.alwaysOriginal)
+        replyAction.backgroundColor = UIColor(named: "color")
+    
+        
+        return UISwipeActionsConfiguration(actions: [replyAction])
+    }
+    
     private func contextMenuConfiguration(_ indexPath: IndexPath) -> UIContextMenuConfiguration? {
         let identifier = "\(indexPath.section)-\(indexPath.row)" as NSString
         
         return UIContextMenuConfiguration(
             identifier: identifier, previewProvider: nil) { _ in
 
-            let answerAction = UIAction(
+            let replyAction = UIAction(
                 title: "Ответить",
                 image: UIImage(systemName: "arrowshape.turn.up.backward")) { _ in
             }
@@ -164,7 +178,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             }
             let moreMenu = UIMenu(title: "", image: nil, identifier: UIMenu.Identifier(rawValue: "more"), options: .displayInline, children: [moreAction])
             
-            return UIMenu(title: "", image: nil, children: [answerAction, copyAction, shareAction, deleteAction, moreMenu])
+            return UIMenu(title: "", image: nil, children: [replyAction, copyAction, shareAction, deleteAction, moreMenu])
         }
     }
     
@@ -191,32 +205,50 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         var bubbleView: UIView?
         
         let message = messages[section][row]
-        if message.sender.userId == chatInfo!.currentUser.userId {
-            switch message.kind {
-            case .voice:
+        
+        switch message.kind {
+        case .voice:
+            switch message.type {
+            case .incoming:
                 let cell = messagesTableView.cellForRow(at: IndexPath(row: row, section: section))
-                    as? OutgoingVoiceMessageTableViewCell
-                bubbleView = cell?.bubbleView
-            default:
+                    as! IncomingVoiceMessageTableViewCell
+                bubbleView = cell.bubbleView
+            case .outgoing:
                 let cell = messagesTableView.cellForRow(at: IndexPath(row: row, section: section))
-                    as? OutgoingMessageTableViewCell
-                bubbleView = cell?.bubbleView
+                    as! OutgoingVoiceMessageTableViewCell
+                bubbleView = cell.bubbleView
             }
-        } else {
-            switch message.kind {
-            case .voice:
-                let cell = messagesTableView.cellForRow(at: IndexPath(row: row, section: section))
-                    as? IncomingVoiceMessageTableViewCell
-                bubbleView = cell?.bubbleView
-            default:
-                let cell = messagesTableView.cellForRow(at: IndexPath(row: row, section: section))
-                    as? IncomingMessageTableViewCell
-                bubbleView = cell?.bubbleView
-            }
+        case .standart:
+            let cell = messagesTableView.cellForRow(at: IndexPath(row: row, section: section))
+                as! MessageCell
+            bubbleView = cell.bubbleView
         }
 
         return UITargetedPreview(view: bubbleView!)
     }
 }
 
+extension ChatViewController: MessageCellDelegate {
+    func didTapCell(with item: AttachedItem) {
+        switch item {
+        case .Image(image: let image):
+            let vc = ImageViewController()
+            self.navigationItem.backButtonTitle = "Назад"
+            vc.image = image
+            vc.modalTransitionStyle = .crossDissolve
+            navigationController?.pushViewController(vc, animated: true)
+        case .Video(media: let media):
+            let vc = PlayerViewController()
+            vc.media = media
+            navigationController?.pushViewController(vc, animated: true)
+            
+        default: break
+        }
+    }
+}
 
+protocol MessagesDelegate {
+    func didSelectMessageToReply(_ message: Message)
+    
+    func didSelectItemToAttach(_ attachedItem: AttachedItem)
+}

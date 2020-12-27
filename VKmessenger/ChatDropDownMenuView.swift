@@ -15,6 +15,50 @@ struct ChatMenuOption {
 
 class ChatDropDownMenuView: UIView {
     
+    var chatType: ChatType!
+    
+    var privateChatMenuOptions: [ChatMenuOption] {
+        let chatMenuOptions: [ChatMenuOption] = [
+            ChatMenuOption(name: "Открыть профиль", imageName: "person.crop.circle", action: {
+                self.delegate?.didSelectOptionOpenProfile()
+            }),
+            ChatMenuOption(name: "Добавить в беседу", imageName: "plus.message", action: {
+                self.delegate?.didSelectOptionAddToChat()
+            }),
+            ChatMenuOption(name: "Поиск сообщений", imageName: "magnifyingglass", action: {
+                self.delegate?.didSelectOptionSearch()
+            }),
+            ChatMenuOption(name: "Показать вложения", imageName: "photo", action: {
+                self.delegate?.didSelectOptionShowAttachments()
+            }),
+            ChatMenuOption(name: "Отключить уведомления", imageName: "volume.slash", action: {
+                self.delegate?.didSelectOptionMute()
+            }),
+            ChatMenuOption(name: "Очистить историю", imageName: "trash", action: {
+                self.delegate?.didSelectOptionClearHistory()
+            }),
+        ]
+        return chatMenuOptions
+    }
+    
+    var groupChatMenuOptions: [ChatMenuOption] {
+        let chatMenuOptions: [ChatMenuOption] = [
+            ChatMenuOption(name: "Добавить участников", imageName: "plus.message", action: {
+                self.delegate?.didSelectOptionAddPeople()
+            }),
+            ChatMenuOption(name: "Поиск сообщений", imageName: "magnifyingglass", action: {
+                self.delegate?.didSelectOptionSearch()
+            }),
+            ChatMenuOption(name: "Показать вложения", imageName: "photo", action: {
+                self.delegate?.didSelectOptionShowAttachments()
+            }),
+            ChatMenuOption(name: "Отключить уведомления", imageName: "volume.slash", action: {
+                self.delegate?.didSelectOptionMute()
+            })
+        ]
+        return chatMenuOptions
+    }
+    
     var transparentView = UIView()
     
     var dropdownMenuTableView = UITableView()
@@ -28,9 +72,7 @@ class ChatDropDownMenuView: UIView {
     var dataSource: ChatDropDownMenuViewDataSource? {
         didSet {
             titleView = dataSource?.titleView()
-            numberOfRows = dataSource?.numberOfRows()
-            dropdownMenuTableView.delegate = self
-            dropdownMenuTableView.dataSource = self
+            chatType = dataSource?.chatType()
         }
     }
     
@@ -72,6 +114,8 @@ class ChatDropDownMenuView: UIView {
         dropdownMenuHeightConstraint = dropdownMenu.heightAnchor.constraint(equalToConstant: 0)
         dropdownMenuHeightConstraint?.isActive = true
         
+        dropdownMenuTableView.delegate = self
+        dropdownMenuTableView.dataSource = self
         dropdownMenu.addSubview(dropdownMenuTableView)
         
         dropdownMenuTableView.topAnchor.constraint(equalTo: dropdownMenu.topAnchor).isActive = true
@@ -106,7 +150,13 @@ class ChatDropDownMenuView: UIView {
     }
     
     func show() {
-        guard let rowsCount = dataSource?.numberOfRows() else { return }
+        var rowsCount = 0
+        
+        switch chatType {
+        case .privateChat: rowsCount = privateChatMenuOptions.count
+        case .groupChat: rowsCount = groupChatMenuOptions.count
+        case .none: rowsCount = 0
+        }
         
         guard rowsCount > 0 else { return }
         
@@ -143,11 +193,21 @@ class ChatDropDownMenuView: UIView {
 
 extension ChatDropDownMenuView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRows ?? 0
+        switch chatType {
+        case .privateChat: return privateChatMenuOptions.count
+        case .groupChat: return groupChatMenuOptions.count
+        case .none: return 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let menuOption = dataSource?.chatMenu(optionForRow: indexPath.row)
+        var menuOption: ChatMenuOption!
+        
+        switch chatType {
+        case .privateChat: menuOption = privateChatMenuOptions[indexPath.row]
+        case .groupChat: menuOption = groupChatMenuOptions[indexPath.row]
+        case .none: break
+        }
         
         guard let option = menuOption else {
             return UITableViewCell(style: .default, reuseIdentifier: "ChatMenuCell")
@@ -162,16 +222,32 @@ extension ChatDropDownMenuView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        dataSource?.chatMenu(optionForRow: indexPath.row).action!()
+        switch chatType {
+        case .privateChat: privateChatMenuOptions[indexPath.row].action!()
+        case .groupChat: groupChatMenuOptions[indexPath.row].action!()
+        case .none: break
+        }
     }
 }
 
-@objc protocol ChatDropDownMenuViewDelegate {
+protocol ChatDropDownMenuViewDelegate {
     func didTapTransparentView()
     
-    @objc optional func didSelectMenuOption(withName name: String)
-    
     func didChangeMute()
+    
+    func didSelectOptionClearHistory()
+    
+    func didSelectOptionOpenProfile()
+    
+    func didSelectOptionAddToChat()
+    
+    func didSelectOptionShowAttachments()
+    
+    func didSelectOptionSearch()
+    
+    func didSelectOptionMute()
+    
+    func didSelectOptionAddPeople()
 }
 
 protocol ChatDropDownMenuViewDataSource {
@@ -180,7 +256,5 @@ protocol ChatDropDownMenuViewDataSource {
     
     func titleView() -> ChatTitleView
     
-    func numberOfRows() -> Int
-    
-    func chatMenu(optionForRow row: Int) -> ChatMenuOption
+    func chatType() -> ChatType
 }

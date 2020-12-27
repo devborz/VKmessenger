@@ -19,24 +19,21 @@ class ChatTableViewCell: UITableViewCell {
     
     @IBOutlet weak var muteImageView: UIImageView!
     
+    var chatID = ""
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         chatImageView.layer.masksToBounds = false
         chatImageView.layer.cornerRadius = chatImageView.frame.width / 2
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
     override func prepareForReuse() {
-
+        super.prepareForReuse()
     }
     
     func setup(_ chat: Chat) {
+        chatID = chat.id
         var chatName: String?
         var chatImage: UIImage?
 
@@ -53,9 +50,8 @@ class ChatTableViewCell: UITableViewCell {
         
         if let message = chat.lastMessage {
             switch message.kind {
-            case .text(let text): lastMessageLabel.text = text
-            case .image(_): print("image")
-            case .voice: print("voice")
+            case .standart(let text, _, _): lastMessageLabel.text = text
+            case .voice(_): print("voice")
             }
             
             let formatter = DateFormatter()

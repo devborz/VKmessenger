@@ -1,5 +1,5 @@
 //
-//  UserProfileViewController.swift
+//  ProfileViewController.swift
 //  VKmessenger
 //
 //  Created by Усман Туркаев on 12.11.2020.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController {
+class ProfileViewController: UIViewController {
     
     var user: User?
     
@@ -89,8 +89,8 @@ class UserProfileViewController: UIViewController {
     
     func setupActivityLabel() {
         lastActivityLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(lastActivityLabel)
+        
         lastActivityLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 10).isActive = true
         lastActivityLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5).isActive = true
         lastActivityLabel.rightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
@@ -108,15 +108,17 @@ class UserProfileViewController: UIViewController {
         view.addSubview(goToChatButton)
         
         goToChatButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 30).isActive = true
-        goToChatButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        goToChatButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        goToChatButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
+        goToChatButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
         goToChatButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        goToChatButton.backgroundColor = UIColor(named: "headerColor")
+        goToChatButton.backgroundColor = UIColor(named: "AccentColor")
         goToChatButton.layer.cornerRadius = 10
+        
         goToChatButton.setTitle("Сообщение", for: .normal)
         goToChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        
+        goToChatButton.setTitleColor(UIColor(named: "TextColor2"), for: .normal)
+
         goToChatButton.addTarget(self, action: #selector(didTapGoToChatButton), for: .touchUpInside)
     }
     
@@ -125,10 +127,12 @@ class UserProfileViewController: UIViewController {
         
         guard let user = user else { return }
         
-        if let chatInfo = DataProcesser.getChat(withUser: user) {
+        let dataManager = (UIApplication.shared.delegate as! AppDelegate).dataManager
+        
+        if let chatInfo = dataManager.getChat(withUser: user) {
             chatVC.chatInfo = chatInfo
         } else {
-            chatVC.chatInfo = DataProcesser.createChat(withUser: user)
+            chatVC.chatInfo = dataManager.createChat(withUser: user)
         }
         
         chatVC.hidesBottomBarWhenPushed = true

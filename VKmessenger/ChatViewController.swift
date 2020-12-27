@@ -9,123 +9,54 @@ import UIKit
 
 class ChatViewController: UIViewController {
     
-    var chatInfo: Chat?
-    
-    var messages = [[Message]]()
-    
-    var attachedItems = [AttachedItem]()
-    
-    var indexPathOfDeletedMessage: IndexPath?
+    // MARK: Views
     
     let chatTitleView = ChatTitleView()
     
-    let transparentView = UIView()
-    
     let dropdownMenu = ChatDropDownMenuView()
-    
-    var dropdownMenuHeightConstraint: NSLayoutConstraint?
     
     let messagesTableView = UITableView()
     
     let inputBar = InputBarView()
     
-    var inputBarBottomConstraint: NSLayoutConstraint?
+    let gradientLayer = CAGradientLayer()
+    
+    // MARK: Constraints
+    
+    var dropdownMenuHeightConstraint: NSLayoutConstraint!
+    
+    var inputBarBottomConstraint: NSLayoutConstraint!
     
     var bottomBarHeight: CGFloat?
+    
+    // MARK: Delegates
+    
+    var transitionDelegate: TransitionDelegate?
+    
+    var messagesDelegate: MessagesDelegate!
+    
+    // MARK: Data
+    
+    var chatInfo: Chat!
+    
+    var messages = [[Message]]()
+    
+    var attachedItems = [AttachedItem]()
+    
+    // MARK: Conditions
+    
+    var indexPathOfDeletedMessage: IndexPath?
     
     var keyboardIsShown = false
     
     var shouldScrollToLastRow = true
     
-    let imagePicker = UIImagePickerController()
-    
-    var itemProviders = [NSItemProvider]()
-    
-    var itemProvidersIterator: IndexingIterator<[NSItemProvider]>?
-    
-    var currentItemProvider: NSItemProvider?
-    
-    var privateChatMenuOptions: [ChatMenuOption] {
-        let chatMenuOptions: [ChatMenuOption] = [
-            ChatMenuOption(name: "Открыть профиль", imageName: "person.crop.circle", action: {
-                let profileVC = UserProfileViewController()
-                
-                guard let chat = self.chatInfo else {
-                    return
-                }
-                switch chat.type {
-                case .privateChat(let user):
-                    profileVC.user = user
-                default: return
-                }
-                
-                self.navigationController?.pushViewController(profileVC, animated: true)
-                
-                self.chatTitleView.isSelected = false
-            }),
-            ChatMenuOption(name: "Добавить в беседу", imageName: "plus.message", action: {
-                
-            }),
-            ChatMenuOption(name: "Поиск сообщений", imageName: "magnifyingglass", action: {
-                let searchVC = SearchInChatViewController()
-                let navVC = UINavigationController()
-                navVC.viewControllers = [searchVC]
-                
-                navVC.modalPresentationStyle = .fullScreen
-                navVC.modalTransitionStyle = .crossDissolve
-                
-                self.navigationController?.present(navVC, animated: true, completion: nil)
-                self.chatTitleView.isSelected = false
-            }),
-            ChatMenuOption(name: "Показать вложения", imageName: "photo", action: {
-                
-            }),
-            ChatMenuOption(name: "Отключить уведомления", imageName: "volume.slash", action: {
-                
-            }),
-            ChatMenuOption(name: "Очистить историю", imageName: "trash", action: {
-                self.chatTitleView.isSelected = false
-                let alertController = UIAlertController(title: nil, message: "Вы действительно хотите удалить историю сообщений?", preferredStyle: .actionSheet)
-        
-                let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
-                    self.messages.removeAll()
-                    let numberOfSections = self.messagesTableView.numberOfSections
-                    self.messagesTableView.deleteSections(IndexSet(integersIn: 0..<numberOfSections), with: .fade)
-                }
-                let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
-                }
-                alertController.addAction(deleteAction)
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true, completion: nil)
-            }),
-        ]
-        return chatMenuOptions
+    override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
+        return [.bottom, .right]
     }
     
-    var groupChatMenuOptions: [ChatMenuOption] {
-        let chatMenuOptions: [ChatMenuOption] = [
-            ChatMenuOption(name: "Добавить участников", imageName: "plus.message", action: {
-                
-            }),
-            ChatMenuOption(name: "Поиск сообщений", imageName: "magnifyingglass", action: {
-                
-            }),
-            ChatMenuOption(name: "Показать вложения", imageName: "photo", action: {
-                
-            }),
-            ChatMenuOption(name: "Отключить уведомления", imageName: "volume.slash", action: {
-                
-            })
-        ]
-        return chatMenuOptions
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupKeyBoardObservers()
     }
     
@@ -136,7 +67,6 @@ class ChatViewController: UIViewController {
         setupTitleView()
         setupMessagesTableView()
         setupInputBar()
-        setupPickers()
     }
     
     override func viewDidLayoutSubviews() {
@@ -150,31 +80,26 @@ class ChatViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        inputBarBottomConstraint?.constant = 0
         removeKeyBoardObservers()
-        
         navigationController?.setToolbarHidden(true, animated: false)
     }
     
-    func setupPickers() {
-        imagePicker.delegate = self
-    }
-    
     func setupNavigationBar() {
-        navigationController?.navigationBar.layer.borderWidth = 0
-        navigationController?.navigationBar.layoutIfNeeded()
         navigationItem.backButtonTitle = " "
     }
     
     func setupColorScheme() {
-        view.backgroundColor = .systemBackground
-        inputBar.backgroundColor = .systemBackground
-        view.tintColor = UIColor(named: "TintColor1")
+        view.backgroundColor = UIColor(named: "color")
+        inputBar.backgroundColor = UIColor(named: "color")
+        messagesTableView.backgroundColor = UIColor(named: "color")
+        
+        
     }
     
     func setupMessagesTableView() {
-        messages = DataProcesser.getMessages(chatInfo!)
+        let dataManager = (UIApplication.shared.delegate as! AppDelegate).dataManager
+        
+        messages = dataManager.getMessages(chatInfo)
         view.addSubview(messagesTableView)
         
         messagesTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -182,13 +107,12 @@ class ChatViewController: UIViewController {
         messagesTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         messagesTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         messagesTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        let bottomConstraint = messagesTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        bottomConstraint.priority = UILayoutPriority(rawValue: 500)
+        bottomConstraint.isActive = true
         
-        let bottomConstaint = messagesTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        bottomConstaint.priority = UILayoutPriority(rawValue: 500)
-        bottomConstaint.isActive = true
-        messagesTableView.register(UINib(nibName: "OutgoingMessageTableViewCell", bundle: nil), forCellReuseIdentifier: "OutgoingMessageCell")
+        messagesTableView.register(MessageCell.self, forCellReuseIdentifier: "MessageCell")
         messagesTableView.register(UINib(nibName: "OutgoingVoiceMessageTableViewCell", bundle: nil), forCellReuseIdentifier: "OutgoingVoiceMessageCell")
-        messagesTableView.register(UINib(nibName: "IncomingMessageTableViewCell", bundle: nil), forCellReuseIdentifier: "IncomingMessageCell")
         messagesTableView.register(UINib(nibName: "IncomingVoiceMessageTableViewCell", bundle: nil), forCellReuseIdentifier: "IncomingVoiceMessageCell")
         
         messagesTableView.dataSource = self
@@ -196,6 +120,7 @@ class ChatViewController: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tap.cancelsTouchesInView = false
+        tap.delaysTouchesBegan = false
         messagesTableView.addGestureRecognizer(tap)
         
         messagesTableView.separatorStyle = .none
@@ -206,26 +131,34 @@ class ChatViewController: UIViewController {
         messagesTableView.allowsMultipleSelectionDuringEditing = true
     }
     
+    @objc func didSwipeMessage(_ gestureRecognizer: UISwipeGestureRecognizer) {
+        if gestureRecognizer.state == .ended {
+            let location = gestureRecognizer.location(in: messagesTableView)
+            let indexPath = messagesTableView.indexPathForRow(at: location)
+            let cell = messagesTableView.cellForRow(at: indexPath!)
+            cell?.setEditing(false, animated: true)
+        }
+    }
+    
     @objc func hideKeyboard() {
         inputBar.textView.resignFirstResponder()
     }
     
     func setupInputBar() {
-        
         inputBar.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(inputBar)
         
         inputBar.topAnchor.constraint(equalTo: messagesTableView.bottomAnchor).isActive = true
-        inputBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        inputBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        inputBar.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
+        inputBar.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        inputBar.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         inputBarBottomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         inputBarBottomConstraint?.isActive = true
         
         inputBar.delegate = self
         inputBar.dataSource = self
         
+        messagesDelegate = inputBar
     }
     
     func setupTitleView() {
@@ -260,6 +193,7 @@ class ChatViewController: UIViewController {
     
     func setupKeyBoardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
@@ -273,17 +207,42 @@ class ChatViewController: UIViewController {
             
             let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
             
-            if let frame = keyboardFrame, let duration = animationDuration {
-                inputBarBottomConstraint?.constant = -frame.height + bottomBarHeight!
-                UIView.animate(withDuration: duration, animations: {
-                    self.messagesTableView.contentOffset.y += frame.height - self.bottomBarHeight!
-                    self.view.layoutIfNeeded()
-                }) { (completed) in
-                    if completed {
-                        self.keyboardIsShown = true
-                    }
+            guard let frame = keyboardFrame, let duration = animationDuration else { return }
+            
+            inputBarBottomConstraint?.constant = -frame.height + bottomBarHeight!
+            UIView.animate(withDuration: duration, animations: {
+                self.messagesTableView.contentOffset.y += frame.height - self.bottomBarHeight!
+                self.view.layoutIfNeeded()
+            }) { (completed) in
+                if completed {
+                    self.keyboardIsShown = true
                 }
             }
+        }
+    }
+    
+    @objc func handleKeyboardWillChangeFrame(notification: NSNotification) {
+        if keyboardIsShown {
+            let keyboardFrameBegin = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue
+            let keyboardFrameEnd = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+            
+            let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+            
+            guard let frameEnd = keyboardFrameEnd,
+               let frameBegin = keyboardFrameBegin,
+               let duration = animationDuration else { return }
+            
+            inputBarBottomConstraint?.constant = -frameEnd.height + bottomBarHeight!
+            
+            UIView.animate(withDuration: duration, animations: {
+                self.messagesTableView.contentOffset.y += frameEnd.height - frameBegin.height
+                self.view.layoutIfNeeded()
+            }) { (completed) in
+                if completed {
+                    self.keyboardIsShown = true
+                }
+            }
+                
         }
     }
     
@@ -294,15 +253,15 @@ class ChatViewController: UIViewController {
             
             let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
             
-            if let frame = keyboardFrame, let duration = animationDuration {
-                inputBarBottomConstraint?.constant = 0
-                UIView.animate(withDuration: duration, animations: {
-                    self.messagesTableView.contentOffset.y += -frame.height + self.bottomBarHeight!
-                    self.view.layoutIfNeeded()
-                }) { (completed) in
-                    if completed {
-                        self.keyboardIsShown = false
-                    }
+            guard let frame = keyboardFrame, let duration = animationDuration else { return }
+            
+            inputBarBottomConstraint?.constant = 0
+            UIView.animate(withDuration: duration, animations: {
+                self.messagesTableView.contentOffset.y += -frame.height + self.bottomBarHeight!
+                self.view.layoutIfNeeded()
+            }) { (completed) in
+                if completed {
+                    self.keyboardIsShown = false
                 }
             }
         }
@@ -384,17 +343,19 @@ class ChatViewController: UIViewController {
             }
         }, completion: { [weak self] _ in
             self?.messagesTableView.scrollToLast(true)
+            self?.messagesTableView.reloadData()
         })
     }
 }
 
 extension ChatViewController: InputBarViewDelegate, InputBarViewDataSource {
-    func currentSender(_ inputBarView: InputBarView) -> User {
-        return chatInfo!.currentUser
+    
+    func didChangedHeight(_ inputBarView: InputBarView, difference: CGFloat) {
+        self.messagesTableView.contentOffset.y += difference
     }
     
-    func didDeleteItem(_ inputBarView: InputBarView, atIndexPath indexPath: IndexPath) {
-        attachedItems.remove(at: indexPath.item)
+    func currentSender(_ inputBarView: InputBarView) -> User {
+        return chatInfo.currentUser
     }
     
     func didEndRecording(_ inputBarView: InputBarView, voiceMesage: String) {
@@ -407,14 +368,6 @@ extension ChatViewController: InputBarViewDelegate, InputBarViewDataSource {
     
     func didPressAttachButton(_ inputBar: InputBarView) {
         presentInputActionSheet()
-    }
-    
-    func countOfAttachedItems(_ inputBarView: InputBarView) -> Int {
-        return attachedItems.count
-    }
-    
-    func attachedItem(_ inputBarView: InputBarView, forIndexPath indexPath: IndexPath) -> AttachedItem {
-        return attachedItems[indexPath.item]
     }
 }
 
@@ -431,39 +384,93 @@ extension ChatViewController: ChatTitleViewDelegate, ChatTitleViewDataSource {
     }
     
     func setImage(_ chatTitleView: ChatTitleView) -> UIImage? {
-        switch chatInfo?.type {
+        switch chatInfo.type {
         case .groupChat(_,_, let image): return image
         case .privateChat(let user): return user.avatar
-        case .none:
-            return nil
         }
     }
     
     func setName(_ chatTitleView: ChatTitleView) -> String? {
-        switch chatInfo?.type {
+        switch chatInfo.type {
         case .privateChat(let user): return user.userName
         case .groupChat(let name, _, _): return name
-        default: return nil
         }
     }
     
 }
 
-extension UITableView {
-    func scrollTableViewToBottom(_ animated: Bool) {
-        guard let dataSource = dataSource else { return }
-        
-        let lastRow = dataSource.tableView(self, numberOfRowsInSection: 0) - 1
-        
-        guard lastRow > -1 else { return }
-        
-        let bottomIndex = IndexPath(row: lastRow, section: 0)
-        
-        scrollToRow(at: bottomIndex, at: .bottom, animated: animated)
+extension ChatViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 
 extension ChatViewController: ChatDropDownMenuViewDelegate, ChatDropDownMenuViewDataSource {
+    func chatType() -> ChatType {
+        return chatInfo.type
+    }
+    
+    func didSelectOptionClearHistory() {
+        self.chatTitleView.isSelected = false
+        let alertController = UIAlertController(title: nil, message: "Вы действительно хотите удалить историю сообщений?", preferredStyle: .actionSheet)
+
+        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+            self.messages.removeAll()
+            let numberOfSections = self.messagesTableView.numberOfSections
+            self.messagesTableView.deleteSections(IndexSet(integersIn: 0..<numberOfSections), with: .fade)
+        }
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
+        }
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func didSelectOptionOpenProfile() {
+        let profileVC = ProfileViewController()
+        
+        guard let chat = self.chatInfo else {
+            return
+        }
+        switch chat.type {
+        case .privateChat(let user):
+            profileVC.user = user
+        default: return
+        }
+        
+        self.navigationController?.pushViewController(profileVC, animated: true)
+        
+        self.chatTitleView.isSelected = false
+    }
+    
+    func didSelectOptionAddToChat() {
+        
+    }
+    
+    func didSelectOptionShowAttachments() {
+        
+    }
+    
+    func didSelectOptionSearch() {
+        let searchVC = SearchInChatViewController()
+        let navVC = UINavigationController()
+        navVC.viewControllers = [searchVC]
+        
+        navVC.modalPresentationStyle = .fullScreen
+        navVC.modalTransitionStyle = .crossDissolve
+        
+        self.navigationController?.present(navVC, animated: true, completion: nil)
+        self.chatTitleView.isSelected = false
+    }
+    
+    func didSelectOptionMute() {
+        
+    }
+    
+    func didSelectOptionAddPeople() {
+        
+    }
+    
     func didTapTransparentView() {
         messagesTableView.reloadData()
     }
@@ -478,19 +485,5 @@ extension ChatViewController: ChatDropDownMenuViewDelegate, ChatDropDownMenuView
     
     func titleView() -> ChatTitleView {
         return chatTitleView
-    }
-    
-    func numberOfRows() -> Int {
-        switch chatInfo?.type {
-        case .privateChat: return privateChatMenuOptions.count
-        default: return groupChatMenuOptions.count
-        }
-    }
-    
-    func chatMenu(optionForRow row: Int) -> ChatMenuOption {
-        switch chatInfo?.type {
-        case .privateChat: return privateChatMenuOptions[row]
-        default: return groupChatMenuOptions[row]
-        }
     }
 }

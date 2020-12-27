@@ -17,6 +17,10 @@ struct Chat {
     var type: ChatType
     
     var isMuted: Bool
+    
+    var isPinned: Bool = true
+    
+    var isLastMessageRead: Bool = true
 }
 
 enum ChatType {
